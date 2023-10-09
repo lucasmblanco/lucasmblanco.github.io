@@ -4,27 +4,43 @@
 <h2>Blog site </h2>
 
 ![Tools](https://skillicons.dev/icons?i=ts,react,astro,tailwindcss)
+
+
 [*Source*](https://github.com/lucasmblanco/blog-api-site) / [*Demo*](https://blog-api-site.vercel.app/)
+
+
 
 This project uses the Blog API to display the posts stored in a database. It also allows the creation of users to enable them to leave likes and comments on the posts and also on other comments.
 
 <h2>Blog Admin Dashboard</h2>
 
 ![Tools](https://skillicons.dev/icons?i=ts,react,nextjs,tailwindcss)
+
+
 [*Source*](https://github.com/lucasmblanco/blog-api-admin-dashboard) / [*Demo*](blog-api-admin-dashboard.vercel.app)
+
+
 
 This project is based on the creation of an admin panel that uses an API to create, view, edit, and delete posts, users, and administrators.
 
 <h2>Blog Api</h2>
 
 ![Tools](https://skillicons.dev/icons?i=js,nodejs,expressjs,mongodb)
+
+
 [*Source*](https://github.com/lucasmblanco/blog-api-be) / [*Demo*](https://blog-api-ol7v.onrender.com/v1)
+
+
 This project is based on the creation of a REST API that allows us to create, view, edit, and delete users, administrators, posts, comments, and likes.
 
 <h2>Battleship Game</h2>
 
 ![Tools](https://skillicons.dev/icons?i=html,scss,js,webpack,jest)
+
+
 [*Source*](https://github.com/lucasmblanco/battleship) / [*Demo*](https://lucasblanco.me/battleship/)
+
+
 This project is based on creating the classic game of Battleship using Test Driven Development (TDD) practices.
 
 <h2>Todo List App </h2>

@@ -13,16 +13,34 @@ const t = useTranslations(lang);
 ---
 
 <nav>
-  <ul class="md:grid-auto-row grid w-full flex-col md:justify-between">
+  <ul class="grid w-full flex-col py-1 md:grid-flow-col md:justify-between">
     <li class="text-center">
       <p>HOME</p>
     </li>
     <li>
       <ul class="flex place-content-center justify-between gap-2">
+        <li>
+          <a
+            href="$"
+            class="rounded px-1 transition-all hover:bg-karasubaido/30 dark:hover:bg-ume-nezu/30"
+            >{t("nav.projects")}</a
+          >
+        </li>
+        <li>
+          <a
+            href="$"
+            class="rounded px-1 transition-all hover:bg-karasubaido/30 dark:hover:bg-ume-nezu/30"
+            >{t("nav.cv")}</a
+          >
+        </li>
+        <li>
+          <a
+            href="$"
+            class="rounded px-1 transition-all hover:bg-karasubaido/30 dark:hover:bg-ume-nezu/30"
+            >{t("nav.contact")}</a
+          >
+        </li>
         <li><LanguagePicker /></li>
-        <li>{t("nav.projects")}</li>
-        <li>{t("nav.cv")}</li>
-        <li>{t("nav.contact")}</li>
         <li><ToggleTheme /></li>
       </ul>
     </li>

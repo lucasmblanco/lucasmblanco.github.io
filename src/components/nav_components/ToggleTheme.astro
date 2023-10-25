@@ -1,9 +1,12 @@
 ---
-
+import { Icon } from "astro-icon";
 ---
 
-<button onclick="document.documentElement.attributes.getNamedItem('data-theme')?.value === 'dark' ? 
-document.dispatchEvent(new CustomEvent('set-theme', { detail: 'light' })) : 
-document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }))
-">Toggle</button>
-
+<button
+  onclick="
+  document.documentElement.attributes.getNamedItem('data-theme')?.value === 'dark' ?
+      document.dispatchEvent(new CustomEvent('set-theme', { detail: 'light' })) :
+      document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }))
+  "
+  >HOLA</button
+>

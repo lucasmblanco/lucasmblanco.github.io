@@ -1,20 +1,29 @@
 ---
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+import LanguagePicker from "./nav_components/LanguagePicker.astro";
+import ToggleTheme from "./nav_components/ToggleTheme.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+// const translatePath = useTranslatedPath(lang);
 ---
 
 <nav>
-  <ul class="flex w-full flex-col md:flex-row md:justify-between">
+  <ul class="md:grid-auto-row grid w-full flex-col md:justify-between">
     <li class="text-center">
       <p>HOME</p>
     </li>
     <li>
-      <ul class="flex place-content-center justify-between">
+      <ul class="flex place-content-center justify-between gap-2">
+        <li><LanguagePicker /></li>
         <li>{t("nav.projects")}</li>
         <li>{t("nav.cv")}</li>
         <li>{t("nav.contact")}</li>
+        <li><ToggleTheme /></li>
       </ul>
     </li>
   </ul>

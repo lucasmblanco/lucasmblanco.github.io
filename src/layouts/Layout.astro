@@ -1,4 +1,8 @@
 ---
+import "@fontsource/inter";
+
+import Themes from "astro-themes";
+
 import Navbar from "../components/Navbar.astro";
 
 interface Props {
@@ -11,6 +15,7 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <Themes defaultTheme="dark" />
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
@@ -19,7 +24,7 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body
-    class="bg-karasubaido text-toki-nezu w-base-width mx-auto h-[100vh] min-h-full"
+    class="mx-auto h-[100vh] min-h-full w-base-width bg-toki-nezu text-karasubaido dark:bg-karasubaido dark:text-toki-nezu"
   >
     <Navbar />
     <slot />

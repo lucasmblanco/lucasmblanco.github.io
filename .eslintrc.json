@@ -17,11 +17,11 @@
     "project": ["./tsconfig.json"],
     "extraFileExtensions": [".astro"]
   },
-  "settings": {
-    "import/resolver": {
-      "typescript": true
-    }
-  },
+  // "settings": {
+  //   "import/resolver": {
+  //     "typescript": true
+  //   }
+  // },
 
   "rules": {
     /* Auto-sort imports and exports */
@@ -36,7 +36,7 @@
       "index-signature" // Prevent ambiguity with Records & Tuples
     ],
     "@typescript-eslint/consistent-type-definitions": "warn",
-    "@typescript-eslint/method-signature-style": "error", // Force type safety
+    // "@typescript-eslint/method-signature-style": "error", // Force type safety
     "@typescript-eslint/no-empty-interface": [
       "warn",
       { "allowSingleExtends": true }
@@ -48,14 +48,14 @@
         "ignoreRestSiblings": true
       }
     ],
-    "@typescript-eslint/triple-slash-reference": [
-      "error",
-      { "path": "always" }
-    ],
+    // "@typescript-eslint/triple-slash-reference": [
+    //   "error",
+    //   { "path": "always" }
+    // ],
     "curly": "warn",
     "func-names": ["warn", "as-needed"],
     "import/no-extraneous-dependencies": "off",
-    "import/prefer-default-export": "off",
+    // "import/prefer-default-export": "off",
     "tailwindcss/classnames-order": "off", // Enforced by Prettier
     "tailwindcss/no-custom-classname": "off" // Avoid distractions while typing
   },

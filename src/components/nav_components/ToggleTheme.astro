@@ -5,8 +5,10 @@ import { Icon } from "astro-icon";
 <button
   onclick="
   document.documentElement.attributes.getNamedItem('data-theme')?.value === 'dark' ?
-      document.dispatchEvent(new CustomEvent('set-theme', { detail: 'light' })) :
-      document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }))
+    document.dispatchEvent(new CustomEvent('set-theme', { detail: 'light' })) :
+    document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }))
   "
-  >HOLA</button
->
+  type="button"
+  class="grid place-content-center"
+  ><Icon name="ph:sun" class="h-4 w-4" />
+</button>

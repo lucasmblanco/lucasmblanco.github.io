@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon";
+
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -13,12 +15,19 @@ const t = useTranslations(lang);
 ---
 
 <nav>
-  <ul class="grid w-full flex-col py-1 md:grid-flow-col md:justify-between">
+  <ul class="grid justify-items-center gap-2 py-2">
     <li class="text-center">
-      <p>HOME</p>
+      <Icon name="majesticons:home" class="h-6 w-6" />
+    </li>
+    <li
+      class="grid w-fit grid-flow-col place-content-center gap-1 rounded bg-karasubaido/30 px-2 py-1 dark:bg-ume-nezu/30"
+    >
+      <LanguagePicker />
+      <hr />
+      <ToggleTheme />
     </li>
     <li>
-      <ul class="flex place-content-center justify-between gap-2">
+      <ul class="grid grid-flow-col items-center font-bold">
         <li>
           <a
             href="$"
@@ -26,7 +35,7 @@ const t = useTranslations(lang);
             >{t("nav.projects")}</a
           >
         </li>
-        <li>
+        <li class="text-center">
           <a
             href="$"
             class="rounded px-1 transition-all hover:bg-karasubaido/30 dark:hover:bg-ume-nezu/30"
@@ -40,8 +49,6 @@ const t = useTranslations(lang);
             >{t("nav.contact")}</a
           >
         </li>
-        <li><LanguagePicker /></li>
-        <li><ToggleTheme /></li>
       </ul>
     </li>
   </ul>

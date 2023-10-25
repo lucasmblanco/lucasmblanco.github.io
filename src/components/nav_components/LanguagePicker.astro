@@ -1,14 +1,11 @@
 ---
-import { Icon } from "astro-icon";
-
-import { languages } from "../../i18n/ui";
 import { getLangFromUrl, useTranslatedPath } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<ul class="flex gap-1">
+<ul class="grid grid-flow-col place-content-center text-xs">
   {
     (
       <>

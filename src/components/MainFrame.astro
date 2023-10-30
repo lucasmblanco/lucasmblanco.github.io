@@ -8,8 +8,10 @@
   <!-- <canvas id="my-canvas" class=""> </canvas> -->
 </div>
 <script>
-  import p5 from "p5";
+  import p5, { changed } from "p5";
   import { gsap } from "gsap";
+  import palletes from "nice-color-palettes";
+
   const root = document.querySelector("html");
   const lightColor = "hsl(54, 100%, 94%)";
   const darkColor = "hsl(150, 7%, 6%)";
@@ -17,128 +19,157 @@
   const w = canvasContainer?.clientWidth;
   const h = canvasContainer?.clientHeight;
 
-  let middleH: number;
-  let middleW: number;
+  let middleY: number;
+  let middleX: number;
   let aspectRatio: number;
-  let aspectRatio2: number;
+
+  let pallete: string[];
+  let distance: number;
+  let distanceX: number;
+  let distanceY: number;
 
   new p5(function (p5) {
     p5.setup = function () {
       const cnv = p5.createCanvas(w, h);
       cnv.parent(canvasContainer);
       p5.frameRate(10);
-      middleH = p5.height / 2;
-      middleW = p5.width / 2;
-      aspectRatio = p5.height / p5.width;
-      aspectRatio2 = p5.width / p5.height;
       p5.noLoop();
-      // p5.pixelDensity(5.0);
+      middleY = p5.height / 2;
+      middleX = p5.width / 2;
+      aspectRatio = p5.height / p5.width;
+      pallete = p5.random(palletes);
+      distance = Math.round(p5.random(3, 10));
+      distanceX = middleX / distance;
+      distanceY = middleY / distance;
+      if (Math.round(distanceX) !== distanceX) {
+        let tmp = middleX / Math.round(distanceX);
+        distanceX = tmp;
+      }
+      if (Math.round(distanceY) !== distanceY) {
+        let tmp = middleY / Math.round(distanceY);
+        distanceY = tmp;
+      }
     };
     p5.draw = function () {
-      // if (mouseIsPressed) {
-      //   p5.fill(0);
-      // } else {
-      //   p5.fill(255);
-      // }
-      // p5.ellipse(p5.mouseX, p5.mouseY, 80, 60);
-      // const canvasContainer = document.querySelector(".canvas-container");
-      // p5.background(root?.dataset.theme === "dark" ? darkColor : lightColor);
-
-      // for (let i = 0; i < p5.height; i += p5.height / 15) {
-      //   p5.line(0, i, p5.width, i);
-      // }
-
-      // p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-      // for (let i = 0; i < p5.height; i += p5.height / 2) {
       p5.clear();
-      p5.stroke(root?.dataset.theme === "dark" ? lightColor : darkColor);
-      p5.line(0, middleH, p5.width, middleH);
-      p5.line(middleW, 0, middleW, p5.height);
-      // }
+      p5.background(p5.random(pallete) + "A0");
 
-      // x1 = 0 - y1 = 0 - x2 = middleW - y2 = middleH
-      // (suma, acom1, racom2, resta, step);
-      // 0,middleW, middleH, 0
+      function incrementOne(
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        step: number,
+      ) {
+        p5.stroke(p5.random(pallete));
 
-      function incrementOne(x1, y1, x2, y2, step) {
-        // FUNCIONA
-        for (let i = 0; i < middleW; i += step) {
-          p5.stroke("#FBAF00");
+        for (let i = 0; i < middleX; i += step) {
           p5.line(x1 + i, y1, x2, y2 - i * aspectRatio);
         }
       }
 
-      function incrementBoth(x1, y1, x2, y2, step) {
-        //FUNCIONA
-        for (let i = 0; i < middleW; i += step) {
-          p5.stroke("#FFD639");
+      function incrementBoth(
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        step: number,
+      ) {
+        p5.stroke(p5.random(pallete));
+
+        for (let i = 0; i < middleX; i += step) {
           p5.line(x1 + i, y1, x2, y2 + i * aspectRatio);
         }
       }
 
-      function decrementBoth(x1, y1, x2, y2, step) {
-        for (let i = step; i < middleW; i += step) {
-          p5.stroke("#FFA3AF");
+      function decrementBoth(
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        step: number,
+      ) {
+        p5.stroke(p5.random(pallete));
+        for (let i = step; i < middleX; i += step) {
           p5.line(x1 - i, y1, x2, y2 - i * aspectRatio);
         }
       }
 
-      function decrementOne(x1, y1, x2, y2, step) {
-        for (let i = step; i < middleW; i += step) {
-          p5.stroke("#007CBE");
+      function decrementOne(
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        step: number,
+      ) {
+        p5.stroke(p5.random(pallete));
+        for (let i = step; i < middleX; i += step) {
           p5.line(x1 - i, y1, x2, y2 + i * aspectRatio);
         }
       }
 
+      function verticalLines(
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        step: number,
+      ) {
+        p5.stroke(p5.random(pallete));
+        console.log(`SOY DISTANCEX DESDE VERTICALLINES ${step}`);
+        for (let i = 0; i <= middleX; i += step) {
+          p5.line(x1 + i, y1, x2 + i, y2);
+        }
+      }
+
+      function horizontalLines(
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        step: number,
+      ) {
+        p5.stroke(p5.random(pallete));
+        for (let i = 0; i < middleY; i += step) {
+          p5.line(x1, y1 + i, x2, y2 + i);
+        }
+      }
+
+      p5.stroke(root?.dataset.theme === "dark" ? lightColor : darkColor);
       // ---- CUADRANTE 1 ----
-      incrementOne(0, 0, middleW, middleH, p5.random(10, 30));
-      incrementBoth(0, middleH, middleW, 0, p5.random(10, 30));
-      decrementBoth(middleW, 0, 0, middleH, p5.random(10, 30));
-      decrementOne(middleW, middleH, 0, 0, p5.random(10, 30));
+      incrementOne(0, 0, middleX, middleY, distanceX);
+      incrementBoth(0, middleY, middleX, 0, distanceX);
+      decrementBoth(middleX, 0, 0, middleY, distanceX);
+      decrementOne(middleX, middleY, 0, 0, distanceX);
+      verticalLines(0, 0, 0, middleY, distanceX);
+      horizontalLines(0, 0, middleX, 0, distanceY);
 
       // ---- CUADRANTE 3 ----
-      incrementOne(0, middleH, middleW, p5.height, p5.random(10, 30));
-      incrementBoth(0, p5.height, middleW, middleH, p5.random(10, 30));
-      decrementBoth(middleW, middleH, 0, p5.height, p5.random(10, 30));
-      decrementOne(middleW, p5.height, 0, middleH, p5.random(10, 30));
+      incrementOne(0, middleY, middleX, p5.height, distanceX);
+      incrementBoth(0, p5.height, middleX, middleY, distanceX);
+      decrementBoth(middleX, middleY, 0, p5.height, distanceX);
+      decrementOne(middleX, p5.height, 0, middleY, distanceX);
+      horizontalLines(0, middleY, middleX, middleY, distanceY);
+      verticalLines(0, middleY, 0, p5.height, distanceX);
 
       // ---- CUADRANTE 2 ----
-      incrementOne(middleW, 0, p5.width, middleH, p5.random(10, 30));
-      incrementBoth(middleW, middleH, p5.width, 0, p5.random(10, 30));
-      decrementBoth(p5.width, 0, middleW, middleH, p5.random(10, 30));
-      decrementOne(p5.width, middleH, middleW, 0, p5.random(10, 30));
+      incrementOne(middleX, 0, p5.width, middleY, distanceX);
+      incrementBoth(middleX, middleY, p5.width, 0, distanceX);
+      decrementBoth(p5.width, 0, middleX, middleY, distanceX);
+      decrementOne(p5.width, middleY, middleX, 0, distanceX);
+      horizontalLines(middleX, 0, p5.width, 0, distanceY);
+      verticalLines(middleX, 0, middleX, middleY, distanceX);
 
       // ---- CUADRANTE 4 ----
-      incrementOne(middleW, middleH, p5.width, p5.height, p5.random(10, 30));
-      incrementBoth(middleW, p5.height, p5.width, middleH, p5.random(10, 30));
-      decrementBoth(p5.width, middleH, middleW, p5.height, p5.random(10, 30));
-      decrementOne(p5.width, p5.height, middleW, middleH, p5.random(10, 30));
+      incrementOne(middleX, middleY, p5.width, p5.height, distanceX);
+      incrementBoth(middleX, p5.height, p5.width, middleY, distanceX);
+      decrementBoth(p5.width, middleY, middleX, p5.height, distanceX);
+      decrementOne(p5.width, p5.height, middleX, middleY, distanceX);
+      verticalLines(middleX, middleY, middleX, p5.height, distanceX);
+      horizontalLines(middleX, middleY, p5.height, middleY, distanceY);
 
-      //incOrDec(middleW, 0, 0, middleW, middleH, 10);
-
-      // function incOrDec(limit, a, b, c, d, step) {
-      //   if (a < limit) {
-      //     if (d < limit) {
-      //       for (let i = 0; i < limit; i += step) {
-      //         p5.line(a + i, b, c, d + i * aspectRatio);
-      //       }
-      //     } else {
-      //       for (let i = 0; i < limit; i += step) {
-      //         p5.line(a + i, b, c, d - i * aspectRatio);
-      //       }
-      //     }
-      //   } else if (c > limit) {
-      //     if (d > limit) {
-      //       for (let i = step; i < middleW; i += step) {
-      //         p5.line(a - i, b, c, d - i * aspectRatio);
-      //       }
-      //     } else {
-      //       for (let i = step; i < middleW; i += step) {
-      //         p5.line(a - i, b, c, d + i * aspectRatio);
-      //       }
-      //     }
-      //   }
-      // }
+      // p5.line(0, middleY, p5.width, middleY);
+      // p5.line(middleX, 0, middleX, p5.height);
     };
     p5.windowResized = function () {
       if (p5.windowWidth < 768) {
@@ -151,11 +182,14 @@
         const w = canvasContainer?.clientWidth;
         const h = canvasContainer?.clientHeight;
         p5.resizeCanvas(w, h);
+
         // aspectRatio2 = p5.width / p5.height;
       }
-      middleH = p5.height / 2;
-      middleW = p5.width / 2;
+      middleY = p5.height / 2;
+      middleX = p5.width / 2;
       aspectRatio = p5.height / p5.width;
+      p5.clear();
+      p5.redraw();
     };
   });
 
@@ -167,43 +201,43 @@
 
 <!-- // ---- CUADRANTE 1 ----
       // 0, 0 - midW, midH "\"
-      for (let i = 0; i < middleW; i += 10) {
-        p5.line(i, 0, middleW, middleH - i * aspectRatio);
+      for (let i = 0; i < middleX; i += 10) {
+        p5.line(i, 0, middleX, middleY - i * aspectRatio);
       }
 
       //0, 0, - MIDW, MIDH
-      for (let i = 10; i < middleW; i += 10) {
-        p5.line(0, 0 + i * aspectRatio, middleW - i, middleH);
+      for (let i = 10; i < middleX; i += 10) {
+        p5.line(0, 0 + i * aspectRatio, middleX - i, middleY);
       }
 
       // "/"
-      for (let i = 0; i < middleW; i += 10) {
-        p5.line(middleW - i, 0, 0, middleH - i * aspectRatio);
+      for (let i = 0; i < middleX; i += 10) {
+        p5.line(middleX - i, 0, 0, middleY - i * aspectRatio);
       }
 
-      for (let i = 10; i < middleW; i += 10) {
-        p5.line(0 + i, middleH, middleW, 0 + i * aspectRatio);
+      for (let i = 10; i < middleX; i += 10) {
+        p5.line(0 + i, middleY, middleX, 0 + i * aspectRatio);
       }
 
       //----------------------------------------
       // ---- CUADRANTE 2 ----
       // WIDTH, 0 - MIDW, MID H "/"
-      for (let i = 0; i < middleW; i += 10) {
-        p5.line(p5.width - i, 0, middleW, middleH - i * aspectRatio);
+      for (let i = 0; i < middleX; i += 10) {
+        p5.line(p5.width - i, 0, middleX, middleY - i * aspectRatio);
       }
 
       // WIDTH, 0 - MID - MID H
-      for (let i = 10; i < middleW; i += 10) {
-        p5.line(p5.width, 0 + i * aspectRatio, middleW + i, middleH);
+      for (let i = 10; i < middleX; i += 10) {
+        p5.line(p5.width, 0 + i * aspectRatio, middleX + i, middleY);
       }
 
       // "\"
-      for (let i = middleW, j = 0; i < p5.width; i += 10, j += 10) {
-        p5.line(i, 0, p5.width, middleH - j * aspectRatio);
+      for (let i = middleX, j = 0; i < p5.width; i += 10, j += 10) {
+        p5.line(i, 0, p5.width, middleY - j * aspectRatio);
       }
 
-      for (let i = 10; i < middleW; i += 10) {
-        p5.line(middleW, 0 + i * aspectRatio, p5.width - i, middleH);
+      for (let i = 10; i < middleX; i += 10) {
+        p5.line(middleX, 0 + i * aspectRatio, p5.width - i, middleY);
       }
 
       //----------------------------------------
@@ -211,20 +245,20 @@
       // ----- CUADRANTE 4 ----
       // "\"
       // MIDW, MIDH - H, W
-      for (let i = middleW, j = 0; i < p5.width; i += 10, j += 10) {
-        p5.line(i, middleH, p5.width, p5.height - j * aspectRatio);
+      for (let i = middleX, j = 0; i < p5.width; i += 10, j += 10) {
+        p5.line(i, middleY, p5.width, p5.height - j * aspectRatio);
       }
 
-      for (let i = 10; i < middleW; i += 10) {
-        p5.line(middleW, middleH + i * aspectRatio, p5.width - i, p5.height);
+      for (let i = 10; i < middleX; i += 10) {
+        p5.line(middleX, middleY + i * aspectRatio, p5.width - i, p5.height);
       }
 
-      for (let i = 0; i < middleW; i += 10) {
-        p5.line(p5.width - i, middleH, middleW, p5.height - i * aspectRatio);
+      for (let i = 0; i < middleX; i += 10) {
+        p5.line(p5.width - i, middleY, middleX, p5.height - i * aspectRatio);
       }
 
-      for (let i = 10; i < middleW; i += 10) {
-        p5.line(p5.width, middleH + i * aspectRatio, middleW + i, p5.height);
+      for (let i = 10; i < middleX; i += 10) {
+        p5.line(p5.width, middleY + i * aspectRatio, middleX + i, p5.height);
       }
 
       //----------------------------------------
@@ -232,20 +266,20 @@
       // ---- CUADRANTE 3 ----
       // "\"
       // 0, MIDH - MIDW - H
-      for (let i = 0; i < middleW; i += 10) {
-        p5.line(i, middleH, middleW, p5.height - i * aspectRatio);
+      for (let i = 0; i < middleX; i += 10) {
+        p5.line(i, middleY, middleX, p5.height - i * aspectRatio);
       }
 
       // 0, MIDH - MIDW, H
-      for (let i = 10; i < middleW; i += 10) {
-        p5.line(0, middleH + i * aspectRatio, middleW - i, p5.height);
+      for (let i = 10; i < middleX; i += 10) {
+        p5.line(0, middleY + i * aspectRatio, middleX - i, p5.height);
       }
 
       // "/"
-      for (let i = 0; i < middleW; i += 10) {
-        p5.line(middleW - i, middleH, 0, p5.height - i * aspectRatio);
+      for (let i = 0; i < middleX; i += 10) {
+        p5.line(middleX - i, middleY, 0, p5.height - i * aspectRatio);
       }
 
-      for (let i = 10; i < middleW; i += 10) {
-        p5.line(middleW, middleH + i * aspectRatio, 0 + i, p5.height);
+      for (let i = 10; i < middleX; i += 10) {
+        p5.line(middleX, middleY + i * aspectRatio, 0 + i, p5.height);
       } -->

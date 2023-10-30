@@ -1,21 +1,23 @@
 {
-  "name": "lucasmblanco-github-io",
+  "name": "portfolio-v2",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\""
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.0.2",
     "@fontsource/inter": "^5.0.15",
-    "astro": "^3.3.3",
+    "@fontsource/roboto-mono": "^5.0.15",
+    "@types/p5": "^1.7.1",
+    "astro": "^2.10.15",
     "astro-icon": "^0.8.1",
     "gsap": "^3.12.2",
+    "p5": "^1.8.0",
     "tailwindcss": "^3.3.3"
   },
   "devDependencies": {

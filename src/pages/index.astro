@@ -1,8 +1,32 @@
 ---
+import Footer from "../components/Footer.astro";
+import MainFrame from "../components/MainFrame.astro";
+import Nav from "../components/Nav.astro";
+import ToggleTheme from "../components/ToggleTheme.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<!-- <meta http-equiv="refresh" content="0;url=/en/" /> -->
 <Layout title="Welcome to Astro.">
-  <main></main>
+  <header
+    class="mx-auto grid w-[98%] grid-flow-col justify-between py-1 text-sm md:text-base"
+  >
+    <p class="text-anim block">LUCAS BLANCO</p>
+    <ToggleTheme />
+    <p class="text-anim block">WEB DEVELOPER</p>
+  </header>
+  <Nav />
+  <main class="mx-auto grid w-[98%] place-content-center py-5">
+    <MainFrame />
+  </main>
+  <Footer />
 </Layout>
+<script>
+  import { gsap } from "gsap";
+  gsap.from(".text-anim", {
+    rotation: 0.01,
+    duration: 1,
+    x: -300,
+    opacity: 0,
+    ease: "power1.inOut",
+  });
+</script>

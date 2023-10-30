@@ -1,0 +1,45 @@
+---
+
+---
+
+<footer class="fixed bottom-0 left-0 w-full text-xs md:text-base">
+  <hr
+    class="footer-anim border-t-[1px] border-pure-black dark:border-pure-white"
+  />
+  <div class="mx-auto grid w-[98%] grid-flow-col justify-between py-4">
+    <ul class="grid grid-flow-col gap-4">
+      <li class="text-anim-reverse">
+        <a href="$" class="hover-effect"
+          ><span class="text-anim-reverse">LINKEDIN</span><span
+            class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
+          ></span></a
+        >
+      </li>
+      <li class="text-anim-reverse">
+        <a href="$" class="hover-effect"
+          ><span class="text-anim-reverse">GITHUB</span><span
+            class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
+          ></span></a
+        >
+      </li>
+    </ul><p class="text-anim-reverse">CÓRDOBA, ARGENTINA</p>
+  </div>
+</footer>
+<script>
+  import { gsap } from "gsap";
+  gsap.from(".footer-anim", {
+    rotation: 0.01,
+    duration: 1,
+    x: "-100%",
+    opacity: 0,
+    ease: "power1.inOut",
+  });
+
+  gsap.from(".text-anim-reverse", {
+    rotation: 0.01,
+    duration: 1,
+    x: 300,
+    opacity: 0,
+    ease: "power1.inOut",
+  });
+</script>

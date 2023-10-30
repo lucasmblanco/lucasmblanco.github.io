@@ -1,0 +1,48 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<button
+  onclick="
+  if (document.documentElement.attributes.getNamedItem('data-theme')?.value === 'dark') {
+    document.dispatchEvent(new CustomEvent('set-theme', { detail: 'light' }));
+  } else {
+    document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }));
+  }
+  "
+  class="toggle-theme text-xs before:content-['['] after:content-[']'] md:text-sm"
+>
+  {t("header.dark-toggle")}
+</button>
+<script>
+  import { gsap } from "gsap";
+
+  const root = document.querySelector("html");
+  const toggleThemeButton = document.querySelector("button");
+  toggleThemeButton?.addEventListener("click", changeTextContent);
+  function changeTextContent() {
+    if (window.location.pathname === "/en/") {
+      if (root?.dataset.theme === "dark") {
+        toggleThemeButton.textContent = "light";
+      } else {
+        toggleThemeButton.textContent = "dark";
+      }
+    } else {
+      if (root?.dataset.theme === "dark") {
+        toggleThemeButton.textContent = "claro";
+      } else {
+        toggleThemeButton.textContent = "oscuro";
+      }
+    }
+  }
+
+  gsap.from(".toggle-theme", {
+    duration: 2.5,
+    y: -300,
+    opacity: 0,
+    ease: "power4.inOut",
+  });
+</script>

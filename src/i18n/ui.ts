@@ -8,14 +8,17 @@ export const languages = {
   
 export const ui = {
   es: {
-    'nav.projects': 'Proyectos',
-    'nav.cv': 'Mi CV',
-    'nav.contact': 'Charlemos!',
+    'nav.projects': 'proyectos',
+    'nav.cv': 'curriculum',
+    'nav.contact': 'hablemos',
+    'header.light-toggle': 'oscuro',
+    'header.dark-toggle': 'claro'
 },
     en: {
-        'nav.projects': 'Projects',
-        'nav.cv': 'My Resume',
-        'nav.contact': "Let's talk!",
+      'nav.projects': 'projects',
+      'nav.contact': "let's talk",
+      'header.light-toggle': 'dark',
+    'header.dark-toggle': 'light'
     },
   } as const;
 

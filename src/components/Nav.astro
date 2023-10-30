@@ -1,0 +1,116 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<nav class="mx-auto grid w-[98%] justify-end text-xs md:text-sm">
+  <ul class="grid justify-items-end gap-1">
+    <li class="nav-list-item">
+      <p class="flex justify-end gap-1">
+        <a
+          href={translatePath("/", "en")}
+          class=`${getLangFromUrl(Astro.url) === "en" && 'underline'}`>en</a
+        >
+        <a
+          href={translatePath("/", "es")}
+          class=`${getLangFromUrl(Astro.url) === "es" && 'underline'}`>es</a
+        >
+      </p>
+    </li>
+    <li class="nav-list-item w-fit">
+      <a href="#projects" class="hover-effect">
+        <span> {t("nav.projects")}</span>
+        <span
+          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
+        ></span>
+      </a>
+    </li>
+    <li class="nav-list-item w-fit">
+      <a href="#cv" class="hover-effect">
+        <span>{t("nav.cv")}</span>
+        <span
+          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
+        ></span>
+      </a>
+    </li>
+    <li class="nav-list-item w-fit">
+      <a href="#contact" class="hover-effect">
+        <span>{t("nav.contact")}</span>
+        <span
+          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
+        ></span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<script>
+  import { gsap } from "gsap";
+
+  const listItems = document.querySelectorAll(".hover-effect");
+
+  function enterAnimation(item, e) {
+    item.tl.tweenFromTo(0, "midway");
+  }
+
+  function exitAnimation(item, e) {
+    item.tl.play();
+  }
+
+  gsap.from(".nav-list-item", {
+    rotation: 0.01,
+    duration: 1,
+    y: 300,
+    opacity: 0,
+    ease: "power1.Out",
+    stagger: 0.3,
+  });
+
+  listItems.forEach((item) => {
+    const underline = item.querySelector(".underline-el");
+
+    item.tl = gsap.timeline({ paused: true });
+
+    item.tl.fromTo(
+      underline,
+      {
+        width: "0%",
+        left: "0%",
+      },
+      {
+        width: "100%",
+        duration: ".5",
+      },
+    );
+
+    item.tl.add("midway");
+
+    item.tl.fromTo(
+      underline,
+      {
+        width: "100%",
+        left: "0%",
+      },
+      {
+        width: "0%",
+        left: "100%",
+        duration: ".5",
+        immediateRender: false,
+      },
+    );
+
+    item.addEventListener("mouseenter", (e) => {
+      enterAnimation(item, e);
+    });
+
+    item.addEventListener("mouseleave", (e) => {
+      exitAnimation(item, e);
+    });
+  });
+</script>

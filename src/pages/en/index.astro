@@ -1,7 +1,58 @@
 ---
+import Nav from "../../components/Nav.astro";
+import ToggleTheme from "../../components/ToggleTheme.astro";
 import Layout from "../../layouts/Layout.astro";
+import MainFrame from "../../components/MainFrame.astro";
 ---
 
 <Layout title="Welcome to Astro.">
-  <main></main>
+  <header
+    class="mx-auto grid w-[98%] grid-flow-col justify-between py-1 text-sm md:text-base"
+  >
+    <p class="text-anim block">LUCAS BLANCO</p>
+    <ToggleTheme />
+    <p class="text-anim block">WEB DEVELOPER</p>
+  </header>
+  <Nav />
+  <main class="mx-auto grid w-[98%] place-content-center py-5">
+    <MainFrame />
+  </main>
+  <footer class="fixed bottom-0 left-0 w-full text-xs md:text-base">
+    <hr
+      class="footer-anim border-t-[1px] border-pure-black dark:border-pure-white"
+    />
+    <div class="mx-auto grid w-[98%] grid-flow-col justify-between py-4">
+      <div class="grid grid-flow-col gap-4">
+        <a href="$" class="text-anim-reverse">LINKEDIN</a><a
+          href="$"
+          class="text-anim-reverse">GITHUB</a
+        >
+      </div><p class="text-anim-reverse">CÓRDOBA, ARGENTINA</p>
+    </div>
+  </footer>
 </Layout>
+<script>
+  import { gsap } from "gsap";
+
+  // const pElements = document.querySelectorAll();
+  gsap.from(".text-anim", {
+    duration: 2.5,
+    x: -300,
+    opacity: 0,
+    ease: "power1.inOut",
+  });
+
+  gsap.from(".footer-anim", {
+    duration: 2.5,
+    x: "-100%",
+    opacity: 0,
+    ease: "power1.inOut",
+  });
+
+  gsap.from(".text-anim-reverse", {
+    duration: 2.5,
+    x: 300,
+    opacity: 0,
+    ease: "power1.inOut",
+  });
+</script>

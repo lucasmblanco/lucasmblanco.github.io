@@ -7,15 +7,18 @@ export default {
 	theme: {
 		extend: {
 			spacing: {
-				'base-width': "min(100% - 5rem, 60rem)"
+				'base-width': "min(100% - 1rem, 98%)"
 			}, 
 			colors: {
 				karasubaido: 'hsl(313, 60%, 6%)', 
 				'ume-nezu': 'hsl(349, 24%, 68%)',
-				'toki-nezu': 'hsl(340, 25%, 86%)'
+				'toki-nezu': 'hsl(340, 25%, 86%)',
+				'pure-black': 'hsl(150, 7%, 6%)', 
+				'pure-white': 'hsl(54, 100%, 94%)'
 			},
 			fontFamily: {
 				sans: ["InterVariable", "Inter", ...defaultTheme.fontFamily.sans],
+				'roboto-mono': ['Roboto Mono', ...defaultTheme.fontFamily.sans]
 			  },
 		},
 	},

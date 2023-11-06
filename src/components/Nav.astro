@@ -10,7 +10,7 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<nav class="mx-auto grid w-[98%] justify-end text-xs md:text-sm">
+<nav class="text-xs mx-auto grid w-[98%] justify-end">
   <ul class="grid justify-items-end gap-1">
     <li class="nav-list-item">
       <p class="flex justify-end gap-1">
@@ -53,13 +53,32 @@ const translatePath = useTranslatedPath(lang);
 <script>
   import { gsap } from "gsap";
 
-  const listItems = document.querySelectorAll(".hover-effect");
+  interface GSAPProps {
+    width?: string;
+    left?: string;
+    duration?: string;
+    immediateRender?: boolean;
+  }
+  interface ListItem extends HTMLLIElement {
+    tl: {
+      tweenFromTo: (pointA: number, pointB: string) => void;
+      play: () => void;
+      fromTo: (
+        element: Element | null,
+        propertieA: GSAPProps,
+        propertieB: GSAPProps,
+      ) => void;
+      add: (point: string) => void;
+    };
+  }
 
-  function enterAnimation(item, e) {
+  const listItems = document.querySelectorAll<ListItem>(".hover-effect");
+
+  function enterAnimation(item: ListItem, e: MouseEvent) {
     item.tl.tweenFromTo(0, "midway");
   }
 
-  function exitAnimation(item, e) {
+  function exitAnimation(item: ListItem, e: MouseEvent) {
     item.tl.play();
   }
 
@@ -72,7 +91,7 @@ const translatePath = useTranslatedPath(lang);
     stagger: 0.3,
   });
 
-  listItems.forEach((item) => {
+  listItems.forEach((item: ListItem) => {
     const underline = item.querySelector(".underline-el");
 
     item.tl = gsap.timeline({ paused: true });

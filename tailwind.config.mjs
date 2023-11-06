@@ -5,7 +5,15 @@ import defaultTheme from "tailwindcss/defaultTheme"
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
+	 
 		extend: {
+			fontSize: {
+				xxs: '0.6rem'
+			}, 
+			boxShadow: {
+				'footer': '0 -30px 60px 20px hsl(150, 7%, 6%)',
+				'footer-light': '0 -30px 60px 20px hsl(54, 100%, 94%)'
+			}, 
 			spacing: {
 				'base-width': "min(100% - 1rem, 98%)"
 			}, 
@@ -19,7 +27,8 @@ export default {
 			fontFamily: {
 				sans: ["InterVariable", "Inter", ...defaultTheme.fontFamily.sans],
 				'roboto-mono': ['Roboto Mono', ...defaultTheme.fontFamily.sans]
-			  },
+			},
+			
 		},
 	},
 	plugins: [],

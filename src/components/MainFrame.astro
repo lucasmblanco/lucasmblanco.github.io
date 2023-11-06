@@ -1,14 +1,25 @@
 ---
-
+// md:h-[43.7rem] md:w-[25rem] md:w-[100rem]
 ---
 
-<div
-  class="canvas-container h-[30rem] w-[20rem] border border-solid border-pure-black bg-transparent dark:border-pure-white md:h-[43.7rem] md:w-[25rem]"
->
-  <!-- <canvas id="my-canvas" class=""> </canvas> -->
+<div class="grid gap-10">
+  <div
+    class="canvas-container mx-auto h-[30rem] w-[20rem] border border-solid border-pure-black bg-transparent dark:border-pure-white md:h-[43.7rem] md:w-[25rem]"
+  >
+    <!-- <canvas id="my-canvas" class=""> </canvas> -->
+  </div>
+  <div
+    class="w-[20rem] border border-pure-black p-4 dark:border-pure-white md:w-[25rem]"
+  >
+    <h2>Wall Drawing #11 (1969)</h2>
+    <p class="text-xs">
+      A wall divided horizontally and vertically into four equal parts. Within
+      each part, three of the four kinds of lines are superimposed.
+    </p>
+  </div>
 </div>
 <script>
-  import p5, { changed } from "p5";
+  import p5 from "p5";
   import { gsap } from "gsap";
   import palletes from "nice-color-palettes";
 
@@ -144,15 +155,7 @@
       verticalLines(0, 0, 0, middleY, distanceX);
       horizontalLines(0, 0, middleX, 0, distanceY);
 
-      // ---- CUADRANTE 3 ----
-      incrementOne(0, middleY, middleX, p5.height, distanceX);
-      incrementBoth(0, p5.height, middleX, middleY, distanceX);
-      decrementBoth(middleX, middleY, 0, p5.height, distanceX);
-      decrementOne(middleX, p5.height, 0, middleY, distanceX);
-      horizontalLines(0, middleY, middleX, middleY, distanceY);
-      verticalLines(0, middleY, 0, p5.height, distanceX);
-
-      // ---- CUADRANTE 2 ----
+      // // ---- CUADRANTE 2 ----
       incrementOne(middleX, 0, p5.width, middleY, distanceX);
       incrementBoth(middleX, middleY, p5.width, 0, distanceX);
       decrementBoth(p5.width, 0, middleX, middleY, distanceX);
@@ -160,16 +163,21 @@
       horizontalLines(middleX, 0, p5.width, 0, distanceY);
       verticalLines(middleX, 0, middleX, middleY, distanceX);
 
-      // ---- CUADRANTE 4 ----
+      // // ---- CUADRANTE 3 ----
+      incrementOne(0, middleY, middleX, p5.height, distanceX);
+      incrementBoth(0, p5.height, middleX, middleY, distanceX);
+      decrementBoth(middleX, middleY, 0, p5.height, distanceX);
+      decrementOne(middleX, p5.height, 0, middleY, distanceX);
+      horizontalLines(0, middleY, middleX, middleY, distanceY);
+      verticalLines(0, middleY, 0, p5.height, distanceX);
+
+      // // ---- CUADRANTE 4 ----
       incrementOne(middleX, middleY, p5.width, p5.height, distanceX);
       incrementBoth(middleX, p5.height, p5.width, middleY, distanceX);
       decrementBoth(p5.width, middleY, middleX, p5.height, distanceX);
       decrementOne(p5.width, p5.height, middleX, middleY, distanceX);
       verticalLines(middleX, middleY, middleX, p5.height, distanceX);
-      horizontalLines(middleX, middleY, p5.height, middleY, distanceY);
-
-      // p5.line(0, middleY, p5.width, middleY);
-      // p5.line(middleX, 0, middleX, p5.height);
+      horizontalLines(middleX, middleY, p5.width, middleY, distanceY);
     };
     p5.windowResized = function () {
       if (p5.windowWidth < 768) {
@@ -198,88 +206,3 @@
     duration: 2.5,
   });
 </script>
-
-<!-- // ---- CUADRANTE 1 ----
-      // 0, 0 - midW, midH "\"
-      for (let i = 0; i < middleX; i += 10) {
-        p5.line(i, 0, middleX, middleY - i * aspectRatio);
-      }
-
-      //0, 0, - MIDW, MIDH
-      for (let i = 10; i < middleX; i += 10) {
-        p5.line(0, 0 + i * aspectRatio, middleX - i, middleY);
-      }
-
-      // "/"
-      for (let i = 0; i < middleX; i += 10) {
-        p5.line(middleX - i, 0, 0, middleY - i * aspectRatio);
-      }
-
-      for (let i = 10; i < middleX; i += 10) {
-        p5.line(0 + i, middleY, middleX, 0 + i * aspectRatio);
-      }
-
-      //----------------------------------------
-      // ---- CUADRANTE 2 ----
-      // WIDTH, 0 - MIDW, MID H "/"
-      for (let i = 0; i < middleX; i += 10) {
-        p5.line(p5.width - i, 0, middleX, middleY - i * aspectRatio);
-      }
-
-      // WIDTH, 0 - MID - MID H
-      for (let i = 10; i < middleX; i += 10) {
-        p5.line(p5.width, 0 + i * aspectRatio, middleX + i, middleY);
-      }
-
-      // "\"
-      for (let i = middleX, j = 0; i < p5.width; i += 10, j += 10) {
-        p5.line(i, 0, p5.width, middleY - j * aspectRatio);
-      }
-
-      for (let i = 10; i < middleX; i += 10) {
-        p5.line(middleX, 0 + i * aspectRatio, p5.width - i, middleY);
-      }
-
-      //----------------------------------------
-
-      // ----- CUADRANTE 4 ----
-      // "\"
-      // MIDW, MIDH - H, W
-      for (let i = middleX, j = 0; i < p5.width; i += 10, j += 10) {
-        p5.line(i, middleY, p5.width, p5.height - j * aspectRatio);
-      }
-
-      for (let i = 10; i < middleX; i += 10) {
-        p5.line(middleX, middleY + i * aspectRatio, p5.width - i, p5.height);
-      }
-
-      for (let i = 0; i < middleX; i += 10) {
-        p5.line(p5.width - i, middleY, middleX, p5.height - i * aspectRatio);
-      }
-
-      for (let i = 10; i < middleX; i += 10) {
-        p5.line(p5.width, middleY + i * aspectRatio, middleX + i, p5.height);
-      }
-
-      //----------------------------------------
-
-      // ---- CUADRANTE 3 ----
-      // "\"
-      // 0, MIDH - MIDW - H
-      for (let i = 0; i < middleX; i += 10) {
-        p5.line(i, middleY, middleX, p5.height - i * aspectRatio);
-      }
-
-      // 0, MIDH - MIDW, H
-      for (let i = 10; i < middleX; i += 10) {
-        p5.line(0, middleY + i * aspectRatio, middleX - i, p5.height);
-      }
-
-      // "/"
-      for (let i = 0; i < middleX; i += 10) {
-        p5.line(middleX - i, middleY, 0, p5.height - i * aspectRatio);
-      }
-
-      for (let i = 10; i < middleX; i += 10) {
-        p5.line(middleX, middleY + i * aspectRatio, 0 + i, p5.height);
-      } -->

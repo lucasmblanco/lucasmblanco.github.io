@@ -1,8 +1,7 @@
 ---
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+// import { getLangFromUrl, useTranslations } from "../i18n/utils";
+// const lang = getLangFromUrl(Astro.url);
+// const t = useTranslations(lang);
 ---
 
 <button
@@ -13,28 +12,41 @@ const t = useTranslations(lang);
     document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }));
   }
   "
-  class="toggle-theme text-xs before:content-['['] after:content-[']'] md:text-sm"
->
-  {t("header.dark-toggle")}
-</button>
+  class="toggle-theme before:toggle-theme after:toggle-theme md:text-xs text-xxs before:content-['['] after:content-[']']"
+></button>
 <script>
   import { gsap } from "gsap";
 
   const root = document.querySelector("html");
   const toggleThemeButton = document.querySelector("button");
+
+  if (window.location.pathname === "/en/") {
+    if (root?.dataset.theme === "dark") {
+      toggleThemeButton!.textContent = "light";
+    } else if (root?.dataset.theme === "light") {
+      toggleThemeButton!.textContent = "dark";
+    }
+  } else {
+    if (root?.dataset.theme === "dark") {
+      toggleThemeButton!.textContent = "claro";
+    } else if (root?.dataset.theme === "light") {
+      toggleThemeButton!.textContent = "oscuro";
+    }
+  }
+
   toggleThemeButton?.addEventListener("click", changeTextContent);
   function changeTextContent() {
     if (window.location.pathname === "/en/") {
       if (root?.dataset.theme === "dark") {
-        toggleThemeButton.textContent = "light";
-      } else {
-        toggleThemeButton.textContent = "dark";
+        toggleThemeButton!.textContent = "light";
+      } else if (root?.dataset.theme === "light") {
+        toggleThemeButton!.textContent = "dark";
       }
     } else {
       if (root?.dataset.theme === "dark") {
-        toggleThemeButton.textContent = "claro";
-      } else {
-        toggleThemeButton.textContent = "oscuro";
+        toggleThemeButton!.textContent = "claro";
+      } else if (root?.dataset.theme === "light") {
+        toggleThemeButton!.textContent = "oscuro";
       }
     }
   }

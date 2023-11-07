@@ -5,11 +5,11 @@ import Icon from "astro-icon";
 
 <div class="grid gap-10">
   <div
-    class="canvas-container mx-auto h-[30rem] w-[20rem] border border-solid border-pure-black bg-transparent dark:border-pure-white md:h-[43.7rem] md:w-[25rem]"
+    class="canvas-container mx-auto h-[30rem] w-[20rem] rounded-lg md:h-[43.7rem] md:w-[25rem]"
   >
   </div>
   <div
-    class="draw-description w-[20rem] border border-pure-black p-4 dark:border-pure-white md:w-[25rem]"
+    class="draw-description w-[20rem] rounded-lg border border-pure-black p-4 dark:border-pure-white md:w-[25rem]"
   >
     <div class="flex justify-between">
       <h2>Wall Drawing #11 (1969)</h2>
@@ -32,6 +32,11 @@ import Icon from "astro-icon";
     <p class="text-right">Sol LeWitt</p>
   </div>
 </div>
+<style is:global>
+  canvas {
+    border-radius: 8px;
+  }
+</style>
 <script>
   import p5 from "p5";
   import { gsap } from "gsap";

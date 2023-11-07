@@ -1,4 +1,5 @@
 ---
+import Icon from "astro-icon";
 // md:h-[43.7rem] md:w-[25rem] md:w-[100rem]
 ---
 
@@ -6,27 +7,45 @@
   <div
     class="canvas-container mx-auto h-[30rem] w-[20rem] border border-solid border-pure-black bg-transparent dark:border-pure-white md:h-[43.7rem] md:w-[25rem]"
   >
-    <!-- <canvas id="my-canvas" class=""> </canvas> -->
   </div>
   <div
-    class="w-[20rem] border border-pure-black p-4 dark:border-pure-white md:w-[25rem]"
+    class="draw-description w-[20rem] border border-pure-black p-4 dark:border-pure-white md:w-[25rem]"
   >
-    <h2>Wall Drawing #11 (1969)</h2>
+    <div class="flex justify-between">
+      <h2>Wall Drawing #11 (1969)</h2>
+      <a
+        href="https://github.com/wholepixel/solving-sol/tree/master/011"
+        target="_blank"
+        class="sol-link"
+        ><Icon
+          class="sol-icon"
+          name="grommet-icons:form-next-link"
+          width="20"
+        /></a
+      >
+    </div>
+
     <p class="text-xs">
-      A wall divided horizontally and vertically into four equal parts. Within
-      each part, three of the four kinds of lines are superimposed.
+      "A wall divided horizontally and vertically into four equal parts. Within
+      each part, three of the four kinds of lines are superimposed."
     </p>
+    <p class="text-right">Sol LeWitt</p>
   </div>
 </div>
 <script>
   import p5 from "p5";
   import { gsap } from "gsap";
   import palletes from "nice-color-palettes";
+  import Quadrant from "../utils/Quadrant";
 
   const root = document.querySelector("html");
+  const canvasContainer = document.querySelector(".canvas-container");
+  const arrowIcon = document.querySelector(".sol-icon");
+  const descriptionLink = document.querySelector(".sol-link");
+
   const lightColor = "hsl(54, 100%, 94%)";
   const darkColor = "hsl(150, 7%, 6%)";
-  const canvasContainer = document.querySelector(".canvas-container");
+
   const w = canvasContainer?.clientWidth;
   const h = canvasContainer?.clientHeight;
 
@@ -38,12 +57,13 @@
   let distance: number;
   let distanceX: number;
   let distanceY: number;
+  let Q1, Q2, Q3, Q4;
 
   new p5(function (p5) {
     p5.setup = function () {
       const cnv = p5.createCanvas(w, h);
       cnv.parent(canvasContainer);
-      p5.frameRate(10);
+      // p5.frameRate(10);
       p5.noLoop();
       middleY = p5.height / 2;
       middleX = p5.width / 2;
@@ -65,120 +85,60 @@
       p5.clear();
       p5.background(p5.random(pallete) + "A0");
 
-      function incrementOne(
-        x1: number,
-        y1: number,
-        x2: number,
-        y2: number,
-        step: number,
-      ) {
-        p5.stroke(p5.random(pallete));
+      Q1 = new Quadrant(
+        p5,
+        0,
+        0,
+        middleX,
+        middleY,
+        distanceX,
+        distanceY,
+        aspectRatio,
+        pallete,
+      );
 
-        for (let i = 0; i < middleX; i += step) {
-          p5.line(x1 + i, y1, x2, y2 - i * aspectRatio);
-        }
-      }
+      Q2 = new Quadrant(
+        p5,
+        middleX,
+        0,
+        p5.width,
+        middleY,
+        distanceX,
+        distanceY,
+        aspectRatio,
+        pallete,
+      );
+      Q3 = new Quadrant(
+        p5,
+        0,
+        middleY,
+        middleX,
+        p5.height,
+        distanceX,
+        distanceY,
+        aspectRatio,
+        pallete,
+      );
+      Q4 = new Quadrant(
+        p5,
+        middleX,
+        middleY,
+        p5.width,
+        p5.height,
+        distanceX,
+        distanceY,
+        aspectRatio,
+        pallete,
+      );
 
-      function incrementBoth(
-        x1: number,
-        y1: number,
-        x2: number,
-        y2: number,
-        step: number,
-      ) {
-        p5.stroke(p5.random(pallete));
-
-        for (let i = 0; i < middleX; i += step) {
-          p5.line(x1 + i, y1, x2, y2 + i * aspectRatio);
-        }
-      }
-
-      function decrementBoth(
-        x1: number,
-        y1: number,
-        x2: number,
-        y2: number,
-        step: number,
-      ) {
-        p5.stroke(p5.random(pallete));
-        for (let i = step; i < middleX; i += step) {
-          p5.line(x1 - i, y1, x2, y2 - i * aspectRatio);
-        }
-      }
-
-      function decrementOne(
-        x1: number,
-        y1: number,
-        x2: number,
-        y2: number,
-        step: number,
-      ) {
-        p5.stroke(p5.random(pallete));
-        for (let i = step; i < middleX; i += step) {
-          p5.line(x1 - i, y1, x2, y2 + i * aspectRatio);
-        }
-      }
-
-      function verticalLines(
-        x1: number,
-        y1: number,
-        x2: number,
-        y2: number,
-        step: number,
-      ) {
-        p5.stroke(p5.random(pallete));
-        console.log(`SOY DISTANCEX DESDE VERTICALLINES ${step}`);
-        for (let i = 0; i <= middleX; i += step) {
-          p5.line(x1 + i, y1, x2 + i, y2);
-        }
-      }
-
-      function horizontalLines(
-        x1: number,
-        y1: number,
-        x2: number,
-        y2: number,
-        step: number,
-      ) {
-        p5.stroke(p5.random(pallete));
-        for (let i = 0; i < middleY; i += step) {
-          p5.line(x1, y1 + i, x2, y2 + i);
-        }
-      }
+      Q1.draw();
+      Q2.draw();
+      Q3.draw();
+      Q4.draw();
 
       p5.stroke(root?.dataset.theme === "dark" ? lightColor : darkColor);
-      // ---- CUADRANTE 1 ----
-      incrementOne(0, 0, middleX, middleY, distanceX);
-      incrementBoth(0, middleY, middleX, 0, distanceX);
-      decrementBoth(middleX, 0, 0, middleY, distanceX);
-      decrementOne(middleX, middleY, 0, 0, distanceX);
-      verticalLines(0, 0, 0, middleY, distanceX);
-      horizontalLines(0, 0, middleX, 0, distanceY);
-
-      // // ---- CUADRANTE 2 ----
-      incrementOne(middleX, 0, p5.width, middleY, distanceX);
-      incrementBoth(middleX, middleY, p5.width, 0, distanceX);
-      decrementBoth(p5.width, 0, middleX, middleY, distanceX);
-      decrementOne(p5.width, middleY, middleX, 0, distanceX);
-      horizontalLines(middleX, 0, p5.width, 0, distanceY);
-      verticalLines(middleX, 0, middleX, middleY, distanceX);
-
-      // // ---- CUADRANTE 3 ----
-      incrementOne(0, middleY, middleX, p5.height, distanceX);
-      incrementBoth(0, p5.height, middleX, middleY, distanceX);
-      decrementBoth(middleX, middleY, 0, p5.height, distanceX);
-      decrementOne(middleX, p5.height, 0, middleY, distanceX);
-      horizontalLines(0, middleY, middleX, middleY, distanceY);
-      verticalLines(0, middleY, 0, p5.height, distanceX);
-
-      // // ---- CUADRANTE 4 ----
-      incrementOne(middleX, middleY, p5.width, p5.height, distanceX);
-      incrementBoth(middleX, p5.height, p5.width, middleY, distanceX);
-      decrementBoth(p5.width, middleY, middleX, p5.height, distanceX);
-      decrementOne(p5.width, p5.height, middleX, middleY, distanceX);
-      verticalLines(middleX, middleY, middleX, p5.height, distanceX);
-      horizontalLines(middleX, middleY, p5.width, middleY, distanceY);
     };
+
     p5.windowResized = function () {
       if (p5.windowWidth < 768) {
         const canvasContainer = document.querySelector(".canvas-container");
@@ -190,8 +150,6 @@
         const w = canvasContainer?.clientWidth;
         const h = canvasContainer?.clientHeight;
         p5.resizeCanvas(w, h);
-
-        // aspectRatio2 = p5.width / p5.height;
       }
       middleY = p5.height / 2;
       middleX = p5.width / 2;
@@ -205,4 +163,24 @@
     autoAlpha: 0,
     duration: 2.5,
   });
+
+  let arrowAnimation = gsap.to(arrowIcon, {
+    ease: "power4.In",
+    paused: true,
+    rotate: "-405deg",
+    duration: 0.8,
+  });
+
+  gsap.from(".draw-description", {
+    rotation: 0.01,
+    duration: 1,
+    y: 300,
+    opacity: 0,
+    ease: "power1.Out",
+  });
+
+  descriptionLink?.addEventListener("mouseenter", () => arrowAnimation.play());
+  descriptionLink?.addEventListener("mouseleave", () =>
+    arrowAnimation.reverse(),
+  );
 </script>

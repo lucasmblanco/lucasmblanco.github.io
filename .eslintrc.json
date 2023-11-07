@@ -24,6 +24,7 @@
   // },
 
   "rules": {
+    "no-plusplus": "off",
     /* Auto-sort imports and exports */
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
@@ -68,6 +69,7 @@
         "parser": "@typescript-eslint/parser"
       },
       "rules": {
+        "no-plusplus": "off",
         "import/no-unresolved": "off"
       }
     }

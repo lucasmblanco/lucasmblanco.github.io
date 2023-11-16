@@ -1,0 +1,58 @@
+---
+
+---
+
+<div>
+  <div class="img-cnv-container h-96 w-96"></div>
+  <div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
+      consectetur, aut odio corporis harum accusantium corrupti neque adipisci
+      iusto nobis? Voluptas eaque, repudiandae placeat quam omnis recusandae
+      provident. Consequuntur, voluptatibus?
+    </p>
+  </div>
+</div>
+<script>
+  import p5 from "p5";
+  import { gsap } from "gsap";
+
+  const imgCnvContainer = document.querySelector(".img-cnv-container");
+  const w = imgCnvContainer?.clientWidth;
+  const h = imgCnvContainer?.clientHeight;
+
+  console.log("width: " + w);
+  console.log("height: " + h);
+
+  let img;
+
+  new p5(function (p5) {
+    p5.preload = function () {
+      img = p5.loadImage(
+        "https://res.cloudinary.com/du8wo1cxh/image/upload/f_auto,q_auto/me1",
+      );
+    };
+    p5.setup = function () {
+      p5.noLoop();
+      const cnv = p5.createCanvas(w, h);
+      cnv.parent(imgCnvContainer);
+      img.loadPixels();
+      p5.image(img, 0, 0, p5.width, p5.height);
+    };
+
+    p5.draw = function () {
+      for (let x = 0; x < img.width; x++) {
+        for (let y = 0; y < img.height; y++) {
+          let index = x + y * img.width;
+          let pix = img.pixels[index];
+          let r = p5.red(pix);
+          let g = p5.green(pix);
+          let b = p5.blue(pix);
+          r = p5.round(r / 255) * 255;
+          g = p5.round(g / 255) * 255;
+          b = p5.round(b / 255) * 255;
+        }
+      }
+    };
+  });
+</script>

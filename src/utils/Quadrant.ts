@@ -1,23 +1,23 @@
-import p5 from 'p5'
+import type p5 from 'p5'
 
 export default class Quadrant {
-    a: number;
+    private a: number;
 
-    b: number;
+    private b: number;
  
-    c: number;
+    private c: number;
  
-    d: number; 
+    private d: number; 
 
-    canvas: p5;
+    private canvas: p5;
 
-    distanceX: number;
+    private distanceX: number;
 
-    distanceY: number;
+    private distanceY: number;
 
-    aspectRatio: number;
+    private aspectRatio: number;
 
-    pallete: p5;
+    private pallete: string[];
 
     constructor(canvas: p5, a: number, b: number, c: number, d: number, distanceX: number, distanceY: number, aspectRatio: number, pallete: string[]) {
         this.canvas = canvas;

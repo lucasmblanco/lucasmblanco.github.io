@@ -3,15 +3,15 @@ import Icon from "astro-icon";
 // md:h-[43.7rem] md:w-[25rem] md:w-[100rem]
 ---
 
-<div class="grid gap-10">
+<div class="grid place-content-center gap-5 md:gap-10">
   <div
     class="canvas-container mx-auto h-[30rem] w-[20rem] rounded-lg md:h-[43.7rem] md:w-[25rem]"
   >
   </div>
   <div
-    class="draw-description w-[20rem] rounded-lg border border-pure-black p-4 dark:border-pure-white md:w-[25rem]"
+    class="draw-description grid w-[20rem] gap-2 rounded-lg md:w-[25rem] md:p-4"
   >
-    <div class="flex justify-between">
+    <div class="flex justify-between md:text-base">
       <h2>Wall Drawing #11 (1969)</h2>
       <a
         href="https://github.com/wholepixel/solving-sol/tree/master/011"
@@ -25,11 +25,11 @@ import Icon from "astro-icon";
       >
     </div>
 
-    <p class="text-xs">
-      "A wall divided horizontally and vertically into four equal parts. Within
-      each part, three of the four kinds of lines are superimposed."
-    </p>
-    <p class="text-right">Sol LeWitt</p>
+    <blockquote class="text-xxs md:text-xs">
+      A wall divided horizontally and vertically into four equal parts. Within
+      each part, three of the four kinds of lines are superimposed.
+    </blockquote>
+    <p class="text-right text-xxs md:text-xs">Sol LeWitt</p>
   </div>
 </div>
 <style is:global>
@@ -173,6 +173,7 @@ import Icon from "astro-icon";
     ease: "power4.In",
     paused: true,
     rotate: "-405deg",
+    scale: 3,
     duration: 0.8,
   });
 

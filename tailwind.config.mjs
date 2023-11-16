@@ -8,6 +8,7 @@ export default {
 	 
 		extend: {
 			fontSize: {
+				smoll: '0.5rem', 
 				xxs: '0.6rem'
 			}, 
 			boxShadow: {

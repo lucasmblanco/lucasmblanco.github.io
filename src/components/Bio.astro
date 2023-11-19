@@ -8,7 +8,7 @@
     alt=""
     class="profile-image relative w-40 self-start rounded-lg saturate-0 md:w-72"
   />
-  <div class="grid grid-cols-3 grid-rows-3 px-8">
+  <div class="grid grid-cols-3 grid-rows-3 gap-16 px-8">
     <article class="col-start-1 flex flex-col gap-2">
       <h3 class="h-fit text-base">SOBRE MI</h3>
       <div>
@@ -58,14 +58,14 @@
   </div>
 </div>
 <script>
-  const container = document.querySelector(".bio-container");
+  const container = document.querySelector(".bio-container") as HTMLDivElement;
   const profileImage = document.querySelector(
     ".profile-image",
   ) as HTMLImageElement;
 
   let thresholdSets = [];
 
-  for (let i = 0.5; i <= 1; i += 0.01) {
+  for (let i = 0; i <= 1; i += 0.01) {
     thresholdSets.push(i);
   }
 
@@ -77,38 +77,16 @@
 
   let callback = (entries, observer) => {
     entries.forEach((entry) => {
-      // Each entry describes an intersection change for one observed
-      // target element:
-      // console.log(entry.intersectionRatio * 100);
-      // console.log(
-      //   (Math.abs(
-      //     entry.intersectionRatio * 100 -
-      //       (profileImage.clientHeight * 100) / entry.target.clientHeight,
-      //   ) ) + "%",
-      // );
-      // profileImage.style.top =
-      //   Math.abs(
-      //     entry.intersectionRatio * 100 -
-      //       (profileImage.clientHeight * 100) / entry.target.clientHeight,
-      //   ) + "%";
-      // console.log(entry);
-      // profileImage.style.top = entry.intersectionRatio * 100 + "%";
-      // console.log(entry.target.clientHeight);
-      // console.log(profileImage.clientHeight);
-      // const height =
-      //   (profileImage.clientHeight * 100) / entry.target.clientHeight - 100;
-      // console.log(entry.intersectionRatio);
-      // console.log(profileImage.style.top);
+      const diff = container.clientHeight - profileImage.clientHeight;
 
-      const calc =
-        (profileImage.clientHeight * 100) / entry.target.clientHeight;
-
-      console.log(
-        (profileImage.clientHeight * 100) / entry.target.clientHeight,
-      );
+      const inter = entry.intersectionRatio * 100;
       if (!(entry.intersectionRatio === 0 && profileImage.style.top === "")) {
-        console.log(entry.intersectionRatio * 100 - calc + "%");
-        profileImage.style.top = entry.intersectionRatio * 100 - calc + "%";
+        let newCalc = (inter * diff) / 100;
+        if (newCalc < 0) {
+          newCalc = 0;
+        }
+
+        profileImage.style.transform = `translateY(${newCalc}px)`;
       }
     });
   };

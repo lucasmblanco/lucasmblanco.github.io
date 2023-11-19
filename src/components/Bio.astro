@@ -1,58 +1,119 @@
 ---
-
+// BAJAR CON EL MOUSE LA IMAGEN HACIA ABAJO
 ---
 
-<div>
-  <div class="img-cnv-container h-96 w-96"></div>
-  <div>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-      consectetur, aut odio corporis harum accusantium corrupti neque adipisci
-      iusto nobis? Voluptas eaque, repudiandae placeat quam omnis recusandae
-      provident. Consequuntur, voluptatibus?
-    </p>
+<div class="bio-container relative grid h-fit grid-flow-col gap-2 text-xs">
+  <img
+    src="https://res.cloudinary.com/du8wo1cxh/image/upload/f_auto,q_auto/ax1ndgvpapg6ht7rebry"
+    alt=""
+    class="profile-image relative w-40 self-start rounded-lg saturate-0 md:w-72"
+  />
+  <div class="grid grid-cols-3 grid-rows-3 px-8">
+    <article class="col-start-1 flex flex-col gap-2">
+      <h3 class="h-fit text-base">SOBRE MI</h3>
+      <div>
+        <p>
+          Me gusta pensar y proponer soluciones a problemas contidianos y
+          utilizo la programación como herramienta para poder hacerlo.
+        </p>
+        <p>
+          Me gusta pensar y proponer soluciones a problemas contidianos y
+          utilizo la pr
+        </p>
+        <p>
+          Me gusta pensar y proponer soluciones a problemas contidianos y
+          utilizo la programación como herramienta para poder hacerlo.
+        </p>
+      </div>
+    </article>
+    <!-- col-start-3 row-start-2 -->
+    <article class="col-start-2 row-start-2 flex flex-col gap-2">
+      <h3 class="h-fit text-base">SERVICIOS</h3>
+      <div>
+        <p>
+          Me gusta pensar y proponer soluciones a problemas contidianos y
+          utilizo la programación como herramienta para poder hacerlo.
+        </p>
+        <p>
+          Me gusta pensar y proponer soluciones a problemas contidianos y
+          utilizo la pr
+        </p>
+        <p>
+          Me gusta pensar y proponer soluciones a problemas contidianos y
+          utilizo la programación como herramienta para poder hacerlo.
+        </p>
+      </div>
+    </article>
+    <!-- col-start-4 -->
+    <article class="col-start-3 row-start-3 flex flex-col gap-2">
+      <h3 class="h-fit text-base">TECNOLOGIAS</h3>
+      <div>
+        <p>Me gusta pensar y proponer soluciones a problemas contidianos y</p>
+        <p>Me gusta pensar y proponer soluciones a problemas contidianos y</p>
+        <p>Me gusta pensar y proponer soluciones a problemas contidianos y</p>
+        <p>Me gusta pensar y proponer soluciones a problemas contidianos y</p>
+        <p>Me gusta pensar y proponer soluciones a problemas contidianos y</p>
+      </div>
+    </article>
   </div>
 </div>
 <script>
-  import p5 from "p5";
-  import { gsap } from "gsap";
+  const container = document.querySelector(".bio-container");
+  const profileImage = document.querySelector(
+    ".profile-image",
+  ) as HTMLImageElement;
 
-  const imgCnvContainer = document.querySelector(".img-cnv-container");
-  const w = imgCnvContainer?.clientWidth;
-  const h = imgCnvContainer?.clientHeight;
+  let thresholdSets = [];
 
-  console.log("width: " + w);
-  console.log("height: " + h);
+  for (let i = 0.5; i <= 1; i += 0.01) {
+    thresholdSets.push(i);
+  }
 
-  let img;
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: thresholdSets,
+  };
 
-  new p5(function (p5) {
-    p5.preload = function () {
-      img = p5.loadImage(
-        "https://res.cloudinary.com/du8wo1cxh/image/upload/f_auto,q_auto/me1",
+  let callback = (entries, observer) => {
+    entries.forEach((entry) => {
+      // Each entry describes an intersection change for one observed
+      // target element:
+      // console.log(entry.intersectionRatio * 100);
+      // console.log(
+      //   (Math.abs(
+      //     entry.intersectionRatio * 100 -
+      //       (profileImage.clientHeight * 100) / entry.target.clientHeight,
+      //   ) ) + "%",
+      // );
+      // profileImage.style.top =
+      //   Math.abs(
+      //     entry.intersectionRatio * 100 -
+      //       (profileImage.clientHeight * 100) / entry.target.clientHeight,
+      //   ) + "%";
+      // console.log(entry);
+      // profileImage.style.top = entry.intersectionRatio * 100 + "%";
+      // console.log(entry.target.clientHeight);
+      // console.log(profileImage.clientHeight);
+      // const height =
+      //   (profileImage.clientHeight * 100) / entry.target.clientHeight - 100;
+      // console.log(entry.intersectionRatio);
+      // console.log(profileImage.style.top);
+
+      const calc =
+        (profileImage.clientHeight * 100) / entry.target.clientHeight;
+
+      console.log(
+        (profileImage.clientHeight * 100) / entry.target.clientHeight,
       );
-    };
-    p5.setup = function () {
-      p5.noLoop();
-      const cnv = p5.createCanvas(w, h);
-      cnv.parent(imgCnvContainer);
-      img.loadPixels();
-      p5.image(img, 0, 0, p5.width, p5.height);
-    };
-
-    p5.draw = function () {
-      for (let x = 0; x < img.width; x++) {
-        for (let y = 0; y < img.height; y++) {
-          let index = x + y * img.width;
-          let pix = img.pixels[index];
-          let r = p5.red(pix);
-          let g = p5.green(pix);
-          let b = p5.blue(pix);
-          r = p5.round(r / 255) * 255;
-          g = p5.round(g / 255) * 255;
-          b = p5.round(b / 255) * 255;
-        }
+      if (!(entry.intersectionRatio === 0 && profileImage.style.top === "")) {
+        console.log(entry.intersectionRatio * 100 - calc + "%");
+        profileImage.style.top = entry.intersectionRatio * 100 - calc + "%";
       }
-    };
-  });
+    });
+  };
+
+  const observer = new IntersectionObserver(callback, options);
+
+  observer.observe(container as Element);
 </script>

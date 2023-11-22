@@ -6,7 +6,7 @@
   <img
     src="https://res.cloudinary.com/du8wo1cxh/image/upload/f_auto,q_auto/ax1ndgvpapg6ht7rebry"
     alt=""
-    class="profile-image relative w-40 self-start rounded-lg saturate-0 md:w-72"
+    class="profile-image relative w-40 self-start rounded-lg opacity-0 saturate-0 md:w-72"
   />
   <div class="grid grid-cols-3 grid-rows-3 gap-16 px-8">
     <article class="col-start-1 flex flex-col gap-2">
@@ -58,7 +58,9 @@
   </div>
 </div>
 <script>
+  import { gsap } from "gsap";
   const container = document.querySelector(".bio-container") as HTMLDivElement;
+  const footer = document.querySelector("footer") as Element;
   const profileImage = document.querySelector(
     ".profile-image",
   ) as HTMLImageElement;
@@ -77,16 +79,79 @@
 
   let callback = (entries, observer) => {
     entries.forEach((entry) => {
-      const diff = container.clientHeight - profileImage.clientHeight;
-
+      //PORCENTAJE NOOOOOOOOOOOO!!!!
+      // console.log(entry);
+      let containerHeight;
+      // const diff = container.clientHeight - profileImage.clientHeight;
       const inter = entry.intersectionRatio * 100;
+      const garbage = entry.boundingClientRect.bottom - container.clientHeight;
+      // console.log(` BOUNDING: ${entry.boundingClientRect.y}`);
+      // console.log(`INTERSECTION: ${entry.intersectionRect.y}`);
+      // if (entry.boundingClientRect.bottom === container.clientHeight) {
+      //   console.log("HOLA HOLA HOLA ");
+      // }
+      // console.log(diff);
+      // tomar bottom, restar lo que mide el container con el bottom, ese es el resultado basura, una vez que se pasa ese porcentage, estamos en el porcentage restante real
       if (!(entry.intersectionRatio === 0 && profileImage.style.top === "")) {
-        let newCalc = (inter * diff) / 100;
-        if (newCalc < 0) {
-          newCalc = 0;
-        }
+        // let newCalc = (inter * diff) / 100;
+        // if (newCalc < 0) {
+        //   newCalc = 0;
+        // }
 
-        profileImage.style.transform = `translateY(${newCalc}px)`;
+        let newCalc = 0;
+
+        console.log(entry.intersectionRect.y);
+        console.log(profileImage.clientHeight);
+        console.log(
+          ` RESULTADO: ${entry.intersectionRect.y - profileImage.clientHeight}`,
+        );
+        // if (
+        //   entry.intersectionRect.y !== 0 &&
+        //   entry.intersectionRect.y < profileImage.clientHeight
+        // ) {
+        //   newCalc = 0;
+        // }
+        if (entry.intersectionRect.y < profileImage.clientHeight) {
+          // const footerHeight =
+          //   (footer.clientHeight * 100) / container.clientHeight;
+          // newCalc += footerHeight;
+          // newCalc = Math.abs(
+          //   (entry.intersectionRect.y * 100) / container.clientHeight - 100,
+          // );
+          // newCalc -= (entry.intersectionRect.y * 100) / container.clientHeight;
+          newCalc = Math.abs(
+            entry.intersectionRect.y - profileImage.clientHeight,
+          );
+          console.log(
+            ` NUEVA CUENTA PAAAAAAAAAA ${
+              entry.intersectionRect.y - profileImage.clientHeight
+            }`,
+          );
+
+          if (newCalc === profileImage.clientHeight) {
+            newCalc = container.clientHeight - profileImage.clientHeight;
+          }
+          // else if (newCalc < profileImage.clientHeight) {
+          //   // newCalc = profileImage.clientHeight - entry.intersectionRect.y;
+          // }
+        }
+        // } else if (
+        //   Math.abs(
+        //     (entry.intersectionRect.y * 100) / container.clientHeight - 100,
+        //   ) === profileImage.clientHeight
+        // ) {
+        //   newCalc = 100;
+        // }
+        // if (newCalc < 0) {
+        //   newCalc = 0;
+        // }
+        // console.log(`Esto es GARBAGE ${garbage}`);
+        // console.log(entry.boundingClientRect.bottom);
+        // console.log(newCalc);
+        gsap.to(profileImage, {
+          y: `${newCalc}`,
+          opacity: 1,
+        });
       }
     });
   };

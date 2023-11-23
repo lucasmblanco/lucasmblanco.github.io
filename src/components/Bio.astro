@@ -1,14 +1,55 @@
 ---
 // BAJAR CON EL MOUSE LA IMAGEN HACIA ABAJO
+// class="box-container relative grid h-fit grid-flow-col gap-2 text-xs"
+//  class="profile-image relative w-[600px] self-start rounded-lg saturate-0 md:w-7"
 ---
 
-<div class="bio-container relative grid h-fit grid-flow-col gap-2 text-xs">
+<div
+  class="grid grid-cols-2 items-center justify-center text-xs md:grid-flow-col"
+>
+  <section class="grid h-full items-center gap-5">
+    <article class="grid gap-2">
+      <h3 class="text-2xl italic">¡HOLA!</h3>
+      <div>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis ab
+          asperiores officia cupiditate a fugiat hic est, maxime accusantium
+          totam alias quia. Impedit blanditiis officiis fugit odit. Reiciendis,
+          expedita sapiente.
+        </p>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo earum
+          maxime sunt natus nesciunt velit! Enim libero ad at expedita
+          repudiandae maxime cupiditate, consequuntur eveniet, voluptatibus eius
+          nobis, optio maiores!
+        </p>
+      </div>
+    </article>
+    <article class="grid gap-2">
+      <h3 class="text-xl italic">TECNOLOGIAS QUE USO</h3>
+      <div class="w-56">
+        <p class="inline-block">
+          <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
+        </p>
+        <p class="inline-block">
+          <span>lorem</span>lorem<span>lorem</span>lorem
+        </p>
+        <p class="inline-block">
+          <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
+        </p>
+        <p class="inline-block">
+          <span>lorem</span>lorem<span>lorem</span>
+        </p>
+      </div>
+    </article>
+  </section>
   <img
-    src="https://res.cloudinary.com/du8wo1cxh/image/upload/f_auto,q_auto/ax1ndgvpapg6ht7rebry"
+    src="https://res.cloudinary.com/du8wo1cxh/image/upload/v1700173905/ax1ndgvpapg6ht7rebry.jpg"
     alt=""
-    class="profile-image relative w-40 self-start rounded-lg opacity-0 saturate-0 md:w-72"
+    class="w-64 justify-self-center object-cover sepia md:w-72"
   />
-  <div class="grid grid-cols-3 grid-rows-3 gap-16 px-8">
+
+  <!-- <div class="grid grid-cols-3 grid-rows-3 gap-16 px-8">
     <article class="col-start-1 flex flex-col gap-2">
       <h3 class="h-fit text-base">SOBRE MI</h3>
       <div>
@@ -26,7 +67,7 @@
         </p>
       </div>
     </article>
-    <!-- col-start-3 row-start-2 -->
+  
     <article class="col-start-2 row-start-2 flex flex-col gap-2">
       <h3 class="h-fit text-base">SERVICIOS</h3>
       <div>
@@ -44,7 +85,7 @@
         </p>
       </div>
     </article>
-    <!-- col-start-4 -->
+    
     <article class="col-start-3 row-start-3 flex flex-col gap-2">
       <h3 class="h-fit text-base">TECNOLOGIAS</h3>
       <div>
@@ -55,108 +96,5 @@
         <p>Me gusta pensar y proponer soluciones a problemas contidianos y</p>
       </div>
     </article>
-  </div>
+  </div> -->
 </div>
-<script>
-  import { gsap } from "gsap";
-  const container = document.querySelector(".bio-container") as HTMLDivElement;
-  const footer = document.querySelector("footer") as Element;
-  const profileImage = document.querySelector(
-    ".profile-image",
-  ) as HTMLImageElement;
-
-  let thresholdSets = [];
-
-  for (let i = 0; i <= 1; i += 0.01) {
-    thresholdSets.push(i);
-  }
-
-  const options = {
-    root: null,
-    rootMargin: "0px",
-    threshold: thresholdSets,
-  };
-
-  let callback = (entries, observer) => {
-    entries.forEach((entry) => {
-      //PORCENTAJE NOOOOOOOOOOOO!!!!
-      // console.log(entry);
-      let containerHeight;
-      // const diff = container.clientHeight - profileImage.clientHeight;
-      const inter = entry.intersectionRatio * 100;
-      const garbage = entry.boundingClientRect.bottom - container.clientHeight;
-      // console.log(` BOUNDING: ${entry.boundingClientRect.y}`);
-      // console.log(`INTERSECTION: ${entry.intersectionRect.y}`);
-      // if (entry.boundingClientRect.bottom === container.clientHeight) {
-      //   console.log("HOLA HOLA HOLA ");
-      // }
-      // console.log(diff);
-      // tomar bottom, restar lo que mide el container con el bottom, ese es el resultado basura, una vez que se pasa ese porcentage, estamos en el porcentage restante real
-      if (!(entry.intersectionRatio === 0 && profileImage.style.top === "")) {
-        // let newCalc = (inter * diff) / 100;
-        // if (newCalc < 0) {
-        //   newCalc = 0;
-        // }
-
-        let newCalc = 0;
-
-        console.log(entry.intersectionRect.y);
-        console.log(profileImage.clientHeight);
-        console.log(
-          ` RESULTADO: ${entry.intersectionRect.y - profileImage.clientHeight}`,
-        );
-        // if (
-        //   entry.intersectionRect.y !== 0 &&
-        //   entry.intersectionRect.y < profileImage.clientHeight
-        // ) {
-        //   newCalc = 0;
-        // }
-        if (entry.intersectionRect.y < profileImage.clientHeight) {
-          // const footerHeight =
-          //   (footer.clientHeight * 100) / container.clientHeight;
-          // newCalc += footerHeight;
-          // newCalc = Math.abs(
-          //   (entry.intersectionRect.y * 100) / container.clientHeight - 100,
-          // );
-          // newCalc -= (entry.intersectionRect.y * 100) / container.clientHeight;
-          newCalc = Math.abs(
-            entry.intersectionRect.y - profileImage.clientHeight,
-          );
-          console.log(
-            ` NUEVA CUENTA PAAAAAAAAAA ${
-              entry.intersectionRect.y - profileImage.clientHeight
-            }`,
-          );
-
-          if (newCalc === profileImage.clientHeight) {
-            newCalc = container.clientHeight - profileImage.clientHeight;
-          }
-          // else if (newCalc < profileImage.clientHeight) {
-          //   // newCalc = profileImage.clientHeight - entry.intersectionRect.y;
-          // }
-        }
-        // } else if (
-        //   Math.abs(
-        //     (entry.intersectionRect.y * 100) / container.clientHeight - 100,
-        //   ) === profileImage.clientHeight
-        // ) {
-        //   newCalc = 100;
-        // }
-        // if (newCalc < 0) {
-        //   newCalc = 0;
-        // }
-        // console.log(`Esto es GARBAGE ${garbage}`);
-        // console.log(entry.boundingClientRect.bottom);
-        // console.log(newCalc);
-        gsap.to(profileImage, {
-          y: `${newCalc}`,
-          opacity: 1,
-        });
-      }
-    });
-  };
-
-  const observer = new IntersectionObserver(callback, options);
-
-  observer.observe(container as Element);
-</script>

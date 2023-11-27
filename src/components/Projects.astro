@@ -2,16 +2,65 @@
 
 ---
 
-<div>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. At, placeat debitis
-    a fuga ipsam libero quisquam soluta maxime doloremque similique tenetur,
-    modi assumenda facilis ipsa. Consequuntur aspernatur atque molestiae
-    provident?
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ipsa
-    ratione eius harum dolores autem similique quo laudantium fugit enim dicta
-    cum beatae quia adipisci laborum, consequatur, laboriosam impedit vel.
-  </p>
-</div>
+<table
+  id="projects"
+  class="table-fixed border-spacing-2 text-center outline outline-1 outline-offset-2 outline-pure-black dark:outline-pure-white"
+>
+  <tr class="header">
+    <th
+      class="bg-pure-black px-2 py-3 text-left text-xl font-normal text-pure-white dark:bg-pure-white dark:text-pure-black"
+      colspan="4">PROJECTS</th
+    >
+  </tr>
+  <tr class="">
+    <td class="p-2">BLOG API</td>
+    <td class="px-2 text-xs"
+      >NodeJs, PassportJS, Express, Javascript, ReactJS, NodeJs, PassportJS,
+    </td>
+    <td class="font-silk px-2 text-xs">Demo</td>
+    <td class="font-silk px-2 text-xs">Source</td>
+  </tr>
+  <tr class="">
+    <td class="p-2">BLOG Website</td>
+    <td class="px-2 text-xs">Astro, PassportJS</td>
+    <td class="font-silk px-2 text-xs">Demo</td>
+    <td class="font-silk px-2 text-xs">Source</td>
+  </tr>
+  <tr class="">
+    <td class="p-2">BLOG Dashboard</td>
+    <td class="px-2 text-xs">Astro, PassportJS</td>
+    <td class="font-silk px-2 text-xs">Demo</td>
+    <td class="font-silk px-2 text-xs">Source</td>
+  </tr>
+</table>
+<style is:global>
+  :root {
+    --icon-margin: 0.5rem;
+  }
+  tr:not(.header):hover::after {
+    content: "<<";
+    display: inline-block;
+    position: absolute;
+    margin-inline: 0.5rem;
+    margin-block: var(--icon-margin);
+    font-family: "Silkscreen", sans-serif;
+  }
+</style>
+<script>
+  const rows = document.querySelectorAll("tr");
+  const iconData = window.getComputedStyle(rows[0], ":after");
+  const iconHeight =
+    Number(iconData.fontSize.split("px")[0]) +
+    Number(iconData.fontSize.split("px")[0]) / 2;
+
+  rows.forEach((row) => {
+    window.getComputedStyle;
+    row.addEventListener("mouseover", () => {
+      const diff = row.offsetHeight - iconHeight;
+      document.documentElement.style.setProperty(
+        "--icon-margin",
+        `${diff / 2}px`,
+      );
+    });
+  });
+</script>

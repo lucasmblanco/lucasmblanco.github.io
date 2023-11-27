@@ -16,7 +16,8 @@ export default {
 				'footer-light': '0 -30px 60px 20px hsl(54, 100%, 94%)'
 			}, 
 			spacing: {
-				'base-width': "min(100% - 3rem, 65ch)"
+				'base-width': "min(100% - 3rem, 65ch)", 
+				'icon-margin': 'var(--icon-margin)', 
 			}, 
 			colors: {
 				karasubaido: 'hsl(313, 60%, 6%)', 
@@ -28,7 +29,8 @@ export default {
 			fontFamily: {
 				sans: ["InterVariable", "Inter", ...defaultTheme.fontFamily.sans],
 				'roboto-mono': ['Roboto Mono', ...defaultTheme.fontFamily.sans],
-				lora: ["Lora Variable", ...defaultTheme.fontFamily.serif]
+				lora: ["Lora Variable", ...defaultTheme.fontFamily.serif], 
+				silk: ["Silkscreen", ...defaultTheme.fontFamily.serif]
 			},
 			
 		},

@@ -32,74 +32,116 @@ export default class Quadrant {
     }
     
 
-    private drawDiagonalDesc() {
+    private groupDiagonalDesc() {
         const descA = () =>  {
-            this.canvas.stroke(this.canvas.random(this.pallete));
+            // this.canvas.stroke(this.canvas.random(this.pallete));
+            // this.canvas.stroke('#f22613')
+            // this.canvas.strokeWeight(4)
+            this.canvas.stroke('#f22613');
+            this.canvas.strokeWeight(4);
             for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.a + i, this.b, this.c, this.d - i * this.aspectRatio);
         }
         }
         const descB = ()  => {
-            this.canvas.stroke(this.canvas.random(this.pallete));
+            // this.canvas.stroke(this.canvas.random(this.pallete));
+            // this.canvas.stroke('#f22613')
+            // this.canvas.strokeWeight(4)
+            this.canvas.stroke('#f22613');
+            this.canvas.strokeWeight(4);
         for (let i = this.distanceX; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.c - i, this.d, this.a, this.b + i * this.aspectRatio);
           }
         }
 
         const arr = [descA(), descB()]; 
-        for (let i = arr.length - 1; i > 0; i--) { 
-            const j = Math.floor(Math.random() * (i + 1)); 
-            [arr[i], arr[j]] = [arr[j], arr[i]]; 
-          } 
+        // // for (let i = arr.length - 1; i > 0; i--) {
+        // //     const j = Math.floor(Math.random() * (i + 1));
+        // //     [arr[i], arr[j]] = [arr[j], arr[i]];
+        // //   }
         return arr; 
+        
     }
 
-    private drawDiagonalAsc() {
+    private groupDiagonalAsc() {
         const ascA = () => {
-            this.canvas.stroke(this.canvas.random(this.pallete));
-            for (let i = 0; i < (this.c - this.c); i += this.distanceX) {
+            // this.canvas.stroke(this.canvas.random(this.pallete));
+            // this.canvas.stroke('#f22613')
+            // this.canvas.strokeWeight(4)
+            this.canvas.stroke('#f22613');
+            this.canvas.strokeWeight(4);
+            for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
                 this.canvas.line(this.a + i, this.d, this.c, this.b + i * this.aspectRatio);
             }
         }
         const ascB = () => {
-            this.canvas.stroke(this.canvas.random(this.pallete));
+            // this.canvas.stroke(this.canvas.random(this.pallete));
+            // this.canvas.stroke('#f22613')
+            // this.canvas.strokeWeight(4)
+            this.canvas.stroke('#f22613');
+            this.canvas.strokeWeight(4);
             for (let i = this.distanceX; i < (this.c - this.a); i += this.distanceX) {
                 this.canvas.line(this.c - i, this.b, this.a, this.d - i * this.aspectRatio);
             }
         }
         
+        
         const arr = [ascA(), ascB()]; 
-        for (let i = arr.length - 1; i > 0; i--) { 
-            const j = Math.floor(Math.random() * (i + 1)); 
-            [arr[i], arr[j]] = [arr[j], arr[i]]; 
-          } 
+        // // for (let i = arr.length - 1; i > 0; i--) {
+        // //     const j = Math.floor(Math.random() * (i + 1));
+        // //     [arr[i], arr[j]] = [arr[j], arr[i]];
+        // //   }
         return arr; 
+        // return (() => {
+        //     this.canvas.stroke('#f22613');
+        //     this.canvas.strokeWeight(4);
+        //     for (let i = 0; i < (this.c - this.c); i += this.distanceX) {
+        //         this.canvas.line(this.a + i, this.d, this.c, this.b + i * this.aspectRatio);
+               
+        //     }
+        //     this.canvas.stroke('#f22613');
+        //     this.canvas.strokeWeight(4);
+        //     for (let i = this.distanceX; i < (this.c - this.a); i += this.distanceX) {
+        //         this.canvas.line(this.c - i, this.b, this.a, this.d - i * this.aspectRatio);
+               
+        //     }
+        // })
 
     }
     
-    private drawVerticalLines() {
-        this.canvas.stroke(this.canvas.random(this.pallete));
+    private verticalLines() {
+        // this.canvas.stroke(this.canvas.random(this.pallete));
+        // this.canvas.stroke('#f22613')
+        // this.canvas.strokeWeight(4)
+        this.canvas.stroke('#f22613');
+        this.canvas.strokeWeight(4);
         for (let i = 0; i <= (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.a + i, this.b, this.a + i, this.d);
-          }
+        }
          
     }
 
-    private drawHorizontalLines() {
-        this.canvas.stroke(this.canvas.random(this.pallete));
-        for (let i = 0; i < (this.a - this.c); i += this.distanceY) {
-            this.canvas.line(this.a, this.b + i, this.c, this.b + i);
-          }
+    private horizontalLines() {
+        // this.canvas.stroke(this.canvas.random(this.pallete));
+        // this.canvas.stroke('#f22613')
+        // this.canvas.strokeWeight(4)
+        this.canvas.stroke('#f22613');
+        this.canvas.strokeWeight(4);
+        for (let i = 0; i <= (this.d - this.b); i += this.distanceY ) {
+               this.canvas.line(this.a, this.b + i, this.c, this.b + i);
+        }
           
     }
 
     draw() { 
-        const arr = [this.drawDiagonalDesc(), this.drawDiagonalAsc(), this.drawVerticalLines(), this.drawHorizontalLines()]
+        const arr = [this.groupDiagonalDesc.bind(this), this.groupDiagonalAsc.bind(this), this.horizontalLines.bind(this),this.verticalLines.bind(this), ]
+        // const arr = [this.horizontalLines()]
         for (let i = arr.length - 1; i > 0; i--) { 
           const j = Math.floor(Math.random() * (i + 1)); 
           [arr[i], arr[j]] = [arr[j], arr[i]]; 
         } 
         arr.pop();
+        arr.forEach(action => {  action(); })
         return arr; 
       }; 
 
@@ -163,7 +205,7 @@ export default class Quadrant {
 //           }
 //     }
     
-//     drawVerticalLines() {
+//     groupVerticalLines() {
 //         this.canvas.stroke(this.canvas.random(this.pallete));
 //         for (let i = 0; i <= (this.c - this.a); i += this.distanceX) {
 //             this.canvas.line(this.a + i, this.b, this.a + i, this.d);
@@ -171,7 +213,7 @@ export default class Quadrant {
          
 //     }
 
-//     drawHorizontalLines() {
+//     groupHorizontalLines() {
 //         this.canvas.stroke(this.canvas.random(this.pallete));
 //         for (let i = 0; i < (this.a - this.c); i += this.distanceY) {
 //             this.canvas.line(this.a, this.b + i, this.c, this.b + i);

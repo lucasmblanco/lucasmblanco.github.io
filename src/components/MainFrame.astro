@@ -1,40 +1,44 @@
 ---
 import Icon from "astro-icon";
 // md:h-[43.7rem] md:w-[25rem] md:w-[100rem]
-// md:w-[25rem]
+// md:w-[25rem] ; h-[30rem]
+// mx-auto w-[1000px] rounded-lg px-4 md:h-[43.7rem]
 ---
 
-<div class="grid place-content-center gap-5 md:gap-10">
+<section
+  class="grid place-content-center gap-5 border-b-[1px] border-pure-black dark:border-al md:gap-10"
+>
+  <div class="canvas-container h-[60vh]"></div>
+
   <div
-    class="canvas-container mx-auto h-[30rem] w-[20rem] rounded-lg md:h-[43.7rem] md:w-[39rem]"
+    class="draw-description grid w-full items-center gap-1 py-8 md:grid-flow-col"
   >
-  </div>
-  <div class="draw-description grid w-full gap-2 justify-self-center md:p-4">
-    <div class="flex justify-between md:text-base">
-      <h2>Wall Drawing #11 (1969)</h2>
-      <a
-        href="https://github.com/wholepixel/solving-sol/tree/master/011"
-        target="_blank"
-        class="sol-link"
-        ><Icon
-          class="sol-icon"
-          name="grommet-icons:form-next-link"
-          width="20"
-        /></a
-      >
+    <div class="grid text-center md:text-base">
+      <h2 class="text-base md:text-2xl">Wall Drawing #11 (1969)</h2>
+      <p class="text-center text-xxs md:text-xs">Sol LeWitt</p>
     </div>
 
-    <blockquote class="text-xxs md:text-xs">
-      A wall divided horizontally and vertically into four equal parts. Within
-      each part, three of the four kinds of lines are superimposed.
-    </blockquote>
-    <p class="text-right text-xxs md:text-xs">Sol LeWitt</p>
+    <div>
+      <blockquote class="text-center text-xxs md:text-xs">
+        A wall divided horizontally and vertically into four equal parts. Within
+        each part, three of the four kinds of lines are superimposed.
+      </blockquote>
+    </div>
+    <a
+      href="https://solvingsol.com/"
+      target="_blank"
+      class="sol-link flex justify-center"
+      ><Icon
+        class="sol-icon w-5 md:w-10"
+        name="grommet-icons:form-next-link"
+      /></a
+    >
   </div>
-</div>
+</section>
 <style is:global>
-  canvas {
+  /* canvas {
     border-radius: 8px;
-  }
+  } */
 </style>
 <script>
   import p5 from "p5";
@@ -43,15 +47,22 @@ import Icon from "astro-icon";
   import Quadrant from "../utils/Quadrant";
 
   const root = document.querySelector("html");
-  const canvasContainer = document.querySelector(".canvas-container");
+  const canvasContainer = document.querySelector(
+    ".canvas-container",
+  ) as HTMLDivElement;
+  const mainContainer = document.querySelector("main") as HTMLDivElement;
   const arrowIcon = document.querySelector(".sol-icon");
   const descriptionLink = document.querySelector(".sol-link");
 
   const lightColor = "hsl(54, 100%, 94%)";
   const darkColor = "hsl(150, 7%, 6%)";
 
-  const w = canvasContainer?.clientWidth;
-  const h = canvasContainer?.clientHeight;
+  // const w = canvasContainer?.offsetWidth;
+  const h = canvasContainer?.offsetHeight;
+
+  const w = mainContainer?.clientWidth;
+  console.log(`ACA ESTA EL WIDTH DE MAIN ${w}`);
+  // const h = mainContainer?.offsetHeight;
 
   let middleY: number;
   let middleX: number;
@@ -65,30 +76,41 @@ import Icon from "astro-icon";
 
   new p5(function (p5) {
     p5.setup = function () {
+      // const cnv = p5.createCanvas(w, h);
+      // const cnv = p5.createCanvas(1000, 699.2);
       const cnv = p5.createCanvas(w, h);
+
       cnv.parent(canvasContainer);
       // p5.frameRate(10);
-      p5.noLoop();
       middleY = p5.height / 2;
       middleX = p5.width / 2;
       aspectRatio = p5.height / p5.width;
       pallete = p5.random(palletes);
-      distance = Math.round(p5.random(3, 10));
-      distanceX = middleX / distance;
-      distanceY = middleY / distance;
-      if (Math.round(distanceX) !== distanceX) {
-        let tmp = middleX / Math.round(distanceX);
-        distanceX = tmp;
-      }
-      if (Math.round(distanceY) !== distanceY) {
-        let tmp = middleY / Math.round(distanceY);
-        distanceY = tmp;
-      }
+      // distance = Math.round(p5.random(4, 6));
+      // distance = Math.round(p5.random(3,));
+      distance = 4;
+      distanceX = Math.round(middleX / distance);
+      distanceY = Math.round(middleY / distance);
+
+      // if (Math.round(distanceX) !== distanceX) {
+      //   console.log("TOCO");
+      //   let tmp = middleX / Math.round(distanceX);
+      //   distanceX = tmp;
+      // }
+      // if (Math.round(distanceY) !== distanceY) {
+      //   console.log("TOCO2");
+      //   let tmp = middleY / Math.round(distanceY);
+      //   distanceY = tmp;
+      // }
+
+      // console.log(distanceX);
+
+      p5.noLoop();
     };
     p5.draw = function () {
       p5.clear();
-      p5.background(p5.random(pallete) + "A0");
-
+      // p5.background(p5.random(pallete) + "A0");
+      // p5.background(p5.random(pallete) + "A0");
       Q1 = new Quadrant(
         p5,
         0,
@@ -140,26 +162,54 @@ import Icon from "astro-icon";
       Q3.draw();
       Q4.draw();
 
-      p5.stroke(root?.dataset.theme === "dark" ? lightColor : darkColor);
+      // p5.stroke(root?.dataset.theme === "dark" ? lightColor : darkColor);
     };
 
     p5.windowResized = function () {
-      if (p5.windowWidth < 768) {
-        const canvasContainer = document.querySelector(".canvas-container");
-        const w = canvasContainer?.clientWidth;
-        const h = canvasContainer?.clientHeight;
-        p5.resizeCanvas(w, h);
-      } else {
-        const canvasContainer = document.querySelector(".canvas-container");
-        const w = canvasContainer?.clientWidth;
-        const h = canvasContainer?.clientHeight;
-        p5.resizeCanvas(w, h);
-      }
+      const w = mainContainer?.clientWidth;
+      const h = canvasContainer?.offsetHeight;
+      p5.resizeCanvas(w, h);
+      // if (w <= 900) {
+
+      //   // p5.clear();
+      //   // p5.redraw();
+      // } else {
+      //   p5.resizeCanvas(w, h);
+      // }
       middleY = p5.height / 2;
       middleX = p5.width / 2;
       aspectRatio = p5.height / p5.width;
-      p5.clear();
-      p5.redraw();
+      distanceX = Math.round(middleX / distance);
+      distanceY = Math.round(middleY / distance);
+      console.log(distanceX);
+      console.log(distanceY);
+      // console.log(middleY);
+      // console.log(middleX);
+      // console.log(aspectRatio);
+      // p5.clear();
+      // p5.redraw();
+      //   // 768
+      //   // const canvasContainer = document.querySelector(
+      //   //   ".canvas-container",
+      //   // ) as HTMLDivElement;
+      //   // // console.log(p5.windowWidth);
+      //   // if (p5.windowWidth <= w) {
+      //   //   const diff = (10 * 100) / p5.windowWidth;
+      //   //   console.log("coso");
+      //   //   // const canvasContainer = document.querySelector(".canvas-container");
+      //   //   // const w = canvasContainer?.offsetWidth;
+      //   //   // const h = canvasContainer?.offsetHeight;
+      //   //   // console.log(w, h);
+      //   //   // p5.resizeCanvas(w, h);
+      //   //   console.log(diff);
+      //   //   p5.resizeCanvas(p5.windowWidth - diff, 699.2);
+      //   // }
+      //   // // else {
+      //   // //   // const canvasContainer = document.querySelector(".canvas-container");
+      //   // //   const w = canvasContainer?.offsetWidth;
+      //   // //   const h = canvasContainer?.offsetHeight;
+      //   // //   p5.resizeCanvas(w, h);
+      //   // // }
     };
   });
 
@@ -169,17 +219,18 @@ import Icon from "astro-icon";
   });
 
   let arrowAnimation = gsap.to(arrowIcon, {
-    ease: "power4.In",
+    ease: "sine.inOut",
     paused: true,
-    rotate: "-405deg",
+    // rotate: "-405deg",
+    rotate: "320deg",
     scale: 3,
-    duration: 0.8,
   });
 
   gsap.from(".draw-description", {
+    // scrollTrigger: ".draw-description",
     rotation: 0.01,
     duration: 1,
-    y: 300,
+    y: 50,
     opacity: 0,
     ease: "power1.Out",
   });

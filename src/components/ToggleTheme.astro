@@ -12,7 +12,7 @@
     document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }));
   }
   "
-  class="toggle-theme before:toggle-theme after:toggle-theme text-smoll opacity-50 before:content-['['] after:content-[']'] md:text-xxs"
+  class="toggle-theme before:toggle-theme after:toggle-theme self-start font-roboto-mono text-smoll opacity-50 before:content-['['] after:content-[']'] md:text-xxs"
 ></button>
 <script>
   import { gsap } from "gsap";
@@ -53,7 +53,7 @@
 
   gsap.from(".toggle-theme", {
     duration: 2.5,
-    y: -300,
+    y: -100,
     opacity: 0,
     ease: "power4.inOut",
   });

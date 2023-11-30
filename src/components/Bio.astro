@@ -1,33 +1,48 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 // BAJAR CON EL MOUSE LA IMAGEN HACIA ABAJO
 // class="box-container relative grid h-fit grid-flow-col gap-2 text-xs"
 //  class="profile-image relative w-[600px] self-start rounded-lg saturate-0 md:w-7"
+// og https://res.cloudinary.com/du8wo1cxh/image/upload/v1700173905/ax1ndgvpapg6ht7rebry.jpg
 ---
 
 <div
   class="grid items-center justify-center text-xs md:grid-flow-col md:grid-cols-2"
 >
+  <h3
+    id="bio-title"
+    class="row-start-1 block py-4 text-center font-young text-3xl md:hidden md:text-left"
+  >
+    {t("bio.gretting")}
+  </h3>
   <section class="grid h-full items-center gap-5">
-    <article class="grid gap-2">
-      <h3 class="text-2xl italic">¡HOLA!</h3>
-      <div class="font-silk">
+    <article class="grid">
+      <h3
+        id="bio-title"
+        class="hidden text-center font-young text-5xl md:block md:text-left"
+      >
+        {t("bio.gretting")}
+      </h3>
+      <div
+        class="bio-standard-anim whitespace-pre-line text-center md:text-left"
+      >
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis ab
-          asperiores officia cupiditate a fugiat hic est, maxime accusantium
-          totam alias quia. Impedit blanditiis officiis fugit odit. Reiciendis,
-          expedita sapiente.
+          {t("bio.p1")}
         </p>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo earum
-          maxime sunt natus nesciunt velit! Enim libero ad at expedita
-          repudiandae maxime cupiditate, consequuntur eveniet, voluptatibus eius
-          nobis, optio maiores!
+          {t("bio.p2")}
         </p>
       </div>
     </article>
     <article class="grid gap-2">
-      <h3 class="text-xl italic">TECNOLOGIAS QUE USO</h3>
-      <div class="font-silk w-56">
+      <h3 class="text-center font-young text-xl md:text-left" id="tech-title">
+        Tecnologias que uso
+      </h3>
+      <div class="bio-standard-anim w-56">
         <p class="inline-block">
           <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
         </p>
@@ -44,8 +59,60 @@
     </article>
   </section>
   <img
-    src="https://res.cloudinary.com/du8wo1cxh/image/upload/v1700173905/ax1ndgvpapg6ht7rebry.jpg"
+    src="https://res.cloudinary.com/du8wo1cxh/image/upload/v1701316806/me_vfpw2x.png"
     alt=""
-    class="last: row-start-1 w-64 justify-self-center object-cover sepia before:absolute before:content-['HOLA!'] md:w-72"
+    class="bio-img relative z-0 row-start-2 aspect-video h-full w-fit justify-self-end object-cover object-m-position md:row-start-1 md:aspect-auto md:w-72"
   />
 </div>
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const title = new SplitType("#bio-title");
+  const techTitle = new SplitType("#tech-title");
+
+  gsap.from(".bio-img", {
+    scrollTrigger: {
+      trigger: ".bio-img",
+      toggleActions: "play none none none",
+      start: "center bottom",
+    },
+    opacity: 0,
+    ease: "sine.inOut",
+    delay: 0.1,
+  });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".bio-standard-anim",
+      toggleActions: "play none none none",
+      start: "center bottom",
+    },
+  });
+
+  gsap.from(".char", {
+    scrollTrigger: {
+      trigger: ".bio-img",
+      toggleActions: "play none none none",
+      start: "center bottom",
+    },
+    opacity: 0,
+    y: 20,
+    stagger: 0.03,
+    ease: "sine.inOut",
+    delay: 0.1,
+    duration: 0.3,
+  });
+
+  tl.from(".bio-standard-anim", {
+    rotation: 0.01,
+    y: 50,
+    opacity: 0,
+    ease: "sine.inOut",
+    stagger: 0.3,
+    delay: 1,
+  });
+</script>

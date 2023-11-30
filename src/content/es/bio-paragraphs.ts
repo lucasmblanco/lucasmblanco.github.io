@@ -1,0 +1,2 @@
+export const p1 = "Spanish Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis ab asperiores officia cupiditate a fugiat hic est, maxime accusantium totam alias quia. Impedit blanditiis officiis fugit odit. Reiciendis,expedita sapiente."
+export const p2 = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo earum maxime sunt natus nesciunt velit! Enim libero ad at expedita repudiandae maxime cupiditate, consequuntur eveniet, voluptatibus eius nobis, optio maiores!'

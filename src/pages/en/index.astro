@@ -8,16 +8,18 @@ import ToggleTheme from "../../components/ToggleTheme.astro";
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Lucas Blanco">
   <header
-    class="mx-auto grid w-[98%] grid-flow-col justify-between px-4 py-2 text-sm md:text-base"
+    class="mx-auto grid grid-flow-col justify-between px-4 py-2 font-young text-sm md:text-base"
   >
     <p class="text-anim block">LUCAS BLANCO</p>
     <ToggleTheme />
     <p class="text-anim block">WEB DEVELOPER</p>
   </header>
   <Nav />
-  <main class="mx-auto mb-24 grid w-[98%] place-content-center py-5">
+  <main
+    class="mx-auto mb-24 grid w-base-width place-content-center gap-24 md:gap-44"
+  >
     <MainFrame />
     <Bio />
     <Projects />

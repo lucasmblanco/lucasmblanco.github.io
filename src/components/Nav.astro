@@ -10,8 +10,12 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<nav class="sticky top-1 mx-auto grid justify-end px-4 text-xs">
-  <ul class="grid justify-items-end gap-1">
+<nav
+  class="sticky top-0 z-50 mx-auto grid justify-center bg-transparent px-4 py-2 text-smoll backdrop-blur dark:backdrop-hue-rotate-180 md:justify-end md:text-xs md:backdrop-blur-0 md:backdrop-hue-rotate-0 md:dark:backdrop-hue-rotate-0"
+>
+  <ul
+    class="grid grid-flow-col justify-items-end gap-2 md:grid-flow-row md:gap-1"
+  >
     <li class="nav-list-item">
       <p class="flex justify-end gap-1">
         <a
@@ -28,15 +32,19 @@ const translatePath = useTranslatedPath(lang);
       <a href="#projects" class="hover-effect">
         <span> {t("nav.projects")}</span>
         <span
-          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
+          class="underline-el dark:bg-al absolute bottom-0 left-0 block h-[1px] bg-pure-black"
         ></span>
       </a>
     </li>
     <li class="nav-list-item w-fit">
-      <a href="#cv" class="hover-effect">
+      <a
+        href="https://docs.google.com/document/d/1MXRM9xi3P7pAaRqdSlBUE2L902qBaqYyRsly5ULosLU/edit?usp=sharing"
+        target="_blank"
+        class="hover-effect"
+      >
         <span>{t("nav.cv")}</span>
         <span
-          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
+          class="underline-el dark:bg-al absolute bottom-0 left-0 block h-[1px] bg-pure-black"
         ></span>
       </a>
     </li>
@@ -44,7 +52,7 @@ const translatePath = useTranslatedPath(lang);
       <a href="#contact" class="hover-effect">
         <span>{t("nav.contact")}</span>
         <span
-          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
+          class="underline-el dark:bg-al absolute bottom-0 left-0 block h-[1px] bg-pure-black"
         ></span>
       </a>
     </li>
@@ -85,7 +93,7 @@ const translatePath = useTranslatedPath(lang);
   gsap.from(".nav-list-item", {
     rotation: 0.01,
     duration: 1,
-    y: 300,
+    y: 100,
     opacity: 0,
     ease: "power1.Out",
     stagger: 0.3,

@@ -1,52 +1,165 @@
 ---
+import { Icon } from "astro-icon";
 
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import supabase from "../lib/supabase";
+
+const { data: projects, error } = await supabase
+  .from("projects")
+  .select("*")
+  .order("id", { ascending: false });
+
+const tableBody = [];
+let startPosition = 0;
+
+if (projects) {
+  for (let i = 0; i < projects?.length; i++) {
+    if (i % 6 === 0 && i !== 0) {
+      tableBody.push([...projects.slice(startPosition, i)]);
+      startPosition = i;
+    }
+    if (i === projects.length - 1) {
+      tableBody.push([...projects.slice(startPosition, i)]);
+    }
+  }
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<table
-  id="projects"
-  class="table-fixed border-spacing-2 text-center outline outline-1 outline-offset-2 outline-pure-black dark:outline-pure-white"
->
-  <tr class="header">
-    <th
-      class="bg-pure-black px-2 py-3 text-left text-xl font-normal text-pure-white dark:bg-pure-white dark:text-pure-black"
-      colspan="4">PROJECTS</th
-    >
-  </tr>
-  <tr class="">
-    <td class="p-2">BLOG API</td>
-    <td class="px-2 text-xs"
-      >NodeJs, PassportJS, Express, Javascript, ReactJS, NodeJs, PassportJS,
-    </td>
-    <td class="font-silk px-2 text-xs">Demo</td>
-    <td class="font-silk px-2 text-xs">Source</td>
-  </tr>
-  <tr class="">
-    <td class="p-2">BLOG Website</td>
-    <td class="px-2 text-xs">Astro, PassportJS</td>
-    <td class="font-silk px-2 text-xs">Demo</td>
-    <td class="font-silk px-2 text-xs">Source</td>
-  </tr>
-  <tr class="">
-    <td class="p-2">BLOG Dashboard</td>
-    <td class="px-2 text-xs">Astro, PassportJS</td>
-    <td class="font-silk px-2 text-xs">Demo</td>
-    <td class="font-silk px-2 text-xs">Source</td>
-  </tr>
-</table>
+<section class="flex flex-col">
+  <table
+    align="center"
+    id="projects"
+    class="w-full table-auto border-collapse select-none rounded-lg border-transparent text-center"
+  >
+    <thead>
+      <tr class="header">
+        <th
+          class="text-al dark:bg-al bg-pure-black px-2 py-3 text-left font-young text-xl font-normal dark:text-pure-black"
+          colspan="5"
+          ><div class="flex items-center gap-2">
+            <Icon
+              name="ghost-smile-bold"
+              width="40"
+              class="project-ghost inline-block"
+            />
+            <span class="text-sm uppercase md:text-2xl"
+              >{t("projects.title")}</span
+            >
+            <span class="text-xs md:text-sm">{t("projects.subtitle")}</span>
+          </div></th
+        >
+      </tr>
+    </thead>
+    {
+      tableBody.map((data, i) => (
+        <tbody data-tb={i} class="hidden text-xs md:text-lg">
+          {data.map((project) => (
+            <tr class="hover:background-transparent dark:border-y-al border border-x-transparent border-y-pure-black hover:backdrop-opacity-95">
+              <td>
+                <span class="font-silk text-smoll md:text-xs">
+                  #{project.id}
+                </span>
+              </td>
+              <td class="w-fit p-2 text-left">
+                <span class=" whitespace-nowrap">{project.name}</span>
+              </td>
+              <td class="hidden w-fit px-2 text-left text-xs md:table-cell">
+                <span class="whitespace-nowrap">{project.tech.toString()}</span>
+              </td>
+              <td class="w-fit px-2 text-xs ">
+                <a href={project.demo_link} target="_blank">
+                  <span class="hover:brightness-175 flex items-center text-smoll md:text-sm">
+                    Demo <Icon name="external-link" width="10" />
+                  </span>
+                </a>
+              </td>
+              <td class="w-fit px-2 text-xs">
+                <a href={project.source_link} target="_blank">
+                  <span class="hover:brightness-175 flex items-center text-smoll md:text-sm">
+                    Source <Icon name="external-link" width="10" />
+                  </span>
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      ))
+    }
+    <!-- {
+      projects?.map((project) => (
+        <tr>
+          <td class="w-fit p-2 text-left">
+            <span class=" whitespace-nowrap">{project.name}</span>
+          </td>
+          <td class="hidden w-fit px-2 text-left text-xs md:table-cell">
+            <span class="whitespace-nowrap">{project.tech.toString()}</span>
+          </td>
+          <td class="w-fit px-2 text-xs ">
+            <a href={project.demo_link} target="_blank">
+              <span class="hover:brightness-175 flex items-center">
+                Demo <Icon name="external-link" width="10" />
+              </span>
+            </a>
+          </td>
+          <td class="w-fit px-2 text-xs">
+            <a href={project.source_link} target="_blank">
+              <span class="hover:brightness-175 flex items-center">
+                Source <Icon name="external-link" width="10" />
+              </span>
+            </a>
+          </td>
+        </tr>
+      ))
+    } -->
+  </table>
+  <div class="flex w-full justify-center gap-2 py-2">
+    {tableBody.map((_, i) => <button data-buttontb={i}>{i + 1}</button>)}
+  </div>
+</section>
 <style is:global>
   :root {
     --icon-margin: 0.5rem;
   }
-  tr:not(.header):hover::after {
-    content: "<<";
-    display: inline-block;
-    position: absolute;
-    margin-inline: 0.5rem;
-    margin-block: var(--icon-margin);
-    font-family: "Silkscreen", sans-serif;
+
+  @media (min-width: 768px) {
+    tr:not(.header):hover::after {
+      content: "<<";
+      display: inline-block;
+      position: absolute;
+      margin-inline: 0.5rem;
+      margin-block: var(--icon-margin);
+      font-family: "Silkscreen", sans-serif;
+    }
   }
 </style>
 <script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  const tbodys = document.querySelectorAll("[data-tb]");
+  const buttons = document.querySelectorAll("[data-buttontb");
+
+  tbodys[0].style.display = "table-row-group";
+  buttons[0].style.textDecorationLine = "underline";
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      tbodys.forEach((table) => {
+        if (table.dataset.tb === e.target.dataset.buttontb) {
+          table.style.display = "table-row-group";
+          button.style.textDecorationLine = "underline";
+        } else {
+          table.style.display = "none";
+        }
+      });
+    });
+  });
+
+  // --- Hover effect with center positioning ---
   const rows = document.querySelectorAll("tr");
   const iconData = window.getComputedStyle(rows[0], ":after");
   const iconHeight =
@@ -54,7 +167,6 @@
     Number(iconData.fontSize.split("px")[0]) / 2;
 
   rows.forEach((row) => {
-    window.getComputedStyle;
     row.addEventListener("mouseover", () => {
       const diff = row.offsetHeight - iconHeight;
       document.documentElement.style.setProperty(
@@ -62,5 +174,29 @@
         `${diff / 2}px`,
       );
     });
+  });
+  // ---------------------------------------
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".project-ghost",
+      toggleActions: "play none none none",
+      start: "center bottom",
+    },
+    repeat: -1,
+    yoyo: true,
+  });
+
+  tl.to(".project-ghost", {
+    y: `-=${gsap.utils.random(1, 5)}`,
+    ease: "sine.inOut",
+    rotation: `-=${gsap.utils.random(1, 3)}`,
+    duration: 2,
+  });
+  tl.to(".project-ghost", {
+    y: `+=${gsap.utils.random(1, 10)}`,
+    ease: "sine.inOut",
+    rotation: `-=${gsap.utils.random(1, 3)}`,
+    duration: 2,
   });
 </script>

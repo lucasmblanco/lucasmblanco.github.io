@@ -6,11 +6,14 @@ import Nav from "../components/Nav.astro";
 import Projects from "../components/Projects.astro";
 import ToggleTheme from "../components/ToggleTheme.astro";
 import Layout from "../layouts/Layout.astro";
+
+/// cosas que retiro: w-base-width; max-w-[40em]; mx-auto
+/// main old class="mx-auto mb-24 grid max-w-[1000px] place-content-center gap-24 px-8 lg:gap-44"
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Lucas Blanco">
   <header
-    class="mx-auto grid grid-flow-col justify-between px-4 py-2 text-sm md:text-base"
+    class="mx-auto grid grid-flow-col justify-between px-4 py-2 font-young text-xs md:text-xl"
   >
     <p class="text-anim block">LUCAS BLANCO</p>
     <ToggleTheme />
@@ -18,7 +21,7 @@ import Layout from "../layouts/Layout.astro";
   </header>
   <Nav />
   <main
-    class="mx-auto mb-24 grid w-base-width place-content-center gap-24 md:gap-44"
+    class="mx-auto mb-24 grid w-[80vw] max-w-[1000px] grid-flow-row gap-12 md:gap-24"
   >
     <MainFrame />
     <Bio />

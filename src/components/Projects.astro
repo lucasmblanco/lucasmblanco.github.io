@@ -37,7 +37,7 @@ const t = useTranslations(lang);
     <thead>
       <tr class="header">
         <th
-          class="text-al dark:bg-al bg-pure-black px-2 py-3 text-left font-young text-xl font-normal dark:text-pure-black"
+          class="bg-pure-black px-2 py-3 text-left font-young text-xl font-normal text-pure-white dark:bg-pure-white dark:text-pure-black"
           colspan="5"
           ><div class="flex items-center gap-2">
             <Icon
@@ -57,7 +57,7 @@ const t = useTranslations(lang);
       tableBody.map((data, i) => (
         <tbody data-tb={i} class="hidden text-xs md:text-lg">
           {data.map((project) => (
-            <tr class="hover:background-transparent dark:border-y-al border border-x-transparent border-y-pure-black hover:backdrop-opacity-95">
+            <tr class="hover:background-transparent border border-x-transparent border-y-pure-black hover:backdrop-opacity-95 dark:border-y-pure-white">
               <td>
                 <span class="font-silk text-smoll md:text-xs">
                   #{project.id}

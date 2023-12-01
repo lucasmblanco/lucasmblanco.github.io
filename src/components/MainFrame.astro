@@ -6,7 +6,7 @@ import Icon from "astro-icon";
 ---
 
 <section
-  class="grid place-content-center gap-5 border-b-[1px] border-pure-black dark:border-al md:gap-10"
+  class="grid place-content-center gap-5 border-b-[1px] border-pure-black dark:border-pure-white md:gap-10"
 >
   <div class="canvas-container h-[60vh]"></div>
 
@@ -36,9 +36,9 @@ import Icon from "astro-icon";
   </div>
 </section>
 <style is:global>
-  /* canvas {
+  canvas {
     border-radius: 8px;
-  } */
+  }
 </style>
 <script>
   import p5 from "p5";
@@ -88,20 +88,18 @@ import Icon from "astro-icon";
       pallete = p5.random(palletes);
       // distance = Math.round(p5.random(4, 6));
       // distance = Math.round(p5.random(3,));
-      distance = 4;
-      distanceX = Math.round(middleX / distance);
+      distance = Math.round(p5.random(4, 20));
+      distanceX = middleX / distance;
       distanceY = Math.round(middleY / distance);
 
-      // if (Math.round(distanceX) !== distanceX) {
-      //   console.log("TOCO");
-      //   let tmp = middleX / Math.round(distanceX);
-      //   distanceX = tmp;
-      // }
-      // if (Math.round(distanceY) !== distanceY) {
-      //   console.log("TOCO2");
-      //   let tmp = middleY / Math.round(distanceY);
-      //   distanceY = tmp;
-      // }
+      if (Math.round(distanceX) !== distanceX) {
+        let tmp = middleX / Math.round(distanceX);
+        distanceX = tmp;
+      }
+      if (Math.round(distanceY) !== distanceY) {
+        let tmp = middleY / Math.round(distanceY);
+        distanceY = tmp;
+      }
 
       // console.log(distanceX);
 
@@ -110,7 +108,7 @@ import Icon from "astro-icon";
     p5.draw = function () {
       p5.clear();
       // p5.background(p5.random(pallete) + "A0");
-      // p5.background(p5.random(pallete) + "A0");
+      // p5.background(p5.random(pallete) + "20");
       Q1 = new Quadrant(
         p5,
         0,
@@ -181,13 +179,9 @@ import Icon from "astro-icon";
       aspectRatio = p5.height / p5.width;
       distanceX = Math.round(middleX / distance);
       distanceY = Math.round(middleY / distance);
-      console.log(distanceX);
-      console.log(distanceY);
-      // console.log(middleY);
-      // console.log(middleX);
-      // console.log(aspectRatio);
-      // p5.clear();
-      // p5.redraw();
+
+      p5.clear();
+      p5.redraw();
       //   // 768
       //   // const canvasContainer = document.querySelector(
       //   //   ".canvas-container",

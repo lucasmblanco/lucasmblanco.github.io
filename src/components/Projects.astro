@@ -3,6 +3,8 @@ import { Icon } from "astro-icon";
 
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import supabase from "../lib/supabase";
+import monsterA1 from "../images/monsterA1.svg";
+import pumpkin1 from "../images/Pumpkin1.png";
 
 const { data: projects, error } = await supabase
   .from("projects")
@@ -28,57 +30,57 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="flex flex-col">
+<section class="flex flex-col border border-pure-black">
   <table
     align="center"
     id="projects"
-    class="w-full table-auto border-collapse select-none rounded-lg border-transparent text-center"
+    class="w-full table-auto border-collapse select-none"
   >
     <thead>
-      <tr class="header">
+      <tr class="header text-center">
         <th
-          class="bg-pure-black px-2 py-3 text-left font-young text-xl font-normal text-pure-white dark:bg-pure-white dark:text-pure-black"
+          class="border border-transparent border-b-pure-black px-2 py-6 text-left font-clash text-lg"
           colspan="5"
           ><div class="flex items-center gap-2">
-            <Icon
-              name="ghost-smile-bold"
+            <!-- <Icon
+              name="ghostie"
               width="40"
               class="project-ghost inline-block"
-            />
-            <span class="text-sm uppercase md:text-2xl"
-              >{t("projects.title")}</span
-            >
-            <span class="text-xs md:text-sm">{t("projects.subtitle")}</span>
+            /> -->
+            <!-- <div class="icon-container bg w-40"></div> -->
+            <img src="" alt="" class="icon-container" />
+            <span class="uppercase md:text-3xl">{t("projects.title")}</span>
+            <span class="text-sm">{t("projects.subtitle")}</span>
           </div></th
         >
       </tr>
     </thead>
     {
       tableBody.map((data, i) => (
-        <tbody data-tb={i} class="hidden text-xs md:text-lg">
+        <tbody data-tb={i} class="hidden text-sm italic md:text-lg">
           {data.map((project) => (
-            <tr class="hover:background-transparent border border-x-transparent border-y-pure-black hover:backdrop-opacity-95 dark:border-y-pure-white">
-              <td>
-                <span class="font-silk text-smoll md:text-xs">
+            <tr class="bg-transparent transition-all hover:bg-pure-black hover:text-pure-white">
+              <td class="py-2">
+                <span class="px-2 font-clash text-sm font-bold not-italic">
                   #{project.id}
                 </span>
               </td>
-              <td class="w-fit p-2 text-left">
-                <span class=" whitespace-nowrap">{project.name}</span>
+              <td class="w-fit px-2 text-left">
+                <span>{project.name}</span>
               </td>
-              <td class="hidden w-fit px-2 text-left text-xs md:table-cell">
-                <span class="whitespace-nowrap">{project.tech.toString()}</span>
+              <td class="hidden w-fit px-2 text-left text-xs  md:table-cell">
+                <span>{project.tech.toString()}</span>
               </td>
-              <td class="w-fit px-2 text-xs ">
+              <td class="w-fit px-2  ">
                 <a href={project.demo_link} target="_blank">
-                  <span class="hover:brightness-175 flex items-center text-smoll md:text-sm">
+                  <span class="hover:brightness-175 flex items-center md:text-sm">
                     Demo <Icon name="external-link" width="10" />
                   </span>
                 </a>
               </td>
-              <td class="w-fit px-2 text-xs">
+              <td class="w-fit px-2 ">
                 <a href={project.source_link} target="_blank">
-                  <span class="hover:brightness-175 flex items-center text-smoll md:text-sm">
+                  <span class="hover:brightness-175 flex items-center md:text-sm">
                     Source <Icon name="external-link" width="10" />
                   </span>
                 </a>
@@ -115,12 +117,14 @@ const t = useTranslations(lang);
       ))
     } -->
   </table>
-  <div class="flex w-full justify-center gap-2 py-2">
+  <div
+    class="flex w-full justify-center gap-2 border border-transparent border-t-pure-black py-2"
+  >
     {tableBody.map((_, i) => <button data-buttontb={i}>{i + 1}</button>)}
   </div>
 </section>
 <style is:global>
-  :root {
+  /* :root {
     --icon-margin: 0.5rem;
   }
 
@@ -133,15 +137,24 @@ const t = useTranslations(lang);
       margin-block: var(--icon-margin);
       font-family: "Silkscreen", sans-serif;
     }
-  }
+  } */
 </style>
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import SplitType from "split-type";
+  // import pnk1 from "../images/Pumpkin1.png";
+  // import pnk2 from "../images/Pumpkin2.png";
 
   const tbodys = document.querySelectorAll("[data-tb]");
   const buttons = document.querySelectorAll("[data-buttontb");
+  const iconsContainer = document.querySelector(".icon-container");
+
+  // gsap.fromTo(
+  //   iconsContainer,
+  //   { attr: { src: pnk1 } },
+  //   { attr: { src: pnk2 }, repeat: -1 },
+  // );
 
   tbodys[0].style.display = "table-row-group";
   buttons[0].style.textDecorationLine = "underline";
@@ -160,21 +173,21 @@ const t = useTranslations(lang);
   });
 
   // --- Hover effect with center positioning ---
-  const rows = document.querySelectorAll("tr");
-  const iconData = window.getComputedStyle(rows[0], ":after");
-  const iconHeight =
-    Number(iconData.fontSize.split("px")[0]) +
-    Number(iconData.fontSize.split("px")[0]) / 2;
+  // const rows = document.querySelectorAll("tr");
+  // const iconData = window.getComputedStyle(rows[0], ":after");
+  // const iconHeight =
+  //   Number(iconData.fontSize.split("px")[0]) +
+  //   Number(iconData.fontSize.split("px")[0]) / 2;
 
-  rows.forEach((row) => {
-    row.addEventListener("mouseover", () => {
-      const diff = row.offsetHeight - iconHeight;
-      document.documentElement.style.setProperty(
-        "--icon-margin",
-        `${diff / 2}px`,
-      );
-    });
-  });
+  // rows.forEach((row) => {
+  //   row.addEventListener("mouseover", () => {
+  //     const diff = row.offsetHeight - iconHeight;
+  //     document.documentElement.style.setProperty(
+  //       "--icon-margin",
+  //       `${diff / 2}px`,
+  //     );
+  //   });
+  // });
   // ---------------------------------------
 
   const tl = gsap.timeline({

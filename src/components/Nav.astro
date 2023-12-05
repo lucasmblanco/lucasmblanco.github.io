@@ -11,10 +11,11 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <nav
-  class="sticky top-0 z-50 mx-auto grid justify-center bg-transparent px-4 py-2 text-smoll backdrop-blur dark:backdrop-hue-rotate-180 md:justify-end md:text-xs md:backdrop-blur-0 md:backdrop-hue-rotate-0 md:dark:backdrop-hue-rotate-0"
+  class="sticky top-0 z-50 mx-auto grid justify-center bg-transparent text-smoll md:justify-end md:text-sm"
 >
+  <button class="block md:hidden">+</button>
   <ul
-    class="grid grid-flow-col justify-items-end gap-2 md:grid-flow-row md:gap-1"
+    class="hidden grid-flow-col justify-items-end gap-2 md:grid md:grid-flow-row md:gap-0"
   >
     <li class="nav-list-item">
       <p class="flex justify-end gap-1">
@@ -32,7 +33,7 @@ const translatePath = useTranslatedPath(lang);
       <a href="#projects" class="hover-effect">
         <span> {t("nav.projects")}</span>
         <span
-          class="underline-el dark:bg-al absolute bottom-0 left-0 block h-[1px] bg-pure-black"
+          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-al"
         ></span>
       </a>
     </li>
@@ -44,7 +45,7 @@ const translatePath = useTranslatedPath(lang);
       >
         <span>{t("nav.cv")}</span>
         <span
-          class="underline-el dark:bg-al absolute bottom-0 left-0 block h-[1px] bg-pure-black"
+          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-al"
         ></span>
       </a>
     </li>
@@ -52,7 +53,7 @@ const translatePath = useTranslatedPath(lang);
       <a href="#contact" class="hover-effect">
         <span>{t("nav.contact")}</span>
         <span
-          class="underline-el dark:bg-al absolute bottom-0 left-0 block h-[1px] bg-pure-black"
+          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-al"
         ></span>
       </a>
     </li>

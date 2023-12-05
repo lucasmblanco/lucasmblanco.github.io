@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/tailwind": "^5.0.2",
     "@fontsource-variable/lora": "^5.0.9",
+    "@fontsource-variable/source-code-pro": "^5.0.16",
     "@fontsource/inter": "^5.0.15",
     "@fontsource/roboto-mono": "^5.0.15",
     "@fontsource/silkscreen": "^5.0.17",

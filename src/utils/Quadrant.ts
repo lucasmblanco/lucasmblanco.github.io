@@ -98,7 +98,7 @@ export default class Quadrant {
     
         // this.canvas.stroke('#f22613');
         // this.canvas.strokeWeight(3);
-        for (let i = 0; i <= (this.c - this.a); i += this.distanceX) {
+        for (let i = this.distanceX; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.a + i, this.b, this.a + i, this.d);
         }
          
@@ -109,7 +109,7 @@ export default class Quadrant {
     
         // this.canvas.stroke('#f22613');
         // this.canvas.strokeWeight(3);
-        for (let i = 0; i <= (this.d - this.b); i += this.distanceY ) {
+        for (let i = this.distanceY; i < (this.d - this.b); i += this.distanceY ) {
                this.canvas.line(this.a, this.b + i, this.c, this.b + i);
         }
           
@@ -123,7 +123,7 @@ export default class Quadrant {
           [arr[i], arr[j]] = [arr[j], arr[i]]; 
         } 
         arr.pop();
-        arr.forEach(action => {  action(); })
+        arr.forEach(action => action())
         return arr; 
       }; 
 

@@ -13,15 +13,19 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Lucas Blanco">
   <header
-    class="mx-auto grid grid-flow-col justify-between px-4 py-2 font-young text-xs md:text-xl"
+    class="sticky top-0 z-0 mx-auto grid grid-flow-col justify-between px-4 py-2 dark:text-pure-white"
   >
-    <p class="text-anim block">LUCAS BLANCO</p>
-    <ToggleTheme />
-    <p class="text-anim block">WEB DEVELOPER</p>
+    <div class="font-clash text-xs font-bold md:text-base">
+      <p class="text-anim block">LUCAS BLANCO</p>
+      <p class="text-anim block">WEB DEVELOPER</p>
+      <ToggleTheme />
+    </div>
+    <Nav />
+    <!-- <ToggleTheme /> -->
   </header>
-  <Nav />
+
   <main
-    class="mx-auto mb-24 grid w-[80vw] max-w-[1000px] grid-flow-row gap-12 md:gap-24"
+    class="mx-auto grid w-[80vw] max-w-[1000px] grid-flow-row gap-12 pb-24 md:gap-24"
   >
     <MainFrame />
     <Bio />

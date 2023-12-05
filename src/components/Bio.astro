@@ -1,5 +1,8 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import profileImage from "../images/thelastone.svg";
+import Icon from "astro-icon";
+import { Image } from "astro:assets";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -8,27 +11,32 @@ const t = useTranslations(lang);
 // class="box-container relative grid h-fit grid-flow-col gap-2 text-xs"
 //  class="profile-image relative w-[600px] self-start rounded-lg saturate-0 md:w-7"
 // og https://res.cloudinary.com/du8wo1cxh/image/upload/v1700173905/ax1ndgvpapg6ht7rebry.jpg
+// md:grid-flow-col md:grid-cols-2
 ---
 
-<div
-  class="grid items-center justify-center text-xs md:grid-flow-col md:grid-cols-2"
->
-  <h3
-    id="bio-title"
-    class="row-start-1 block py-4 text-center font-young text-3xl md:hidden md:text-left"
-  >
-    {t("bio.gretting")}
-  </h3>
-  <section class="grid h-full items-center gap-5">
-    <article class="grid">
+<div class="grid items-center justify-center text-xs">
+  <div class="grid md:grid-flow-col">
+    <h3
+      id="bio-title"
+      class="row-start-1 block py-4 text-left font-clash text-2xl font-bold md:hidden"
+    >
+      {t("bio.gretting")}
+    </h3>
+    <article class="">
       <h3
         id="bio-title"
-        class="hidden text-center font-young text-5xl md:block md:text-left"
+        class="row-start-1 hidden text-left font-clash text-6xl font-bold md:block"
       >
         {t("bio.gretting")}
       </h3>
+      <!-- <h3
+        id="bio-title"
+        class="font-basteleur-moon hidden text-center text-5xl md:block md:text-left"
+      >
+        {t("bio.gretting")}
+      </h3> -->
       <div
-        class="bio-standard-anim whitespace-pre-line text-center md:text-left"
+        class="bio-standard-anim whitespace-pre-line text-left text-sm md:text-lg"
       >
         <p>
           {t("bio.p1")}
@@ -37,33 +45,46 @@ const t = useTranslations(lang);
           {t("bio.p2")}
         </p>
       </div>
+      <article class="grid gap-2">
+        <h3 class="text-left font-clash text-xl font-semibold" id="tech-title">
+          Tecnologias que uso
+        </h3>
+        <div class="bio-standard-anim w-56">
+          <p class="inline-block">
+            <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
+          </p>
+          <p class="inline-block">
+            <span>lorem</span>lorem<span>lorem</span>lorem
+          </p>
+          <p class="inline-block">
+            <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
+          </p>
+          <p class="inline-block">
+            <span>lorem</span>lorem<span>lorem</span>
+          </p>
+        </div>
+      </article>
     </article>
-    <article class="grid gap-2">
-      <h3 class="text-center font-young text-xl md:text-left" id="tech-title">
-        Tecnologias que uso
-      </h3>
-      <div class="bio-standard-anim w-56">
-        <p class="inline-block">
-          <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
-        </p>
-        <p class="inline-block">
-          <span>lorem</span>lorem<span>lorem</span>lorem
-        </p>
-        <p class="inline-block">
-          <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
-        </p>
-        <p class="inline-block">
-          <span>lorem</span>lorem<span>lorem</span>
-        </p>
-      </div>
-    </article>
-  </section>
-  <img
-    src="https://res.cloudinary.com/du8wo1cxh/image/upload/v1701316806/me_vfpw2x.png"
-    alt=""
-    class="bio-img relative z-0 row-start-2 aspect-video h-full w-fit justify-self-end object-cover object-m-position md:row-start-1 md:aspect-auto md:w-72"
-  />
+    <!-- class="row-start-2 md:row-start-1 " -->
+    <!-- src="https://res.cloudinary.com/du8wo1cxh/image/upload/v1701712541/output-onlinepngtools_3_woxkog.png" -->
+    <div
+      class="profile-bio row-start-2 aspect-video w-full bg-transparent dark:bg-pure-white md:row-start-1 md:aspect-auto"
+    >
+      <!-- <Fragment set:html={profileImage} /> -->
+      <img
+        src={profileImage}
+        alt=""
+        class="bio-img relative aspect-video h-full w-fit justify-self-end object-cover object-m-position dark:bg-pure-white md:aspect-auto"
+      />
+    </div>
+  </div>
+
+  <!-- <section class="grid h-full items-center gap-5">
+   
+   
+  </section> -->
 </div>
+<style></style>
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";

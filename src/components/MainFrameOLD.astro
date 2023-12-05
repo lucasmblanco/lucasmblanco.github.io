@@ -8,59 +8,42 @@ import Wrapper from "./Wrapper.astro";
 // SECTION OLD -> class="grid place-content-center gap-5 border-b-[1px] border-pure-black dark:border-pure-white md:gap-10"
 ---
 
-<section class="grid place-content-center">
-  <div
-    class="canvas-container h-[60vh] border border-pure-black dark:border-pure-white"
-  >
-  </div>
-
-  <!-- <a
-    href="https://solvingsol.com/"
-    target="_blank"
-    class="sol-link h-fit fill-pure-black dark:fill-pure-white"
-    slot="right-icon"
-    ><Icon class="sol-icon h-2 w-2 md:h-3 md:w-3" name="question_mark" /></a
-  > -->
-  <!-- <div
-    class="grid w-full grid-cols-2 items-center justify-center gap-[1px] bg-pure-black dark:bg-pure-white md:grid-flow-col md:gap-[2px]"
-    slot="content"
-  >
-    <div
-      class="grid h-full grow place-content-center bg-pure-white p-1 text-center dark:dark:bg-pure-black"
+<section class="grid place-content-center gap-5 md:gap-10">
+  <div class="canvas-container h-[60vh]"></div>
+  <Wrapper title="Info">
+    <a
+      href="https://solvingsol.com/"
+      target="_blank"
+      class="sol-link h-fit fill-pure-black dark:fill-pure-white"
+      slot="right-icon"
+      ><Icon class="sol-icon h-2 w-2 md:h-3 md:w-3" name="question_mark" /></a
     >
-      <h2 class="text-base md:text-3xl">Wall Drawing #11</h2>
-      <div class="text-xs md:text-sm">
-        <span>(1969)</span>
-        <span class="text-center">Sol LeWitt</span>
+    <div
+      class="grid w-full grid-cols-2 items-center justify-center gap-[1px] bg-pure-black dark:bg-pure-white md:grid-flow-col md:gap-[2px]"
+      slot="content"
+    >
+      <div
+        class="grid h-full grow place-content-center bg-pure-white p-1 text-center dark:dark:bg-pure-black"
+      >
+        <h2 class="text-base md:text-3xl">Wall Drawing #11</h2>
+        <div class="text-xs md:text-sm">
+          <span>(1969)</span>
+          <span class="text-center">Sol LeWitt</span>
+        </div>
+      </div>
+      <div class="h-full grow bg-pure-white text-center dark:bg-pure-black">
+        <blockquote class="p-1 text-smoll md:whitespace-pre-line">
+          A wall divided horizontally and vertically into four equal parts.
+          Within each part, three of the four kinds of lines are superimposed.
+        </blockquote>
       </div>
     </div>
-    <div class="h-full grow bg-pure-white text-center dark:bg-pure-black">
-      <blockquote class="p-1 text-smoll md:whitespace-pre-line">
-        A wall divided horizontally and vertically into four equal parts. Within
-        each part, three of the four kinds of lines are superimposed.
-      </blockquote>
-    </div>
-  </div> -->
-  <div class="grid place-content-center py-2 md:grid-cols-2">
-    <div class="text-sm md:text-base">
-      <span
-        class="bg-pure-black px-1 font-bold text-pure-white dark:bg-pure-white dark:text-pure-black"
-        >#11 Wall Drawing (1969)</span
-      >
-      <p>Sol Lewitt</p>
-    </div>
-    <div>
-      <p class="text-xs md:text-base">
-        A wall divided horizontally and vertically into four equal parts. Within
-        each part, three of the four kinds of lines are superimposed.
-      </p>
-    </div>
-  </div>
+  </Wrapper>
 </section>
 <style is:global>
-  /* canvas {
+  canvas {
     border-radius: 8px;
-  } */
+  }
 </style>
 <script>
   import p5 from "p5";
@@ -76,7 +59,7 @@ import Wrapper from "./Wrapper.astro";
   const arrowIcon = document.querySelector(".sol-icon");
   const descriptionLink = document.querySelector(".sol-link");
 
-  const h = canvasContainer?.clientHeight;
+  const h = canvasContainer?.offsetHeight;
 
   const w = mainContainer?.clientWidth;
 
@@ -115,7 +98,7 @@ import Wrapper from "./Wrapper.astro";
     };
     p5.draw = function () {
       p5.clear();
-      p5.background(p5.random(pallete) + "A0");
+      // p5.background(p5.random(pallete) + "A0");
       Q1 = new Quadrant(
         p5,
         0,

@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "sysfontc";
+  src:
+    url("sysfont-webfont.woff2") format("woff2"),
+    url("sysfont-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "chicagoflfregular";
+  src:
+    url("chicagoflf-webfont.woff2") format("woff2"),
+    url("chicagoflf-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FT88";
+  src:
+    url("FT88-Bold.woff2") format("woff2"),
+    url("FT88-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: "FT88-Expanded";
+  src:
+    url("FT88-Expanded.woff2") format("woff2"),
+    url("FT88-Expanded.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FT88-Gothique";
+  src:
+    url("FT88-Gothique.woff2") format("woff2"),
+    url("FT88-Gothique.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FT88";
+  src:
+    url("FT88-Gothique.woff2") format("woff2"),
+    url("FT88-Gothique.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FT88";
+  src:
+    url("FT88-Regular.woff2") format("woff2"),
+    url("FT88-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ClashDisplay";
+  src:
+    url("ClashDisplay-Light.woff2") format("woff2"),
+    url("ClashDisplay-Light.woff") format("woff"),
+    url("ClashDisplay-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ClashDisplay";
+  src:
+    url("ClashDisplay-Regular.woff2") format("woff2"),
+    url("ClashDisplay-Regular.woff") format("woff"),
+    url("ClashDisplay-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ClashDisplay";
+  src:
+    url("ClashDisplay-Semibold.woff2") format("woff2"),
+    url("ClashDisplay-Semibold.woff") format("woff"),
+    url("ClashDisplay-Semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ClashDisplay";
+  src:
+    url("ClashDisplay-Bold.woff2") format("woff2"),
+    url("ClashDisplay-Bold.woff") format("woff"),
+    url("ClashDisplay-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src:
+    url("Archivo-Light.woff2") format("woff2"),
+    url("Archivo-Light.woff") format("woff"),
+    url("Archivo-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src:
+    url("Archivo-LightItalic.woff2") format("woff2"),
+    url("Archivo-LightItalic.woff") format("woff"),
+    url("Archivo-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src:
+    url("Archivo-Regular.woff2") format("woff2"),
+    url("Archivo-Regular.woff") format("woff"),
+    url("Archivo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src:
+    url("Archivo-Italic.woff2") format("woff2"),
+    url("Archivo-Italic.woff") format("woff"),
+    url("Archivo-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src:
+    url("Archivo-Bold.woff2") format("woff2"),
+    url("Archivo-Bold.woff") format("woff"),
+    url("Archivo-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src:
+    url("Archivo-BoldItalic.woff2") format("woff2"),
+    url("Archivo-BoldItalic.woff") format("woff"),
+    url("Archivo-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+  font-style: italic;
+}

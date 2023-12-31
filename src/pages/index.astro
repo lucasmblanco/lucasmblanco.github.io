@@ -1,18 +1,12 @@
 ---
 import Bio from "../components/Bio.astro";
-
 import Footer from "../components/Footer.astro";
-// import Header from "../components/HeaderOLD.astro";
 import Header from "../components/Header.astro";
 import MainFrame from "../components/MainFrame.astro";
 import Nav from "../components/Nav.astro";
-// import Nav from "../components/Nav.astro";
 import Projects from "../components/Projects.astro";
 import Technologies from "../components/Technologies.astro";
-// import ToggleTheme from "../components/ToggleTheme.astro";
 import Layout from "../layouts/Layout.astro";
-/// cosas que retiro: w-base-width; max-w-[40em]; mx-auto
-/// main old class="mx-auto mb-24 grid max-w-[1000px] place-content-center gap-24 px-8 lg:gap-44"
 ---
 
 <Layout title="Lucas Blanco">
@@ -25,38 +19,6 @@ import Layout from "../layouts/Layout.astro";
     <Bio />
     <Technologies />
     <Projects />
-    <!-- <div class="grid h-[100vh] grid-cols-2">
-    <div class="h-[100vh] overflow-auto">
-     
-      <Nav />
-      <div class="mx-auto max-w-[500px]">
-        <Bio />
-        <Projects />
-      </div>
-    </div>
-
-    <div class="frame-container">
-      <MainFrame />
-    </div>
-  </div> -->
-
-    <!--  <header
-    class="sticky top-0 z-0 mx-auto grid grid-flow-col justify-between px-4 py-2 dark:text-pure-white"
-  >
-    <div class="font-clash text-xs font-bold md:text-base">
-      <p class="text-anim block">LUCAS BLANCO</p>
-      <p class="text-anim block">WEB DEVELOPER</p>
-      <ToggleTheme />
-    </div>
-   
-    <ToggleTheme /> // este no iba 
-  </header> -->
-    <!-- <main
-    class="mx-auto mt-4 grid w-[calc(100vw_-_10%)] max-w-[1000px] content-center gap-12 md:gap-24"
-  > -->
-    <!-- <Bio />
-    
-    <!-- </main> -->
   </main>
   <Footer />
 </Layout>

@@ -1,33 +1,23 @@
 ---
 import Bio from "../../components/Bio.astro";
+import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import MainFrame from "../../components/MainFrame.astro";
 import Nav from "../../components/Nav.astro";
 import Projects from "../../components/Projects.astro";
-// import ToggleTheme from "../../components/ToggleTheme.astro";
+import Technologies from "../../components/Technologies.astro";
 import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="Lucas Blanco">
   <Header />
   <Nav />
-
-  <!--  <header
-    class="sticky top-0 z-0 mx-auto grid grid-flow-col justify-between px-4 py-2 dark:text-pure-white"
-  >
-    <div class="font-clash text-xs font-bold md:text-base">
-      <p class="text-anim block">LUCAS BLANCO</p>
-      <p class="text-anim block">WEB DEVELOPER</p>
-      <ToggleTheme />
-    </div>
-   
-    <ToggleTheme /> // este no iba 
-  </header> -->
   <main
-    class="mx-auto mt-4 grid w-[calc(100vw_-_10%)] max-w-[1000px] content-center gap-12 md:gap-24"
+    class="mx-auto grid w-[calc(100vw_-_10%)] max-w-[1000px] content-center gap-12 md:gap-24 md:border-x md:border-x-pure-black md:dark:border-x-pure-white"
   >
     <MainFrame />
     <Bio />
+    <Technologies />
     <Projects />
   </main>
   <Footer />

@@ -12,13 +12,11 @@
     document.dispatchEvent(new CustomEvent('set-theme', { detail: 'dark' }));
   }
   "
-  class="toggle-theme before:toggle-theme after:toggle-theme hidden self-start font-roboto-mono text-smoll opacity-50 before:content-['['] after:content-[']'] md:block md:text-xxs"
+  class="toggle-theme before:toggle-theme after:toggle-theme before:content-['['] after:content-[']']"
 ></button>
 <script>
-  import { gsap } from "gsap";
-
   const root = document.querySelector("html");
-  const toggleThemeButton = document.querySelector("button");
+  const toggleThemeButton = document.querySelector("button.toggle-theme");
 
   if (window.location.pathname === "/en/") {
     if (root?.dataset.theme === "dark") {
@@ -51,10 +49,10 @@
     }
   }
 
-  gsap.from(".toggle-theme", {
-    duration: 2.5,
-    y: -100,
-    opacity: 0,
-    ease: "power4.inOut",
-  });
+  // gsap.from(".toggle-theme", {
+  //   duration: 2.5,
+  //   y: -100,
+  //   opacity: 0,
+  //   ease: "power4.inOut",
+  // });
 </script>

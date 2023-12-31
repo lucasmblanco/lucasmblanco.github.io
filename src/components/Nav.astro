@@ -4,141 +4,61 @@ import {
   useTranslatedPath,
   useTranslations,
 } from "../i18n/utils";
+import ToggleTheme from "./ToggleTheme.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
+// class="sticky top-0 z-50 bg-pink-300 px-4 py-1 font-roboto-mono text-xs text-pure-black dark:bg-lime-500"
 ---
 
-<nav
-  class="sticky top-0 z-50 mx-auto grid justify-center bg-transparent text-smoll md:justify-end md:text-sm"
->
-  <button class="block md:hidden">+</button>
+<nav class="sticky top-0 z-50 grid bg-pure-white text-sm dark:bg-pure-black">
   <ul
-    class="hidden grid-flow-col justify-items-end gap-2 md:grid md:grid-flow-row md:gap-0"
+    class="navigation-bar absolute mx-auto grid w-[calc(100vw_-_10%)] max-w-[1000px] grid-flow-col justify-center gap-3 justify-self-center border-b border-b-pure-black bg-pure-white py-1 text-sm dark:border-b-pure-white dark:bg-pure-black max-md:[clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)] md:sticky md:justify-start md:justify-self-start"
   >
-    <li class="nav-list-item">
-      <p class="flex justify-end gap-1">
+    <li class="shrink grow-0 basis-16"><ToggleTheme /></li>
+    <li>
+      <p class="flex gap-1">
         <a
           href={translatePath("/", "en")}
-          class=`${getLangFromUrl(Astro.url) === "en" && 'underline'}`>en</a
+          class=`${getLangFromUrl(Astro.url) === "en" && "before:content-['['] after:content-[']'] "}`
+          >en</a
         >
         <a
           href={translatePath("/", "es")}
-          class=`${getLangFromUrl(Astro.url) === "es" && 'underline'}`>es</a
+          class=`${getLangFromUrl(Astro.url) === "es" && "before:content-['['] after:content-[']'] "}`
+          >es</a
         >
       </p>
     </li>
-    <li class="nav-list-item w-fit">
-      <a href="#projects" class="hover-effect">
-        <span> {t("nav.projects")}</span>
-        <span
-          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-al"
-        ></span>
-      </a>
-    </li>
-    <li class="nav-list-item w-fit">
+    <li>
       <a
-        href="https://docs.google.com/document/d/1MXRM9xi3P7pAaRqdSlBUE2L902qBaqYyRsly5ULosLU/edit?usp=sharing"
-        target="_blank"
-        class="hover-effect"
+        href="#projects"
+        class="before:opacity-0 before:content-['['] after:opacity-0 after:content-[']'] before:hover:opacity-100 after:hover:opacity-100"
+        >{t("nav.projects")}</a
       >
-        <span>{t("nav.cv")}</span>
-        <span
-          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-al"
-        ></span>
-      </a>
     </li>
-    <li class="nav-list-item w-fit">
-      <a href="#contact" class="hover-effect">
-        <span>{t("nav.contact")}</span>
-        <span
-          class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-al"
-        ></span>
-      </a>
+    <li>
+      <a
+        href="#aboutme"
+        class="before:opacity-0 before:content-['['] after:opacity-0 after:content-[']'] before:hover:opacity-100 after:hover:opacity-100"
+        >info</a
+      >
     </li>
   </ul>
 </nav>
 <script>
-  import { gsap } from "gsap";
+  const mql = window.matchMedia("screen and (min-width: 768px)");
 
-  interface GSAPProps {
-    width?: string;
-    left?: string;
-    duration?: string;
-    immediateRender?: boolean;
+  window.addEventListener("resize", onrecize);
+
+  function onrecize() {
+    const navBar = document.querySelector("ul.navigation-bar");
+    if (mql.matches) {
+      if (navBar?.hasAttribute("style")) {
+        navBar?.removeAttribute("style");
+        navBar?.classList.remove("active");
+      }
+    }
   }
-  interface ListItem extends HTMLLIElement {
-    tl: {
-      tweenFromTo: (pointA: number, pointB: string) => void;
-      play: () => void;
-      fromTo: (
-        element: Element | null,
-        propertieA: GSAPProps,
-        propertieB: GSAPProps,
-      ) => void;
-      add: (point: string) => void;
-    };
-  }
-
-  const listItems = document.querySelectorAll<ListItem>(".hover-effect");
-
-  function enterAnimation(item: ListItem, e: MouseEvent) {
-    item.tl.tweenFromTo(0, "midway");
-  }
-
-  function exitAnimation(item: ListItem, e: MouseEvent) {
-    item.tl.play();
-  }
-
-  gsap.from(".nav-list-item", {
-    rotation: 0.01,
-    duration: 1,
-    y: 100,
-    opacity: 0,
-    ease: "power1.Out",
-    stagger: 0.3,
-  });
-
-  listItems.forEach((item: ListItem) => {
-    const underline = item.querySelector(".underline-el");
-
-    item.tl = gsap.timeline({ paused: true });
-
-    item.tl.fromTo(
-      underline,
-      {
-        width: "0%",
-        left: "0%",
-      },
-      {
-        width: "100%",
-        duration: ".5",
-      },
-    );
-
-    item.tl.add("midway");
-
-    item.tl.fromTo(
-      underline,
-      {
-        width: "100%",
-        left: "0%",
-      },
-      {
-        width: "0%",
-        left: "100%",
-        duration: ".5",
-        immediateRender: false,
-      },
-    );
-
-    item.addEventListener("mouseenter", (e) => {
-      enterAnimation(item, e);
-    });
-
-    item.addEventListener("mouseleave", (e) => {
-      exitAnimation(item, e);
-    });
-  });
 </script>

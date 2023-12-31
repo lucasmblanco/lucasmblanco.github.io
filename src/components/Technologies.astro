@@ -1,0 +1,135 @@
+---
+
+---
+
+<section class="grid gap-4 md:grid-cols-2 md:px-4">
+  <div class="grid gap-2 text-center dark:text-pure-black">
+    <div class="marquee relative flex select-none overflow-hidden">
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#a3a380]"
+      >
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>SASS</li>
+        <li>JAVASCRIPT</li>
+        <li>TYPESCRIPT</li>
+      </ul>
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#a3a380]"
+        aria-hidden="true"
+      >
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>SASS</li>
+        <li>JAVASCRIPT</li>
+        <li>TYPESCRIPT</li>
+      </ul>
+    </div>
+    <div class="marquee relative flex select-none overflow-hidden">
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d6ce93] px-2"
+      >
+        <li>ASTRO</li>
+        <li>NEXT.JS</li>
+        <li>EXPRESS.JS</li>
+        <li>TAILWINDCSS</li>
+      </ul>
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d6ce93] px-2"
+        aria-hidden="true"
+      >
+        <li>ASTRO</li>
+        <li>NEXT.JS</li>
+        <li>EXPRESS.JS</li>
+        <li>TAILWINDCSS</li>
+      </ul>
+    </div>
+    <div class="marquee relative flex select-none overflow-hidden">
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#efebce] px-2"
+      >
+        <li>REACT</li>
+        <li>VUE.JS</li>
+      </ul>
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#efebce] px-2"
+        aria-hidden="true"
+      >
+        <li>REACT</li>
+        <li>VUE.JS</li>
+      </ul>
+    </div>
+    <div class="marquee relative flex select-none overflow-hidden">
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d8a48f] px-2"
+      >
+        <li>FIREBASE</li>
+        <li>MONGODB</li>
+        <li>POSTGRESQL</li>
+      </ul>
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d8a48f] px-2"
+        aria-hidden="true"
+      >
+        <li>FIREBASE</li>
+        <li>MONGODB</li>
+        <li>POSTGRESQL</li>
+      </ul>
+    </div>
+    <div class="marquee relative flex select-none overflow-hidden">
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#bb8588] px-2"
+      >
+        <li>GIT</li>
+        <li>GITHUB</li>
+        <li>WEBPACK</li>
+        <li>VITE</li>
+        <li>FIGMA</li>
+      </ul>
+      <ul
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#bb8588] px-2"
+        aria-hidden="true"
+      >
+        <li>GIT</li>
+        <li>GITHUB</li>
+        <li>WEBPACK</li>
+        <li>VITE</li>
+        <li>FIGMA</li>
+      </ul>
+    </div>
+  </div>
+  <p class="text-center text-xxs md:text-right md:text-lg">
+    La curiosidad de estar experimentando con diferentes tecnologias para poder
+    conocer distinas formas de abordar la solucion de un problema hace que
+    costantemente este buscando diferentes tecnologias, sin importar si es front
+    o back, por mas que no sea un maestro de alguna de estas tecnologias, me
+    gusta constantemente aprender el funcionamiento y aplicacion de tecnologias
+    y esto me permite tener una flexibilidad para poder aprender rapidamente
+    cualquier tipo de tecnologia entre estas estan al front, back, database.
+  </p>
+</section>
+
+<style>
+  .marquee {
+    --gap: 0.001rem;
+    gap: var(--gap);
+  }
+
+  .marquee:hover {
+    filter: brightness(1.1);
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  .marquee__content {
+    gap: var(--gap);
+    animation: scroll 10s linear infinite;
+  }
+</style>

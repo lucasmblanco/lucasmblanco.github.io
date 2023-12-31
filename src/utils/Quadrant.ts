@@ -35,20 +35,22 @@ export default class Quadrant {
     
     private groupDiagonalDesc() {
         const descA = () =>  {
-            this.canvas.stroke(this.canvas.random(this.pallete));
-         
-            // this.canvas.stroke('#f22613');
-            // this.canvas.strokeWeight(3);
+            // this.canvas.stroke('#000000');
+            this.canvas.blendMode('source-over')
+        //    this.canvas.stroke(this.canvas.random(this.pallete));
+            this.canvas.strokeWeight(3);
+            this.canvas.strokeCap('butt')
             for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.a + i, this.b, this.c, this.d - i * this.aspectRatio);
         }
         }
         const descB = ()  => {
-            this.canvas.stroke(this.canvas.random(this.pallete));
-           
-            // this.canvas.stroke('#f22613');
-            // this.canvas.strokeWeight(3);
-        for (let i = this.distanceX; i < (this.c - this.a); i += this.distanceX) {
+            // this.canvas.stroke('#000000');
+           this.canvas.blendMode('source-over')
+        //    this.canvas.stroke(this.canvas.random(this.pallete));
+            this.canvas.strokeWeight(3);
+            this.canvas.strokeCap('butt')
+        for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.c - i, this.d, this.a, this.b + i * this.aspectRatio);
           }
         }
@@ -64,20 +66,22 @@ export default class Quadrant {
 
     private groupDiagonalAsc() {
         const ascA = () => {
-            this.canvas.stroke(this.canvas.random(this.pallete));
-           
-            // this.canvas.stroke('#f22613');
-            // this.canvas.strokeWeight(3);
+            // this.canvas.stroke('#000000');
+           this.canvas.blendMode('source-over')
+        //    this.canvas.stroke(this.canvas.random(this.pallete));
+            this.canvas.strokeWeight(3);
+            this.canvas.strokeCap('butt')
             for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
                 this.canvas.line(this.a + i, this.d, this.c, this.b + i * this.aspectRatio);
             }
         }
         const ascB = () => {
-            this.canvas.stroke(this.canvas.random(this.pallete));
-           
-            // this.canvas.stroke('#f22613');
-            // this.canvas.strokeWeight(3);
-            for (let i = this.distanceX; i < (this.c - this.a); i += this.distanceX) {
+            // this.canvas.stroke('#000000');
+           this.canvas.blendMode('source-over')
+        //    this.canvas.stroke(this.canvas.random(this.pallete));
+            this.canvas.strokeWeight(3);
+            this.canvas.strokeCap('butt')
+            for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
                 this.canvas.line(this.c - i, this.b, this.a, this.d - i * this.aspectRatio);
             }
         }
@@ -94,10 +98,11 @@ export default class Quadrant {
     }
     
     private verticalLines() {
-        this.canvas.stroke(this.canvas.random(this.pallete));
-    
-        // this.canvas.stroke('#f22613');
-        // this.canvas.strokeWeight(3);
+        // this.canvas.stroke('#000000');
+       this.canvas.blendMode('source-over')
+    //    this.canvas.stroke(this.canvas.random(this.pallete));
+        this.canvas.strokeWeight(3);
+        this.canvas.strokeCap('butt')
         for (let i = this.distanceX; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.a + i, this.b, this.a + i, this.d);
         }
@@ -105,10 +110,11 @@ export default class Quadrant {
     }
 
     private horizontalLines() {
-        this.canvas.stroke(this.canvas.random(this.pallete));
-    
-        // this.canvas.stroke('#f22613');
-        // this.canvas.strokeWeight(3);
+        // this.canvas.stroke('#000000');
+       this.canvas.blendMode('source-over')
+        // this.canvas.stroke(this.canvas.random(this.pallete));
+        this.canvas.strokeWeight(3);
+        this.canvas.strokeCap('butt')
         for (let i = this.distanceY; i < (this.d - this.b); i += this.distanceY ) {
                this.canvas.line(this.a, this.b + i, this.c, this.b + i);
         }
@@ -123,7 +129,10 @@ export default class Quadrant {
           [arr[i], arr[j]] = [arr[j], arr[i]]; 
         } 
         arr.pop();
-        arr.forEach(action => action())
+        arr.forEach(action => {
+            this.canvas.stroke(this.canvas.random(this.pallete));
+            action()
+        })
         return arr; 
       }; 
 

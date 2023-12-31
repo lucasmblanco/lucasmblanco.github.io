@@ -1,16 +1,17 @@
 ---
-import Icon from "astro-icon";
-
-import Wrapper from "./Wrapper.astro";
+import MemoQuestionMark from "../icons/QuestionMark";
 // md:h-[43.7rem] md:w-[25rem] md:w-[100rem]
 // md:w-[25rem] ; h-[30rem]
 // mx-auto w-[1000px] rounded-lg px-4 md:h-[43.7rem]
 // SECTION OLD -> class="grid place-content-center gap-5 border-b-[1px] border-pure-black dark:border-pure-white md:gap-10"
 ---
 
-<section class="grid place-content-center">
+<!-- <div class="canvas-container h-[60vh] md:h-[80vh]"></div> -->
+<section
+  class="frame-section grid w-full grid-cols-1 place-content-center px-0 py-4 md:p-4"
+>
   <div
-    class="canvas-container h-[60vh] border border-pure-black dark:border-pure-white"
+    class="canvas-container h-[60vh] w-full overflow-hidden rounded-lg md:h-[80vh]"
   >
   </div>
 
@@ -41,171 +42,183 @@ import Wrapper from "./Wrapper.astro";
       </blockquote>
     </div>
   </div> -->
-  <div class="grid place-content-center py-2 md:grid-cols-2">
+  <div
+    class="grid place-content-start py-2 md:grid-cols-2 md:place-content-center"
+  >
     <div class="text-sm md:text-base">
       <span
-        class="bg-pure-black px-1 font-bold text-pure-white dark:bg-pure-white dark:text-pure-black"
+        class="bg-pure-black text-pure-white dark:bg-pure-white dark:text-pure-black"
         >#11 Wall Drawing (1969)</span
       >
       <p>Sol Lewitt</p>
+
+      <a
+        href="https://solvingsol.com/"
+        target="_blank"
+        class="text-pure-black dark:text-pure-white"
+      >
+        <MemoQuestionMark /></a
+      >
     </div>
     <div>
-      <p class="text-xs md:text-base">
+      <p class="hidden text-xs md:block md:text-base">
         A wall divided horizontally and vertically into four equal parts. Within
         each part, three of the four kinds of lines are superimposed.
       </p>
     </div>
   </div>
-</section>
-<style is:global>
-  /* canvas {
-    border-radius: 8px;
-  } */
-</style>
-<script>
-  import p5 from "p5";
-  import { gsap } from "gsap";
-  import palletes from "nice-color-palettes";
-  import Quadrant from "../utils/Quadrant";
+  <style></style>
+  <script>
+    import p5 from "p5";
+    import { gsap } from "gsap";
+    import palletes from "nice-color-palettes";
+    import Quadrant from "../utils/Quadrant";
 
-  const root = document.querySelector("html");
-  const canvasContainer = document.querySelector(
-    ".canvas-container",
-  ) as HTMLDivElement;
-  const mainContainer = document.querySelector("main") as HTMLDivElement;
-  const arrowIcon = document.querySelector(".sol-icon");
-  const descriptionLink = document.querySelector(".sol-link");
+    const canvasContainer = document.querySelector(
+      ".canvas-container",
+    ) as HTMLDivElement;
+    const mainContainer = document.querySelector(
+      ".frame-section",
+    ) as HTMLDivElement;
+    // const frameContainer = document.querySelector(
+    //   ".frame-container",
+    // ) as HTMLDivElement;
+    const arrowIcon = document.querySelector(".sol-icon");
+    const descriptionLink = document.querySelector(".sol-link");
 
-  const h = canvasContainer?.clientHeight;
+    const h = canvasContainer?.clientHeight;
+    // const canvaBorderPx = 16;
+    const w = canvasContainer?.clientWidth;
 
-  const w = mainContainer?.clientWidth;
+    let middleY: number;
+    let middleX: number;
+    let aspectRatio: number;
 
-  let middleY: number;
-  let middleX: number;
-  let aspectRatio: number;
+    let pallete: string[];
+    let distance: number;
+    let distanceX: number;
+    let distanceY: number;
+    let Q1, Q2, Q3, Q4;
 
-  let pallete: string[];
-  let distance: number;
-  let distanceX: number;
-  let distanceY: number;
-  let Q1, Q2, Q3, Q4;
+    new p5(function (p5) {
+      p5.setup = function () {
+        const cnv = p5.createCanvas(w, h);
+        cnv.parent(canvasContainer);
+        middleY = p5.height / 2;
+        middleX = p5.width / 2;
+        aspectRatio = p5.height / p5.width;
+        pallete = p5.random(palletes);
+        //p5.random(5)
+        distance = 5;
+        distanceX = Math.round(middleX / distance);
+        distanceY = Math.round(middleY / distance);
 
-  new p5(function (p5) {
-    p5.setup = function () {
-      const cnv = p5.createCanvas(w, h);
-      cnv.parent(canvasContainer);
-      middleY = p5.height / 2;
-      middleX = p5.width / 2;
-      aspectRatio = p5.height / p5.width;
-      pallete = p5.random(palletes);
-      distance = Math.round(p5.random(4, 20));
-      distanceX = middleX / distance;
-      distanceY = Math.round(middleY / distance);
+        if (Math.round(distanceX) !== distanceX) {
+          let tmp = middleX / Math.round(distanceX);
+          distanceX = tmp;
+        }
+        if (Math.round(distanceY) !== distanceY) {
+          let tmp = middleY / Math.round(distanceY);
+          distanceY = tmp;
+        }
+        // p5.filter(p5.GRAY);
+        p5.noLoop();
+      };
+      p5.draw = function () {
+        p5.clear();
+        p5.background(p5.random(pallete) + "20");
+        Q1 = new Quadrant(
+          p5,
+          0,
+          0,
+          middleX,
+          middleY,
+          distanceX,
+          distanceY,
+          aspectRatio,
+          pallete,
+        );
 
-      if (Math.round(distanceX) !== distanceX) {
-        let tmp = middleX / Math.round(distanceX);
-        distanceX = tmp;
-      }
-      if (Math.round(distanceY) !== distanceY) {
-        let tmp = middleY / Math.round(distanceY);
-        distanceY = tmp;
-      }
-      p5.filter(p5.GRAY);
-      p5.noLoop();
-    };
-    p5.draw = function () {
-      p5.clear();
-      p5.background(p5.random(pallete) + "A0");
-      Q1 = new Quadrant(
-        p5,
-        0,
-        0,
-        middleX,
-        middleY,
-        distanceX,
-        distanceY,
-        aspectRatio,
-        pallete,
-      );
+        Q2 = new Quadrant(
+          p5,
+          middleX,
+          0,
+          p5.width,
+          middleY,
+          distanceX,
+          distanceY,
+          aspectRatio,
+          pallete,
+        );
+        Q3 = new Quadrant(
+          p5,
+          0,
+          middleY,
+          middleX,
+          p5.height,
+          distanceX,
+          distanceY,
+          aspectRatio,
+          pallete,
+        );
+        Q4 = new Quadrant(
+          p5,
+          middleX,
+          middleY,
+          p5.width,
+          p5.height,
+          distanceX,
+          distanceY,
+          aspectRatio,
+          pallete,
+        );
 
-      Q2 = new Quadrant(
-        p5,
-        middleX,
-        0,
-        p5.width,
-        middleY,
-        distanceX,
-        distanceY,
-        aspectRatio,
-        pallete,
-      );
-      Q3 = new Quadrant(
-        p5,
-        0,
-        middleY,
-        middleX,
-        p5.height,
-        distanceX,
-        distanceY,
-        aspectRatio,
-        pallete,
-      );
-      Q4 = new Quadrant(
-        p5,
-        middleX,
-        middleY,
-        p5.width,
-        p5.height,
-        distanceX,
-        distanceY,
-        aspectRatio,
-        pallete,
-      );
+        Q1.draw();
+        Q2.draw();
+        Q3.draw();
+        Q4.draw();
+      };
 
-      Q1.draw();
-      Q2.draw();
-      Q3.draw();
-      Q4.draw();
-    };
+      p5.windowResized = function () {
+        const w = canvasContainer?.clientWidth;
+        const h = canvasContainer?.clientHeight;
+        p5.resizeCanvas(w, h);
 
-    p5.windowResized = function () {
-      const w = mainContainer?.clientWidth;
-      const h = canvasContainer?.offsetHeight;
-      p5.resizeCanvas(w, h);
+        middleY = p5.height / 2;
+        middleX = p5.width / 2;
+        aspectRatio = p5.height / p5.width;
+        distanceX = Math.round(middleX / distance);
+        distanceY = Math.round(middleY / distance);
 
-      middleY = p5.height / 2;
-      middleX = p5.width / 2;
-      aspectRatio = p5.height / p5.width;
-      distanceX = Math.round(middleX / distance);
-      distanceY = Math.round(middleY / distance);
+        p5.clear();
+        p5.redraw();
+      };
+    });
 
-      p5.clear();
-      p5.redraw();
-    };
-  });
+    gsap.from(".canvas-container", {
+      autoAlpha: 0,
+      duration: 2.5,
+    });
 
-  gsap.from(".canvas-container", {
-    autoAlpha: 0,
-    duration: 2.5,
-  });
+    let arrowAnimation = gsap.to(arrowIcon, {
+      ease: "sine.inOut",
+      // paused: true,
+      // rotate: "-405deg",
+      rotate: "360deg",
+      // repeat: -1,
+      overwrite: true,
+      // scale: 3,
+    });
 
-  let arrowAnimation = gsap.to(arrowIcon, {
-    ease: "sine.inOut",
-    // paused: true,
-    // rotate: "-405deg",
-    rotate: "360deg",
-    // repeat: -1,
-    overwrite: true,
-    // scale: 3,
-  });
+    descriptionLink?.addEventListener("mouseenter", () =>
+      arrowAnimation.play(),
+    );
+    descriptionLink?.addEventListener("mouseleave", () =>
+      arrowAnimation.reverse(),
+    );
+  </script>
 
-  descriptionLink?.addEventListener("mouseenter", () => arrowAnimation.play());
-  descriptionLink?.addEventListener("mouseleave", () =>
-    arrowAnimation.reverse(),
-  );
-</script>
-
-<!-- <div
+  <!-- <div
 class="draw-description flex w-full flex-col items-center justify-center gap-[1px] border-[1px] border-pure-black bg-pure-black outline outline-[1px] outline-offset-1 dark:border-pure-white dark:bg-pure-white md:grid-flow-col md:gap-[2px] md:border-2 md:outline-2 md:outline-offset-2"
 >
 <div
@@ -238,3 +251,4 @@ class="draw-description flex w-full flex-col items-center justify-center gap-[1p
   </div>
 </div>
 </div> -->
+</section>

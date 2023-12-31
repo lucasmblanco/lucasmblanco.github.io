@@ -2,48 +2,45 @@
 
 ---
 
-<footer
-  class="fixed bottom-0 left-0 w-full bg-pure-white text-smoll text-pure-black shadow-footer-light dark:bg-pure-black dark:text-pure-white dark:shadow-footer md:text-sm"
->
-  <hr
-    class="footer-anim border-t-[1px] border-pure-black/75 dark:border-pure-white/75"
-  />
-  <div class="mx-auto grid w-[98%] grid-flow-col justify-between p-2 md:p-4">
-    <ul class="grid grid-flow-col gap-2 md:gap-4">
-      <li class="text-anim-reverse">
-        <a
-          href="https://www.linkedin.com/in/lucas-matias-blanco/"
-          class="hover-effect"
-          ><span class="text-anim-reverse">linkedin</span><span
-            class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
-          ></span></a
+<footer class="mx-auto grid w-[calc(100vw_-_10%)] max-w-[1000px]">
+  <div class="grid grid-cols-2 py-4 text-xs md:text-base">
+    <div class="grid gap-2 md:gap-0">
+      <div class="grid grid-flow-col items-center justify-start gap-[2px]">
+        <button onclick="copyContent()" class="footer-link">email</button><span
+          class="button-msg text-xxs opacity-50 before:content-['{'] after:content-['}'] md:text-xs"
+          >tocá para copiar</span
         >
-      </li>
-      <li class="text-anim-reverse">
-        <a href="https://github.com/lucasmblanco" class="hover-effect"
-          ><span class="text-anim-reverse">github</span><span
-            class="underline-el absolute bottom-0 left-0 block h-[1px] bg-pure-black dark:bg-pure-white"
-          ></span></a
-        >
-      </li>
-    </ul><p class="text-anim-reverse">córdoba, argentina</p>
+      </div>
+      <a href="$" class="footer-link">whatsapp</a>
+    </div>
+    <div class="grid justify-end gap-2 md:gap-0">
+      <a
+        href="https://github.com/lucasmblanco"
+        class="footer-link justify-self-end"
+      >
+        github</a
+      >
+      <a
+        href="https://www.linkedin.com/in/lucas-matias-blanco/"
+        class="footer-link justify-self-end"
+      >
+        linkedin</a
+      >
+    </div>
   </div>
+  <p class="text-center text-xxs opacity-50 md:text-sm">
+    Hecho con mucho &#129481; desde Córdoba, Argentina.
+  </p>
 </footer>
-<script>
-  import { gsap } from "gsap";
-  gsap.from(".footer-anim", {
-    rotation: 0.01,
-    duration: 1,
-    x: "-100%",
-    opacity: 0,
-    ease: "power1.inOut",
-  });
+<script is:inline>
+  const buttonMsg = document.querySelector(".button-msg");
 
-  gsap.from(".text-anim-reverse", {
-    rotation: 0.01,
-    duration: 1,
-    x: 300,
-    opacity: 0,
-    ease: "power1.inOut",
-  });
+  const copyContent = async () => {
+    try {
+      await navigator.clipboard.writeText("lucasmatiasblanco@outlook.com");
+      buttonMsg.textContent = "copied to the clipboard";
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
 </script>

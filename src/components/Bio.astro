@@ -1,89 +1,67 @@
 ---
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import profileImage from "../images/thelastone.svg";
-import Icon from "astro-icon";
 import { Image } from "astro:assets";
+
+// import Icon from "astro-icon";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+// import me from "../images/me.png";
+import profileImage from "../images/thelastone.svg";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// BAJAR CON EL MOUSE LA IMAGEN HACIA ABAJO
-// class="box-container relative grid h-fit grid-flow-col gap-2 text-xs"
-//  class="profile-image relative w-[600px] self-start rounded-lg saturate-0 md:w-7"
-// og https://res.cloudinary.com/du8wo1cxh/image/upload/v1700173905/ax1ndgvpapg6ht7rebry.jpg
-// md:grid-flow-col md:grid-cols-2
 ---
 
-<div class="grid items-center justify-center text-xs">
-  <div class="grid md:grid-flow-col">
-    <h3
-      id="bio-title"
-      class="row-start-1 block py-4 text-left font-clash text-2xl font-bold md:hidden"
-    >
+<section id="aboutme" class="grid gap-4 md:grid-cols-2 md:px-4">
+  <!-- <h3
+    id="bio-title"
+    class="title w-full py-4 font-clash text-4xl font-semibold"
+  >
+    ¿Quien soy?
+  </h3> -->
+  <!-- <div class="grid md:grid-cols-2"> -->
+
+  <!-- <h3 class="block text-left font-clash text-2xl font-bold md:hidden">
       {t("bio.gretting")}
-    </h3>
-    <article class="">
-      <h3
-        id="bio-title"
-        class="row-start-1 hidden text-left font-clash text-6xl font-bold md:block"
-      >
-        {t("bio.gretting")}
-      </h3>
-      <!-- <h3
-        id="bio-title"
-        class="font-basteleur-moon hidden text-center text-5xl md:block md:text-left"
-      >
-        {t("bio.gretting")}
-      </h3> -->
-      <div
-        class="bio-standard-anim whitespace-pre-line text-left text-sm md:text-lg"
-      >
-        <p>
-          {t("bio.p1")}
-        </p>
-        <p>
-          {t("bio.p2")}
-        </p>
-      </div>
-      <article class="grid gap-2">
-        <h3 class="text-left font-clash text-xl font-semibold" id="tech-title">
-          Tecnologias que uso
-        </h3>
-        <div class="bio-standard-anim w-56">
-          <p class="inline-block">
-            <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
-          </p>
-          <p class="inline-block">
-            <span>lorem</span>lorem<span>lorem</span>lorem
-          </p>
-          <p class="inline-block">
-            <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
-          </p>
-          <p class="inline-block">
-            <span>lorem</span>lorem<span>lorem</span>
-          </p>
-        </div>
-      </article>
-    </article>
-    <!-- class="row-start-2 md:row-start-1 " -->
-    <!-- src="https://res.cloudinary.com/du8wo1cxh/image/upload/v1701712541/output-onlinepngtools_3_woxkog.png" -->
-    <div
-      class="profile-bio row-start-2 aspect-video w-full bg-transparent dark:bg-pure-white md:row-start-1 md:aspect-auto"
-    >
-      <!-- <Fragment set:html={profileImage} /> -->
-      <img
-        src={profileImage}
-        alt=""
-        class="bio-img relative aspect-video h-full w-fit justify-self-end object-cover object-m-position dark:bg-pure-white md:aspect-auto"
-      />
-    </div>
+    </h3> -->
+  <article>
+    <p class="whitespace-pre-wrap text-center text-xxs md:text-left md:text-lg">
+      {t("bio.p1")}
+    </p>
+  </article>
+
+  <div
+    class="bio-img grid aspect-video w-full place-content-center [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)] md:aspect-auto"
+  >
+    <Image
+      src={profileImage}
+      alt=""
+      class="relative aspect-video h-full bg-pure-white object-cover object-m-position md:aspect-auto"
+    />
   </div>
 
-  <!-- <section class="grid h-full items-center gap-5">
-   
-   
-  </section> -->
-</div>
+  <!-- <div class="grid gap-2"> -->
+  <!-- <h3
+      id="bio-title"
+      class="w-full px-2 py-4 font-clash text-4xl font-semibold"
+      id="tech-title"
+    >
+      ¿Que uso?
+    </h3> -->
+  <!-- <div class="bio-standard-anim">
+      <p class="inline-block">
+        <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
+      </p>
+      <p class="inline-block">
+        <span>lorem</span>lorem<span>lorem</span>lorem
+      </p>
+      <p class="inline-block">
+        <span>lorem</span>lorem<span>lorem</span>lorem<span>lorem</span>
+      </p>
+      <p class="inline-block">
+        <span>lorem</span>lorem<span>lorem</span>
+      </p>
+    </div> -->
+  <!-- </div> -->
+</section>
 <style></style>
 <script>
   import { gsap } from "gsap";
@@ -92,32 +70,34 @@ const t = useTranslations(lang);
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const title = new SplitType("#bio-title");
-  const techTitle = new SplitType("#tech-title");
+  // const title = new SplitType("#bio-title");
+  // const techTitle = new SplitType("#tech-title");
 
-  gsap.from(".bio-img", {
+  gsap.to(".bio-img", {
     scrollTrigger: {
       trigger: ".bio-img",
-      toggleActions: "play none none none",
+      toggleActions: "play none none reverse",
       start: "center bottom",
     },
-    opacity: 0,
-    ease: "sine.inOut",
+    // opacity: 0,
+    clipPath: "polygon(0 0, 100% 5%, 100% 100%, 0 95%)",
+    ease: "power3.inOut",
     delay: 0.1,
+    duration: 2,
   });
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".bio-standard-anim",
-      toggleActions: "play none none none",
-      start: "center bottom",
-    },
-  });
+  // const tl = gsap.timeline({
+  //   scrollTrigger: {
+  //     trigger: ".bio-standard-anim",
+  //     toggleActions: "play none none none",
+  //     start: "center bottom",
+  //   },
+  // });
 
   gsap.from(".char", {
     scrollTrigger: {
       trigger: ".bio-img",
-      toggleActions: "play none none none",
+      toggleActions: "play none none reverse",
       start: "center bottom",
     },
     opacity: 0,
@@ -128,12 +108,39 @@ const t = useTranslations(lang);
     duration: 0.3,
   });
 
-  tl.from(".bio-standard-anim", {
-    rotation: 0.01,
-    y: 50,
-    opacity: 0,
-    ease: "sine.inOut",
-    stagger: 0.3,
-    delay: 1,
-  });
+  // tl.from(".bio-standard-anim", {
+  //   rotation: 0.01,
+  //   y: 50,
+  //   opacity: 0,
+  //   ease: "sine.inOut",
+  //   stagger: 0.3,
+  //   delay: 1,
+  // });
+
+  // gsap.from(".title", {
+  //   scrollTrigger: {
+  //     trigger: ".title",
+  //     start: "center bottom",
+  //   },
+  //   autoAlpha: 0,
+  //   // scale: 0.5,
+  //   // transformOrigin: "50% 50%",
+  //   y: 300,
+  //   ease: "sine.inOut",
+  // });
+
+  // let sections = gsap.utils.toArray(".scroll-section");
+
+  // sections.forEach((section) => {
+  //   gsap.to(".scroll-section", {
+  //     scrollTrigger: {
+  //       trigger: ".scroll-section",
+  //       start: "top bottom",
+  //       end: "bottom bottom",
+  //       scrub: true,
+  //     },
+  //     yPercent: -100,
+  //     ease: "none",
+  //   });
+  // });
 </script>

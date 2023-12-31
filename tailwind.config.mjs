@@ -7,13 +7,16 @@ export default {
 	theme: {
 	 
 		extend: {
+			backgroundImage: {
+				'conic-gradient': 'repeating-conic-gradient(from 0deg, hsl(150, 7%, 6%) 0% 25%, transparent 25% 50%, hsl(150, 7%, 6%) 50% 75%, transparent 75% 100%) 1px 0.5px / 2px 2px',
+			},
 			dropShadow: {
 				light: '0 25px 25px hsl(54, 100%, 94% / 25%)',
 				dark: '0 25px 25px hsl(150, 7%, 6% / 25%)'
 			}, 
 
 			fontSize: {
-				smoll: '0.5rem', 
+				smoll: '0.45rem', 
 				xxs: '0.6rem'
 			}, 
 			boxShadow: {
@@ -36,23 +39,15 @@ export default {
 				'toki-nezu': 'hsl(340, 25%, 86%)',
 				'pure-black': 'hsl(150, 7%, 6%)', 
 				'pure-white': 'hsl(54, 100%, 94%)',
+				// 'pure-white': '#fffffe',
 				// 'pure-white': 'rgba(231,231,231,255)', ---> grey apple
 				// 'pure-white': '#fafafa',
 				al: 'hsl(158, 12%, 62%)',
 				'dark-grey': 'rgba(153,155,158,255)'
 			},
 			fontFamily: {
-				sans: ["InterVariable", "Inter", ...defaultTheme.fontFamily.sans],
-				'roboto-mono': ['Roboto Mono', ...defaultTheme.fontFamily.sans],
-				lora: ["Lora Variable", ...defaultTheme.fontFamily.serif], 
-				silk: ["Silkscreen", ...defaultTheme.fontFamily.serif], 
-				young: ['Young Serif', ...defaultTheme.fontFamily.serif], 
-				system: ['sysfontc', ...defaultTheme.fontFamily.sans],
-				chicago: ['chicagoflfregular', ...defaultTheme.fontFamily.sans],
-				ft88: ['FT88', ...defaultTheme.fontFamily.serif],
-				source: ['Source Code Pro Variable', ...defaultTheme.fontFamily.sans], 
-				archivo: ['Archivo', ...defaultTheme.fontFamily.serif], 
-				clash: ['ClashDisplay', ...defaultTheme.fontFamily.sans]
+				oi: ['oi', ...defaultTheme.fontFamily.sans], 
+				inconsolata: ['inconsolata', ...defaultTheme.fontFamily.serif],
 				
 				
 			},

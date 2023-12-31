@@ -16,11 +16,11 @@ export const ui = {
     'nav.contact': 'hablemos',
     'header.light-toggle': 'oscuro',
     'header.dark-toggle': 'claro',
-    'bio.gretting': '¡Hola, soy Lucas!', 
+    'bio.gretting': 'Me llamo Lucas,', 
     'bio.p1': p1Spanish, 
     'bio.p2': p2Spanish,
     'projects.title': 'Proyectos', 
-    'projects.subtitle': 'y otras cosas.'
+    'projects.subtitle': 'y cosas copadas.'
     
 },
     en: {

@@ -1,12 +1,17 @@
 ---
-import { Icon } from "astro-icon";
+// import { Image } from "astro:assets";
+// import { Icon } from "astro-icon";
 
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+// import enemy from "../images/weird.png";
 import supabase from "../lib/supabase";
-import monsterA1 from "../images/monsterA1.svg";
-import pumpkin1 from "../images/Pumpkin1.png";
+import Table from "./Table.tsx";
+// import TableData from "./TableBody";
+// import Tech from "./tech.astro";
 
-const { data: projects, error } = await supabase
+// const { data: projects, error } = await supabase
+
+const { data: projects } = await supabase
   .from("projects")
   .select("*")
   .order("id", { ascending: false });
@@ -16,12 +21,12 @@ let startPosition = 0;
 
 if (projects) {
   for (let i = 0; i < projects?.length; i++) {
+    if (i === projects.length - 1) {
+      tableBody.push([...projects.slice(startPosition, i + 1)]);
+    }
     if (i % 6 === 0 && i !== 0) {
       tableBody.push([...projects.slice(startPosition, i)]);
       startPosition = i;
-    }
-    if (i === projects.length - 1) {
-      tableBody.push([...projects.slice(startPosition, i)]);
     }
   }
 }
@@ -30,36 +35,36 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="flex flex-col border border-pure-black">
-  <table
+<section
+  class="z-40 flex w-full flex-col bg-pure-white dark:bg-pure-black"
+  id="projects"
+>
+  <!-- <h3 id="bio-title" class="w-full px-2 py-4 font-clash text-2xl font-semibold">
+    ¿Que hice?
+  </h3> -->
+  <Table
+    title={t("projects.title")}
+    subtitle={t("projects.subtitle")}
+    data={tableBody}
+    client:only="react"
+  />
+  <!-- <table
     align="center"
     id="projects"
     class="w-full table-auto border-collapse select-none"
   >
-    <thead>
-      <tr class="header text-center">
-        <th
-          class="border border-transparent border-b-pure-black px-2 py-6 text-left font-clash text-lg"
-          colspan="5"
-          ><div class="flex items-center gap-2">
-            <!-- <Icon
-              name="ghostie"
-              width="40"
-              class="project-ghost inline-block"
-            /> -->
-            <!-- <div class="icon-container bg w-40"></div> -->
-            <img src="" alt="" class="icon-container" />
-            <span class="uppercase md:text-3xl">{t("projects.title")}</span>
-            <span class="text-sm">{t("projects.subtitle")}</span>
-          </div></th
-        >
-      </tr>
-    </thead>
-    {
+    <thead> </thead>
+    <TableData tableBodyData={tableBody} client:load /> -->
+  <!-- {
       tableBody.map((data, i) => (
-        <tbody data-tb={i} class="hidden text-sm italic md:text-lg">
+        <tbody
+          data-tb={i}
+          class={` ${
+            i === 0 ? "relative table-row-group" : "absolute hidden"
+          } text-xs italic md:text-lg`}
+        >
           {data.map((project) => (
-            <tr class="bg-transparent transition-all hover:bg-pure-black hover:text-pure-white">
+            <tr class="bg-transparent transition-all hover:bg-pure-black hover:text-pure-white dark:hover:bg-pure-white dark:hover:text-pure-black">
               <td class="py-2">
                 <span class="px-2 font-clash text-sm font-bold not-italic">
                   #{project.id}
@@ -69,7 +74,11 @@ const t = useTranslations(lang);
                 <span>{project.name}</span>
               </td>
               <td class="hidden w-fit px-2 text-left text-xs  md:table-cell">
-                <span>{project.tech.toString()}</span>
+                <div class="flex gap-1">
+                  {project.tech.map((t) => (
+                    <Tech name={t} />
+                  ))}
+                </div>
               </td>
               <td class="w-fit px-2  ">
                 <a href={project.demo_link} target="_blank">
@@ -89,84 +98,74 @@ const t = useTranslations(lang);
           ))}
         </tbody>
       ))
-    }
-    <!-- {
-      projects?.map((project) => (
-        <tr>
-          <td class="w-fit p-2 text-left">
-            <span class=" whitespace-nowrap">{project.name}</span>
-          </td>
-          <td class="hidden w-fit px-2 text-left text-xs md:table-cell">
-            <span class="whitespace-nowrap">{project.tech.toString()}</span>
-          </td>
-          <td class="w-fit px-2 text-xs ">
-            <a href={project.demo_link} target="_blank">
-              <span class="hover:brightness-175 flex items-center">
-                Demo <Icon name="external-link" width="10" />
-              </span>
-            </a>
-          </td>
-          <td class="w-fit px-2 text-xs">
-            <a href={project.source_link} target="_blank">
-              <span class="hover:brightness-175 flex items-center">
-                Source <Icon name="external-link" width="10" />
-              </span>
-            </a>
-          </td>
-        </tr>
-      ))
     } -->
-  </table>
-  <div
-    class="flex w-full justify-center gap-2 border border-transparent border-t-pure-black py-2"
-  >
-    {tableBody.map((_, i) => <button data-buttontb={i}>{i + 1}</button>)}
-  </div>
+  <!-- </table> -->
 </section>
-<style is:global>
-  /* :root {
-    --icon-margin: 0.5rem;
-  }
 
-  @media (min-width: 768px) {
-    tr:not(.header):hover::after {
-      content: "<<";
-      display: inline-block;
-      position: absolute;
-      margin-inline: 0.5rem;
-      margin-block: var(--icon-margin);
-      font-family: "Silkscreen", sans-serif;
-    }
-  } */
-</style>
-<script>
+<!-- <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import SplitType from "split-type";
-  // import pnk1 from "../images/Pumpkin1.png";
-  // import pnk2 from "../images/Pumpkin2.png";
 
   const tbodys = document.querySelectorAll("[data-tb]");
   const buttons = document.querySelectorAll("[data-buttontb");
-  const iconsContainer = document.querySelector(".icon-container");
 
-  // gsap.fromTo(
-  //   iconsContainer,
-  //   { attr: { src: pnk1 } },
-  //   { attr: { src: pnk2 }, repeat: -1 },
-  // );
+  gsap.to(".character", {
+    repeat: -1,
+    x: -360,
+    ease: "steps(8)",
+    duration: 1,
+  });
 
-  tbodys[0].style.display = "table-row-group";
+  // tbodys[0].style.position = "relative";
+
   buttons[0].style.textDecorationLine = "underline";
+
+  const tl2 = gsap.timeline();
 
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
+      const tables = document.querySelectorAll("[data-tb]");
+      buttons.forEach((button) => (button.style.textDecorationLine = "none"));
+      e.target.style.textDecorationLine = "underline";
       tbodys.forEach((table) => {
-        if (table.dataset.tb === e.target.dataset.buttontb) {
-          table.style.display = "table-row-group";
-          button.style.textDecorationLine = "underline";
-        } else {
-          table.style.display = "none";
+        if (
+          table.dataset.tb !== e.target.dataset.buttontb &&
+          window.getComputedStyle(table, null).display !== "none"
+        ) {
+          tl2.fromTo(
+            table,
+            {
+              xPercent: 0,
+            },
+            {
+              xPercent: -100,
+              display: "none",
+              position: "absolute",
+            },
+          );
+        }
+      });
+      tbodys.forEach((table) => {
+        if (
+          table.dataset.tb === e.target.dataset.buttontb &&
+          window.getComputedStyle(table, null).display === "none"
+        ) {
+          console.log("HOLA ELSE IF ");
+          tl2.fromTo(
+            table,
+            {
+              xPercent: 100,
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              xPercent: 0,
+              display: "table-row-group",
+              position: "relative",
+            },
+            "<",
+          );
         }
       });
     });
@@ -212,4 +211,4 @@ const t = useTranslations(lang);
     rotation: `-=${gsap.utils.random(1, 3)}`,
     duration: 2,
   });
-</script>
+</script> -->

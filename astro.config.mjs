@@ -5,8 +5,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'http://lucasblanco.me',
-  
+  site: 'https://lucasblanco.me',
   integrations: [tailwind(), react({
     experimentalReactChildren: true,
   })]

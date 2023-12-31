@@ -5,8 +5,8 @@
 @font-face {
   font-family: "oi";
   src:
-    url("oi-regular-webfont.woff2") format("woff2"),
-    url("oi-regular-webfont.woff") format("woff");
+    url("/oi-regular-webfont.woff2") format("woff2"),
+    url("/oi-regular-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -14,8 +14,8 @@
 @font-face {
   font-family: "inconsolata";
   src:
-    url("inconsolata-variablefont_wdthwght-webfont.woff2") format("woff2"),
-    url("inconsolata-variablefont_wdthwght-webfont.woff") format("woff");
+    url("/inconsolata-variablefont_wdthwght-webfont.woff2") format("woff2"),
+    url("/inconsolata-variablefont_wdthwght-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

@@ -1,10 +1,9 @@
-import { p1 as p1English, p2 as p2SEnglish }  from '../content/en/bio-paragraphs'; 
-import { p1 as p1Spanish, p2 as p2Spanish }  from '../content/es/bio-paragraphs'; 
+import { p1 as p1English}  from '../content/en/bio-paragraphs'; 
+import { p1 as p1Spanish}  from '../content/es/bio-paragraphs'; 
 
 export const languages = {
     es: 'Español',
     en: 'English',
-   
   };
   
   export const defaultLang = 'es';
@@ -18,7 +17,7 @@ export const ui = {
     'header.dark-toggle': 'claro',
     'bio.gretting': 'Me llamo Lucas,', 
     'bio.p1': p1Spanish, 
-    'bio.p2': p2Spanish,
+ 
     'projects.title': 'Proyectos', 
     'projects.subtitle': 'y cosas copadas.'
     
@@ -30,7 +29,7 @@ export const ui = {
       'header.dark-toggle': 'light', 
       'bio.gretting': "Hi, I'm Lucas!", 
       'bio.p1': p1English, 
-      'bio.p2': p2SEnglish, 
+    
       'projects.title': 'Projects', 
       'projects.subtitle': 'and other stuffs.'  
     },

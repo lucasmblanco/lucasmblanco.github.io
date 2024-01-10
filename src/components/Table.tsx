@@ -8,6 +8,8 @@ export default function Table({ title, subtitle, data }) {
   
   const handlePageChange = (newPage) => setCurrentPage(newPage);
   
+
+
   return (
       <>
       <table className="w-full table-auto border-collapse select-none overflow-hidden text-base border-y border-y-pure-black dark:border-y-pure-white">

@@ -36,15 +36,9 @@ export default function tableBody({ data, index, currentPage }) {
     Number(currentPage) === index && <tbody
     ref={currentTable}
     data-tb={index}
-    className="">
+    >
     {data.map((project) => (
-   
          <tr  key={Math.random()} className="bg-transparent  transition-all group data-hover-effect ">
-        {/* <td className=" py-6">
-          <span className=" not-italic text-xxs">
-            #{project.id}
-          </span>
-        </td> */}
         <td className="py-6 md:text-center">
           <span>{project.name}</span>
         </td>
@@ -55,7 +49,7 @@ export default function tableBody({ data, index, currentPage }) {
             ))}
           </div>
         </td>
-        <td className="">
+        <td >
           <a href={project.demo_link} target="_blank">
             <span className="hover:brightness-175 flex items-center ">
               Demo

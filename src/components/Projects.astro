@@ -39,67 +39,12 @@ const t = useTranslations(lang);
   class="z-40 flex w-full flex-col bg-pure-white dark:bg-pure-black"
   id="projects"
 >
-  <!-- <h3 id="bio-title" class="w-full px-2 py-4 font-clash text-2xl font-semibold">
-    ¿Que hice?
-  </h3> -->
   <Table
     title={t("projects.title")}
     subtitle={t("projects.subtitle")}
     data={tableBody}
     client:only="react"
   />
-  <!-- <table
-    align="center"
-    id="projects"
-    class="w-full table-auto border-collapse select-none"
-  >
-    <thead> </thead>
-    <TableData tableBodyData={tableBody} client:load /> -->
-  <!-- {
-      tableBody.map((data, i) => (
-        <tbody
-          data-tb={i}
-          class={` ${
-            i === 0 ? "relative table-row-group" : "absolute hidden"
-          } text-xs italic md:text-lg`}
-        >
-          {data.map((project) => (
-            <tr class="bg-transparent transition-all hover:bg-pure-black hover:text-pure-white dark:hover:bg-pure-white dark:hover:text-pure-black">
-              <td class="py-2">
-                <span class="px-2 font-clash text-sm font-bold not-italic">
-                  #{project.id}
-                </span>
-              </td>
-              <td class="w-fit px-2 text-left">
-                <span>{project.name}</span>
-              </td>
-              <td class="hidden w-fit px-2 text-left text-xs  md:table-cell">
-                <div class="flex gap-1">
-                  {project.tech.map((t) => (
-                    <Tech name={t} />
-                  ))}
-                </div>
-              </td>
-              <td class="w-fit px-2  ">
-                <a href={project.demo_link} target="_blank">
-                  <span class="hover:brightness-175 flex items-center md:text-sm">
-                    Demo <Icon name="external-link" width="10" />
-                  </span>
-                </a>
-              </td>
-              <td class="w-fit px-2 ">
-                <a href={project.source_link} target="_blank">
-                  <span class="hover:brightness-175 flex items-center md:text-sm">
-                    Source <Icon name="external-link" width="10" />
-                  </span>
-                </a>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      ))
-    } -->
-  <!-- </table> -->
 </section>
 
 <!-- <script>

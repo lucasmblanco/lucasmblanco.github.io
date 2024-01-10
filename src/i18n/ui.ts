@@ -29,7 +29,6 @@ export const ui = {
       'header.dark-toggle': 'light', 
       'bio.gretting': "Hi, I'm Lucas!", 
       'bio.p1': p1English, 
-    
       'projects.title': 'Projects', 
       'projects.subtitle': 'and other stuffs.'  
     },

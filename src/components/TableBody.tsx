@@ -51,7 +51,7 @@ export default function tableBody({ data, index, currentPage }) {
         </td>
         <td >
           <a href={project.demo_link} target="_blank">
-            <span className="hover:brightness-175 flex items-center ">
+            <span className="hover:brightness-175 flex justify-end items-center md:justify-start">
               Demo
               <MemoExternalLink/>
             </span>
@@ -59,7 +59,7 @@ export default function tableBody({ data, index, currentPage }) {
         </td>
         <td className="  ">
           <a href={project.source_link} target="_blank">
-            <span className="hover:brightness-175 flex items-center ">
+            <span className="hover:brightness-175 flex justify-end items-center md:justify-start">
               Source
               <MemoExternalLink/>
             </span>

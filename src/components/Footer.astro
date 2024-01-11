@@ -1,5 +1,8 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <footer class="mx-auto grid w-[calc(100vw_-_10%)] max-w-[1000px]">
@@ -8,10 +11,12 @@
       <div class="grid grid-flow-col items-center justify-start gap-[2px]">
         <button onclick="copyContent()" class="footer-link">email</button><span
           class="button-msg text-xxs opacity-50 before:content-['{'] after:content-['}'] md:text-xs"
-          >tocá para copiar</span
+          >{t("email.message")}</span
         >
       </div>
-      <a href="$" class="footer-link" target="_blank">whatsapp</a>
+      <a href="https://wa.link/7y4o7i" class="footer-link" target="_blank"
+        >whatsapp</a
+      >
     </div>
     <div class="grid gap-2 md:gap-0">
       <a
@@ -45,7 +50,11 @@
   const copyContent = async () => {
     try {
       await navigator.clipboard.writeText("lucasmatiasblanco@outlook.com");
-      buttonMsg.textContent = "copied to the clipboard";
+      if (window.location.pathname.match(/en/)) {
+        buttonMsg.textContent = "copied to the clipboard";
+      } else {
+        buttonMsg.textContent = "copiado al portapapeles";
+      }
     } catch (err) {
       console.error("Failed to copy: ", err);
     }

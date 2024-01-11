@@ -1,10 +1,13 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="grid gap-4 md:grid-cols-2 md:px-4">
   <div class="grid gap-2 text-center text-xs dark:text-pure-black md:text-base">
-    <div class="marquee relative flex select-none overflow-hidden">
+    <div class="marquee relative flex select-none overflow-hidden bg-[#a3a380]">
       <ul
         class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#a3a380]"
       >
@@ -25,7 +28,7 @@
         <li>TYPESCRIPT</li>
       </ul>
     </div>
-    <div class="marquee relative flex select-none overflow-hidden">
+    <div class="marquee relative flex select-none overflow-hidden bg-[#d6ce93]">
       <ul
         class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d6ce93] px-2"
       >
@@ -44,7 +47,7 @@
         <li>TAILWINDCSS</li>
       </ul>
     </div>
-    <div class="marquee relative flex select-none overflow-hidden">
+    <div class="marquee relative flex select-none overflow-hidden bg-[#efebce]">
       <ul
         class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#efebce] px-2"
       >
@@ -59,7 +62,7 @@
         <li>VUE.JS</li>
       </ul>
     </div>
-    <div class="marquee relative flex select-none overflow-hidden">
+    <div class="marquee relative flex select-none overflow-hidden bg-[#d8a48f]">
       <ul
         class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d8a48f] px-2"
       >
@@ -76,7 +79,7 @@
         <li>POSTGRESQL</li>
       </ul>
     </div>
-    <div class="marquee relative flex select-none overflow-hidden">
+    <div class="marquee relative flex select-none overflow-hidden bg-[#bb8588]">
       <ul
         class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#bb8588] px-2"
       >
@@ -99,19 +102,13 @@
     </div>
   </div>
   <p class="text-center text-xxs md:text-right md:text-lg">
-    Voy experimentando con diferentes tecnologias para poder tener un abanico
-    cada vez más amplio de posibles soluciones a la hora de abordar un problema;
-    sin importar si es relacionado al front o al back, considero que es
-    importante aprender el funcionamiento de las tecnologías desde ambas
-    perspectivas para así lograr que su aplicación sea más óptima. Esto también
-    me permite tener flexibilidad para incorporar rapidamente nuevos
-    conocimientos.
+    {t("tech.p1")}
   </p>
 </section>
 
 <style>
   .marquee {
-    --gap: 0.001rem;
+    --gap: 0.0001rem;
     gap: var(--gap);
   }
 

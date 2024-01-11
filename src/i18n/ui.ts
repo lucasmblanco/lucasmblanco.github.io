@@ -1,5 +1,8 @@
-import { p1 as p1English}  from '../content/en/bio-paragraphs'; 
-import { p1 as p1Spanish}  from '../content/es/bio-paragraphs'; 
+import { p1 as bioEn } from '../content/en/bio-paragraphs'; 
+import { p1 as techEn } from '../content/en/tech'; 
+import { p1 as bioEs } from '../content/es/bio-paragraphs'; 
+import { p1 as techEs } from '../content/es/tech'; 
+
 
 export const languages = {
     es: 'Español',
@@ -16,10 +19,11 @@ export const ui = {
     'header.light-toggle': 'oscuro',
     'header.dark-toggle': 'claro',
     'bio.gretting': 'Me llamo Lucas,', 
-    'bio.p1': p1Spanish, 
- 
+    'bio.p1': bioEs, 
+    'tech.p1': techEs,
     'projects.title': 'Proyectos', 
-    'projects.subtitle': 'y cosas copadas.'
+    'projects.subtitle': 'y cosas copadas.',
+    'email.message': 'tocá para copiar'
     
 },
     en: {
@@ -28,9 +32,11 @@ export const ui = {
       'header.light-toggle': 'dark',
       'header.dark-toggle': 'light', 
       'bio.gretting': "Hi, I'm Lucas!", 
-      'bio.p1': p1English, 
+      'bio.p1': bioEn, 
+      'tech.p1': techEn,
       'projects.title': 'Projects', 
-      'projects.subtitle': 'and other stuffs.'  
+      'projects.subtitle': 'and other stuffs.',
+      'email.message': 'touch to copy' 
     },
   } as const;
 

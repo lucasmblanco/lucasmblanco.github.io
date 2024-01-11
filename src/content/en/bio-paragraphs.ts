@@ -1,1 +1,3 @@
-export const p1 = "English Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis ab asperiores officia cupiditate a fugiat hic est, maxime accusantium totam alias quia. Impedit blanditiis officiis fugit odit. Reiciendis,expedita sapiente."
+export const p1 = `Since I gained access to a computer, I've always enjoyed having the possibility of exploring on my own, allowing me the opportunity to solve many problems that have arisen simply from using a device or attempting to fix issues that were causing me problems at the time.
+I feel that since I started my journey into programming, I found a tool that allows me to conceive and create solutions that are more tailored to the field of computer science. It also gives me the ability to address problems that may arise in our day-to-day lives.
+I hope to continue growing within this field, expanding my knowledge even further to apply it to increasingly broader spectrums.`

@@ -20,6 +20,8 @@ const t = useTranslations(lang);
     class="bio-img grid aspect-video w-full place-content-center [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)] md:aspect-auto"
   >
     <Image
+      decoding="async"
+      loading="lazy"
       src={profileImage}
       alt=""
       class="relative aspect-video h-full bg-pure-white object-cover object-m-position md:aspect-auto"

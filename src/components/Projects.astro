@@ -1,15 +1,8 @@
 ---
-// import { Image } from "astro:assets";
-// import { Icon } from "astro-icon";
-
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-// import enemy from "../images/weird.png";
+
 import supabase from "../lib/supabase";
 import Table from "./Table.tsx";
-// import TableData from "./TableBody";
-// import Tech from "./tech.astro";
-
-// const { data: projects, error } = await supabase
 
 const { data: projects } = await supabase
   .from("projects")

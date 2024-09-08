@@ -9,30 +9,19 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section id="aboutme" class="grid gap-4 md:grid-cols-2 md:px-4">
+<section id="aboutme" class="md:px-4">
   <article>
-    <p class="whitespace-pre-wrap text-center text-xxs md:text-left md:text-lg">
+    <p
+      class="whitespace-pre-wrap text-center text-xxs italic md:text-center md:text-base"
+    >
       {t("bio.p1")}
     </p>
   </article>
-
-  <div
-    class="bio-img grid aspect-video w-full place-content-center [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)] md:aspect-auto"
-  >
-    <Image
-      decoding="async"
-      loading="lazy"
-      src={profileImage}
-      alt=""
-      class="relative aspect-video h-full bg-pure-white object-cover object-m-position md:aspect-auto"
-    />
-  </div>
 </section>
 <style></style>
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import SplitType from "split-type";
 
   gsap.registerPlugin(ScrollTrigger);
 

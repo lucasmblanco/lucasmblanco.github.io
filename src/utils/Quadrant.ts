@@ -38,7 +38,7 @@ export default class Quadrant {
             // this.canvas.stroke('#000000');
             this.canvas.blendMode('source-over')
         //    this.canvas.stroke(this.canvas.random(this.pallete));
-            this.canvas.strokeWeight(3);
+            this.canvas.strokeWeight(1);
             this.canvas.strokeCap('butt')
             for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.a + i, this.b, this.c, this.d - i * this.aspectRatio);
@@ -48,7 +48,7 @@ export default class Quadrant {
             // this.canvas.stroke('#000000');
            this.canvas.blendMode('source-over')
         //    this.canvas.stroke(this.canvas.random(this.pallete));
-            this.canvas.strokeWeight(3);
+            this.canvas.strokeWeight(1);
             this.canvas.strokeCap('butt')
         for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.c - i, this.d, this.a, this.b + i * this.aspectRatio);
@@ -69,7 +69,7 @@ export default class Quadrant {
             // this.canvas.stroke('#000000');
            this.canvas.blendMode('source-over')
         //    this.canvas.stroke(this.canvas.random(this.pallete));
-            this.canvas.strokeWeight(3);
+            this.canvas.strokeWeight(1);
             this.canvas.strokeCap('butt')
             for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
                 this.canvas.line(this.a + i, this.d, this.c, this.b + i * this.aspectRatio);
@@ -79,7 +79,7 @@ export default class Quadrant {
             // this.canvas.stroke('#000000');
            this.canvas.blendMode('source-over')
         //    this.canvas.stroke(this.canvas.random(this.pallete));
-            this.canvas.strokeWeight(3);
+            this.canvas.strokeWeight(1);
             this.canvas.strokeCap('butt')
             for (let i = 0; i < (this.c - this.a); i += this.distanceX) {
                 this.canvas.line(this.c - i, this.b, this.a, this.d - i * this.aspectRatio);
@@ -101,7 +101,7 @@ export default class Quadrant {
         // this.canvas.stroke('#000000');
        this.canvas.blendMode('source-over')
     //    this.canvas.stroke(this.canvas.random(this.pallete));
-        this.canvas.strokeWeight(3);
+        this.canvas.strokeWeight(1);
         this.canvas.strokeCap('butt')
         for (let i = this.distanceX; i < (this.c - this.a); i += this.distanceX) {
             this.canvas.line(this.a + i, this.b, this.a + i, this.d);
@@ -113,7 +113,7 @@ export default class Quadrant {
         // this.canvas.stroke('#000000');
        this.canvas.blendMode('source-over')
         // this.canvas.stroke(this.canvas.random(this.pallete));
-        this.canvas.strokeWeight(3);
+        this.canvas.strokeWeight(1);
         this.canvas.strokeCap('butt')
         for (let i = this.distanceY; i < (this.d - this.b); i += this.distanceY ) {
                this.canvas.line(this.a, this.b + i, this.c, this.b + i);

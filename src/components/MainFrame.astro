@@ -1,72 +1,24 @@
 ---
 import MemoQuestionMark from "../icons/QuestionMark";
-// md:h-[43.7rem] md:w-[25rem] md:w-[100rem]
-// md:w-[25rem] ; h-[30rem]
-// mx-auto w-[1000px] rounded-lg px-4 md:h-[43.7rem]
-// SECTION OLD -> class="grid place-content-center gap-5 border-b-[1px] border-pure-black dark:border-pure-white md:gap-10"
+import { Icon } from "astro-icon/components";
 ---
 
-<!-- <div class="canvas-container h-[60vh] md:h-[80vh]"></div> -->
 <section
-  class="frame-section grid w-full grid-cols-1 place-content-center px-0 py-4 md:p-4"
+  class="frame-section grid w-full grid-cols-1 place-content-center px-0 py-2 md:p-4"
 >
-  <div
-    class="canvas-container h-[60vh] w-full overflow-hidden rounded-lg md:h-[80vh]"
-  >
+  <div class="canvas-container h-[60vh] w-full overflow-hidden md:h-[80vh]">
   </div>
 
-  <!-- <a
-    href="https://solvingsol.com/"
-    target="_blank"
-    class="sol-link h-fit fill-pure-black dark:fill-pure-white"
-    slot="right-icon"
-    ><Icon class="sol-icon h-2 w-2 md:h-3 md:w-3" name="question_mark" /></a
-  > -->
-  <!-- <div
-    class="grid w-full grid-cols-2 items-center justify-center gap-[1px] bg-pure-black dark:bg-pure-white md:grid-flow-col md:gap-[2px]"
-    slot="content"
+  <div
+    class="flex w-fit items-center gap-2 bg-pure-black px-2 text-xxs text-pure-white dark:bg-pure-white dark:text-pure-black md:text-sm"
   >
-    <div
-      class="grid h-full grow place-content-center bg-pure-white p-1 text-center dark:dark:bg-pure-black"
+    <span>#11 - Sol Lewitt (1969)</span>
+
+    <a href="https://solvingsol.com/" target="_blank"
+      ><Icon name="pixelarticons:external-link" /></a
     >
-      <h2 class="text-base md:text-3xl">Wall Drawing #11</h2>
-      <div class="text-xs md:text-sm">
-        <span>(1969)</span>
-        <span class="text-center">Sol LeWitt</span>
-      </div>
-    </div>
-    <div class="h-full grow bg-pure-white text-center dark:bg-pure-black">
-      <blockquote class="p-1 text-smoll md:whitespace-pre-line">
-        A wall divided horizontally and vertically into four equal parts. Within
-        each part, three of the four kinds of lines are superimposed.
-      </blockquote>
-    </div>
-  </div> -->
-  <div
-    class="grid place-content-start py-2 md:grid-cols-2 md:place-content-center"
-  >
-    <div class="text-sm md:text-base">
-      <span
-        class="bg-pure-black text-pure-white dark:bg-pure-white dark:text-pure-black"
-        >#11 Wall Drawing (1969)</span
-      >
-      <p>Sol Lewitt</p>
-
-      <a
-        href="https://solvingsol.com/"
-        target="_blank"
-        class="text-pure-black dark:text-pure-white"
-      >
-        <MemoQuestionMark /></a
-      >
-    </div>
-    <div>
-      <p class="hidden text-xs md:block md:text-base">
-        A wall divided horizontally and vertically into four equal parts. Within
-        each part, three of the four kinds of lines are superimposed.
-      </p>
-    </div>
   </div>
+
   <style></style>
   <script>
     import p5 from "p5";
@@ -75,19 +27,14 @@ import MemoQuestionMark from "../icons/QuestionMark";
     import Quadrant from "../utils/Quadrant";
 
     const canvasContainer = document.querySelector(
-      ".canvas-container",
+      ".canvas-container"
     ) as HTMLDivElement;
-    const mainContainer = document.querySelector(
-      ".frame-section",
-    ) as HTMLDivElement;
-    // const frameContainer = document.querySelector(
-    //   ".frame-container",
-    // ) as HTMLDivElement;
+
     const arrowIcon = document.querySelector(".sol-icon");
     const descriptionLink = document.querySelector(".sol-link");
 
     const h = canvasContainer?.clientHeight;
-    // const canvaBorderPx = 16;
+
     const w = canvasContainer?.clientWidth;
 
     let middleY: number;
@@ -109,7 +56,7 @@ import MemoQuestionMark from "../icons/QuestionMark";
         aspectRatio = p5.height / p5.width;
         pallete = p5.random(palletes);
         //p5.random(5)
-        distance = 5;
+        distance = 5; // the distance between the lines, default is 5
         distanceX = Math.round(middleX / distance);
         distanceY = Math.round(middleY / distance);
 
@@ -136,7 +83,7 @@ import MemoQuestionMark from "../icons/QuestionMark";
           distanceX,
           distanceY,
           aspectRatio,
-          pallete,
+          pallete
         );
 
         Q2 = new Quadrant(
@@ -148,7 +95,7 @@ import MemoQuestionMark from "../icons/QuestionMark";
           distanceX,
           distanceY,
           aspectRatio,
-          pallete,
+          pallete
         );
         Q3 = new Quadrant(
           p5,
@@ -159,7 +106,7 @@ import MemoQuestionMark from "../icons/QuestionMark";
           distanceX,
           distanceY,
           aspectRatio,
-          pallete,
+          pallete
         );
         Q4 = new Quadrant(
           p5,
@@ -170,7 +117,7 @@ import MemoQuestionMark from "../icons/QuestionMark";
           distanceX,
           distanceY,
           aspectRatio,
-          pallete,
+          pallete
         );
 
         Q1.draw();
@@ -211,44 +158,10 @@ import MemoQuestionMark from "../icons/QuestionMark";
     });
 
     descriptionLink?.addEventListener("mouseenter", () =>
-      arrowAnimation.play(),
+      arrowAnimation.play()
     );
     descriptionLink?.addEventListener("mouseleave", () =>
-      arrowAnimation.reverse(),
+      arrowAnimation.reverse()
     );
   </script>
-
-  <!-- <div
-class="draw-description flex w-full flex-col items-center justify-center gap-[1px] border-[1px] border-pure-black bg-pure-black outline outline-[1px] outline-offset-1 dark:border-pure-white dark:bg-pure-white md:grid-flow-col md:gap-[2px] md:border-2 md:outline-2 md:outline-offset-2"
->
-<div
-  class="flex w-full grow justify-end bg-pure-white p-[2px] dark:bg-pure-black"
->
-  <a
-    href="https://solvingsol.com/"
-    target="_blank"
-    class="sol-link bg-red-500 fill-pure-black dark:fill-pure-white"
-    ><Icon class="sol-icon w-2 md:w-3" name="question_mark" /></a
-  >
-</div>
-<div
-  class="flex w-full flex-col justify-center gap-[1px] md:flex-row md:gap-[2px]"
->
-  <div
-    class="grid grow place-content-center bg-pure-white p-1 text-center dark:dark:bg-pure-black"
-  >
-    <h2 class="text-base md:text-3xl">Wall Drawing #11</h2>
-    <div class="text-xs md:text-sm">
-      <span>(1969)</span>
-      <span class="text-center">Sol LeWitt</span>
-    </div>
-  </div>
-  <div class="grow bg-pure-white text-center dark:bg-pure-black">
-    <blockquote class="p-1 text-smoll md:whitespace-pre-line">
-      A wall divided horizontally and vertically into four equal parts.
-      Within each part, three of the four kinds of lines are superimposed.
-    </blockquote>
-  </div>
-</div>
-</div> -->
 </section>

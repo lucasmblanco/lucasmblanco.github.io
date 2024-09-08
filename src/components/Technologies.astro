@@ -5,11 +5,12 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="grid gap-4 md:grid-cols-2 md:px-4">
-  <div class="grid gap-2 text-center text-xs dark:text-pure-black md:text-base">
+<!-- <section class="grid gap-4 md:grid-cols-2 md:px-4"> -->
+<section class="md:px-4">
+  <div class="grid text-center text-xs dark:text-pure-black md:text-lg">
     <div class="marquee relative flex select-none overflow-hidden bg-[#a3a380]">
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#a3a380]"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#a3a380] p-3"
       >
         <li>HTML</li>
         <li>CSS</li>
@@ -18,7 +19,7 @@ const t = useTranslations(lang);
         <li>TYPESCRIPT</li>
       </ul>
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#a3a380]"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#a3a380] p-3"
         aria-hidden="true"
       >
         <li>HTML</li>
@@ -30,7 +31,7 @@ const t = useTranslations(lang);
     </div>
     <div class="marquee relative flex select-none overflow-hidden bg-[#d6ce93]">
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d6ce93] px-2"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d6ce93] p-3 px-2"
       >
         <li>ASTRO</li>
         <li>NEXT.JS</li>
@@ -38,7 +39,7 @@ const t = useTranslations(lang);
         <li>TAILWINDCSS</li>
       </ul>
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d6ce93] px-2"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d6ce93] p-3 px-2"
         aria-hidden="true"
       >
         <li>ASTRO</li>
@@ -49,39 +50,41 @@ const t = useTranslations(lang);
     </div>
     <div class="marquee relative flex select-none overflow-hidden bg-[#efebce]">
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#efebce] px-2"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#efebce] p-3 px-2"
       >
         <li>REACT</li>
-        <li>VUE.JS</li>
+        <li>SVELTE</li>
       </ul>
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#efebce] px-2"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#efebce] p-3 px-2"
         aria-hidden="true"
       >
         <li>REACT</li>
-        <li>VUE.JS</li>
+        <li>SVELTE</li>
       </ul>
     </div>
     <div class="marquee relative flex select-none overflow-hidden bg-[#d8a48f]">
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d8a48f] px-2"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d8a48f] p-3 px-2"
       >
         <li>FIREBASE</li>
         <li>MONGODB</li>
         <li>POSTGRESQL</li>
+        <li>MYSQL</li>
       </ul>
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d8a48f] px-2"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#d8a48f] p-3 px-2"
         aria-hidden="true"
       >
         <li>FIREBASE</li>
         <li>MONGODB</li>
         <li>POSTGRESQL</li>
+        <li>MYSQL</li>
       </ul>
     </div>
     <div class="marquee relative flex select-none overflow-hidden bg-[#bb8588]">
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#bb8588] px-2"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#bb8588] p-3 px-2"
       >
         <li>GIT</li>
         <li>GITHUB</li>
@@ -90,7 +93,7 @@ const t = useTranslations(lang);
         <li>FIGMA</li>
       </ul>
       <ul
-        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#bb8588] px-2"
+        class="marquee__content flex min-w-[100%] shrink-0 items-center justify-around bg-[#bb8588] p-3 px-2"
         aria-hidden="true"
       >
         <li>GIT</li>
@@ -101,9 +104,9 @@ const t = useTranslations(lang);
       </ul>
     </div>
   </div>
-  <p class="text-center text-xxs md:text-right md:text-lg">
+  <!-- <p class="text-center text-xxs md:text-right md:text-lg">
     {t("tech.p1")}
-  </p>
+  </p> -->
 </section>
 
 <style>

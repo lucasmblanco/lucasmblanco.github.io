@@ -1,35 +1,15 @@
 ---
 import MemoNavMobileIcon from "../icons/NavMobileIcon";
+import { Icon } from "astro-icon/components";
 ---
 
 <header
-  class="mx-auto flex w-[calc(100vw_-_10%)] max-w-[1000px] justify-between gap-4 border-b border-b-pure-black py-1 dark:border-b-pure-white md:py-2"
+  class="mx-auto flex w-[calc(100vw_-_10%)] max-w-[1000px] justify-between gap-4"
 >
-  <h1 class="font-oi text-base md:text-2xl">lucas</h1>
-  <button class="toggle-nav nav-mobile-icon block rotate-180 md:hidden"
-    ><MemoNavMobileIcon /></button
+  <h1 class="py-2 font-oi text-base md:text-2xl">lucas</h1>
+  <button class="toggle-nav nav-mobile-icon block md:hidden"
+    ><Icon name="pixelarticons:chevron-down" /></button
   >
-  <!-- <div class="flex w-full justify-between">
-    <div class="grid grid-cols-2 gap-2">
-      <a href="https://www.linkedin.com/in/lucas-matias-blanco/" class="">
-        <span class="">linkedin</span></a
-      >
-
-      <a href="https://github.com/lucasmblanco" class="row-start-2">
-        <span class="">github</span></a
-      >
-
-      <a href="$" class="after:absolute after:hover:content-['\u00A9']">email</a
-      >
-      <a
-        href="https://docs.google.com/document/d/1MXRM9xi3P7pAaRqdSlBUE2L902qBaqYyRsly5ULosLU/edit?usp=sharing"
-        target="_blank"
-        class=""
-      >
-        <span>cv</span>
-      </a>
-    </div>
-  </div> -->
 </header>
 <script>
   import { gsap } from "gsap";
@@ -59,112 +39,3 @@ import MemoNavMobileIcon from "../icons/NavMobileIcon";
     }
   });
 </script>
-<!-- <script>
-  import { gsap } from "gsap";
-
-  interface GSAPProps {
-    width?: string;
-    left?: string;
-    duration?: string;
-    immediateRender?: boolean;
-  }
-
-  // interface HTMLLinkElement extends HTMLLIElement {
-  //   tl: {
-  //     tweenFromTo: (pointA: number, pointB: string) => void;
-  //     play: () => void;
-  //     fromTo: (
-  //       element: Element | null,
-  //       propertieA: GSAPProps,
-  //       propertieB: GSAPProps,
-  //     ) => void;
-  //     add: (point: string) => void;
-  //   };
-  // }
-
-  // const listItems = document.querySelectorAll<HTMLLinkElement>(".hover-effect");
-
-  // function enterAnimation(item: HTMLLinkElement, e: MouseEvent) {
-  //   item.tl.tweenFromTo(0, "midway");
-  // }
-
-  // function exitAnimation(item: HTMLLinkElement, e: MouseEvent) {
-  //   item.tl.play();
-  // }
-
-  //   gsap.from(".nav-list-item", {
-  //     rotation: 0.01,
-  //     duration: 1,
-  //     y: 100,
-  //     opacity: 0,
-  //     ease: "power1.Out",
-  //     stagger: 0.3,
-  //   });
-
-  // listItems.forEach((item: HTMLLinkElement) => {
-  //   const underline = item.querySelector(".underline-el");
-
-  //   item.tl = gsap.timeline({ paused: true });
-
-  //   item.tl.fromTo(
-  //     underline,
-  //     {
-  //       width: "0%",
-  //       left: "0%",
-  //     },
-  //     {
-  //       width: "100%",
-  //       duration: ".5",
-  //     },
-  //   );
-
-  //   item.tl.add("midway");
-
-  //   item.tl.fromTo(
-  //     underline,
-  //     {
-  //       width: "100%",
-  //       left: "0%",
-  //     },
-  //     {
-  //       width: "0%",
-  //       left: "100%",
-  //       duration: ".5",
-  //       immediateRender: false,
-  //     },
-  //   );
-
-  //   item.addEventListener("mouseenter", (e) => {
-  //     enterAnimation(item, e);
-  //   });
-
-  //   item.addEventListener("mouseleave", (e) => {
-  //     exitAnimation(item, e);
-  //   });
-  // });
-  // gsap.to(".header-wrapper", {
-  //   clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-  //   ease: "power3.inOut",
-  //   delay: 0.1,
-  //   duration: 2,
-  // });
-
-  // gsap.from(".header-text-entrance", {
-  //   rotation: 0.01,
-  //   duration: 1,
-  //   x: 300,
-  //   opacity: 0,
-  //   ease: "sine.inOut",
-  //   delay: 0.5,
-  // });
-
-  // gsap.from(".header-title", {
-  //   rotation: 0.01,
-  //   duration: 1,
-  //   x: -300,
-  //   opacity: 0,
-  //   ease: "sine.inOut",
-  //   delay: 0.7,
-  //   stagger: 0.3,
-  // });
-</script> -->

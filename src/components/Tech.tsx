@@ -1,8 +1,5 @@
-// import React from 'react'
-
-export default function Tech({name}) {
+export default function Tech({name}: {name: string}) {
   return (
-   
 <span
   className="text-sm"
   >#{name}</span>

@@ -8,7 +8,9 @@ export function getLangFromUrl(url: URL) {
 
 export function useTranslations(lang: keyof typeof ui) {
   return function t(key: keyof typeof ui[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
+    const translation = ui[lang] as typeof ui[typeof defaultLang]; // Assert the type explicitly
+
+    return translation[key] || ui[defaultLang][key]; // Access with type confidence
   }
 }
 

@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
-import TableEmptyBody from './TableEmptyBody.tsx';
-import TableBody from './TableBody.tsx';
+import TableEmptyBody from './TableEmptyBody';
+import TableBody from './TableBody';
 
+interface TableDataProps {
+  tableBodyData: Array<{ [key: string]: any }>;
+  currentPage: number;
+}
 
-export default function TableData({ tableBodyData, currentPage }) {
+export default function TableData({ tableBodyData, currentPage }: TableDataProps) {
 
   if (Array.isArray(tableBodyData) && !tableBodyData.length) {
     return <TableEmptyBody/>

@@ -1,6 +1,8 @@
 import * as React from "react";
 
-function ExternalLink(props) {
+interface ExternalLinkProps extends React.SVGProps<SVGSVGElement> {}
+
+function ExternalLink(props: ExternalLinkProps) {
   return (
     <svg width="1em" height="1em" viewBox="0 0 24 24" {...props}>
       <path

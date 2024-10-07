@@ -6,7 +6,7 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://lucasblanco.me',
+  // site: 'https://lucasblanco.me',
   integrations: [tailwind(), react({
     experimentalReactChildren: true,
   }), icon()]

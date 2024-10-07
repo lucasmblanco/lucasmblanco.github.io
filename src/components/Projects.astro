@@ -9,6 +9,8 @@ const { data: projects } = await supabase
   .select("*")
   .order("id", { ascending: false });
 
+
+
 const tableBody = [];
 let startPosition = 0;
 

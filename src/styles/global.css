@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-terminal-orange: #FD7126;
+  --font-geist-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+}
 
 @font-face {
   font-family: "oi";

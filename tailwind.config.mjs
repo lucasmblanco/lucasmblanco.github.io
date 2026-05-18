@@ -39,17 +39,14 @@ export default {
 				'toki-nezu': 'hsl(340, 25%, 86%)',
 				'pure-black': 'hsl(150, 7%, 6%)', 
 				'pure-white': 'hsl(54, 100%, 94%)',
-				// 'pure-white': '#fffffe',
-				// 'pure-white': 'rgba(231,231,231,255)', ---> grey apple
-				// 'pure-white': '#fafafa',
 				al: 'hsl(158, 12%, 62%)',
-				'dark-grey': 'rgba(153,155,158,255)'
+				'dark-grey': 'rgba(153,155,158,255)',
+				'terminal-orange': '#FD7126',
 			},
 			fontFamily: {
 				oi: ['oi', ...defaultTheme.fontFamily.sans], 
 				inconsolata: ['inconsolata', ...defaultTheme.fontFamily.serif],
-				
-				
+				'geist-mono': ['Geist Mono', ...defaultTheme.fontFamily.mono],
 			},
 			objectPosition: {
 				'm-position': '55% 50%'

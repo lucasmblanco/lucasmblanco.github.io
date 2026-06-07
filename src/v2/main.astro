@@ -1,5 +1,18 @@
 ---
+import { Icon } from "astro-icon/components";
 ---
+
+<style is:global>
+  #grid-pattern > *:nth-child(odd) {
+    background-color: var(--color-terminal-orange);
+  }
+  #grid-pattern.inverted > *:nth-child(odd) {
+    background-color: transparent;
+  }
+  #grid-pattern.inverted > *:nth-child(even) {
+    background-color: var(--color-terminal-orange);
+  }
+</style>
 
 <section
   id="terminal-section"
@@ -7,14 +20,17 @@
 >
   <div
     id="terminal-content"
-    class="flex w-[250px] flex-col gap-y-0 text-left font-geist-mono text-[9px] uppercase leading-[1.15] tracking-normal text-terminal-orange antialiased sm:text-[10px] md:text-[11px]"
+    class="flex w-[250px] flex-col gap-y-1 text-left font-geist-mono text-[9px] uppercase leading-[1.15] tracking-normal text-terminal-orange antialiased sm:text-[10px] md:text-[11px]"
   >
-    <div class="mb-1">
+    <div class="mb-1 flex items-center gap-x-2 justify-between">
       <span
-        class="inline-block rounded-full border border-terminal-orange bg-transparent px-2 py-px"
+        class="inline-block rounded-full border border-terminal-orange bg-transparent px-2 py-px font-cormorant font-bold leading-normal"
       >
         LUCAS BLANCO
       </span>
+      <div id="grid-pattern" class="grid size-[1.6em] shrink-0 grid-cols-5 grid-rows-5">
+        {Array.from({ length: 25 }).map(() => <div />)}
+      </div>
     </div>
 
     <div class="flex w-full justify-between gap-x-4">
@@ -22,61 +38,61 @@
       <span>CORDOBA, ARG</span>
     </div>
 
-    <div class="flex w-full justify-between">
+    <div class="flex w-full items-center">
       <span class="flex">
         <a
-          href="#"
+          href="https://flexxus.com.ar/"
           target="_blank"
           rel="noopener noreferrer"
-          class="transition-colors duration-150 hover:text-[#FF8A4A]"
+          class="transition-colors duration-150 hover:text-[#7b9e12]"
         >
           @FLEXXUS
         </a>
       </span>
-       <span class="mx-1">::::::::</span>
+       <span class="flex-1 mx-1"><canvas class="pixel-divider"></canvas></span>
       <span>2025 // ACTUALIDAD</span>
     </div>
 
-    <div class="flex w-full justify-between">
+    <div class="flex w-full items-center">
       <span class="flex">
         <a
-          href="#"
+          href="https://austral.cz/"
           target="_blank"
           rel="noopener noreferrer"
-          class="transition-colors duration-150 hover:text-[#FF8A4A]"
+          class="transition-colors duration-150 hover:text-[#7b9e12]"
         >
           @AGENCIA AUSTRAL
         </a>
       </span>
-        <span class="mx-1">::::::::</span>
+        <span class="flex-1 mx-1"><canvas class="pixel-divider"></canvas></span>
       <span>2024 // 2025</span>
     </div>
 
     <div class="flex w-full justify-between gap-x-4">
-      <span>
+      <span class="flex gap-x-2">
         <a
           href="https://github.com/lucasmblanco"
           target="_blank"
           rel="noopener noreferrer"
-          class="transition-colors duration-150 hover:text-[#FF8A4A]"
+          class="transition-colors duration-150 hover:text-[#7b9e12]"
         >
-          GITHUB
+          <Icon name="simple-icons:github" class="size-3" />
         </a>
-        <span class="mx-0.5">¤</span>
         <a
           href="#"
           target="_blank"
           rel="noopener noreferrer"
-          class="transition-colors duration-150 hover:text-[#FF8A4A]"
+          class="transition-colors duration-150 hover:text-[#7b9e12]"
         >
-          LINKEDIN
+          <Icon name="simple-icons:linkedin" class="size-3" />
         </a>
-        <span class="mx-0.5">¤</span>
         <a
           href="#"
-          class="transition-colors duration-150 hover:text-[#FF8A4A]"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition-colors duration-150 hover:text-[#7b9e12]"
         >
-          EMAIL
+          <Icon name="pixelarticons:file" class="size-3" />
         </a>
       </span>
       <span>&#169; 2026</span>
@@ -88,8 +104,8 @@
   (function () {
     'use strict';
 
-    var BLOOM_THRESHOLD = 0.02;
-    var BLOOM_INTENSITY = 2.5;
+    var BLOOM_THRESHOLD = 0.01;
+    var BLOOM_INTENSITY = 10.0;
     var NOISE_INTENSITY = 0.06;
 
     var VERT_SRC = `#version 300 es
@@ -104,7 +120,6 @@ void main() {
 precision highp float;
 uniform sampler2D uTexture;
 uniform float uThreshold;
-uniform float uTime;
 in vec2 vUv;
 out vec4 fragColor;
 void main() {
@@ -210,9 +225,9 @@ void main() {
       var section = document.getElementById('terminal-section');
       if (!section) return;
 
-      var glCanvas = document.createElement('canvas');
-      glCanvas.setAttribute('layoutsubtree', '');
-      glCanvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#000;';
+      var captureCanvas = document.createElement('canvas');
+      captureCanvas.setAttribute('layoutsubtree', '');
+      captureCanvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#000;z-index:0;';
 
       section.style.position = 'static';
       section.style.width = '100%';
@@ -222,21 +237,29 @@ void main() {
       section.style.justifyContent = 'center';
       section.style.background = '#000';
 
-      glCanvas.appendChild(section);
-      document.body.appendChild(glCanvas);
+      captureCanvas.appendChild(section);
+      document.body.appendChild(captureCanvas);
 
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          setupWebGL(glCanvas, section);
+      captureCanvas.onpaint = function() {
+        requestAnimationFrame(function() {
+          setupWebGL(captureCanvas, section);
         });
-      });
+        captureCanvas.onpaint = null;
+      };
     }
 
-    function setupWebGL(glCanvas, content) {
-      var gl = glCanvas.getContext('webgl2', { alpha: false, antialias: false });
-      if (!gl) { restore(); return; }
+    function setupWebGL(captureCanvas, content) {
+      var captureCtx = captureCanvas.getContext('2d');
+      if (!captureCtx || typeof captureCtx.drawElementImage !== 'function') return;
 
-      if (typeof gl.texElementImage2D !== 'function') { restore(); return; }
+      if (typeof captureCanvas.captureElementImage !== 'function') return;
+
+      var glCanvas = document.createElement('canvas');
+      glCanvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;';
+      document.body.appendChild(glCanvas);
+
+      var gl = glCanvas.getContext('webgl2', { alpha: false, antialias: false });
+      if (!gl) { glCanvas.remove(); return; }
 
       gl.getExtension('EXT_color_buffer_float');
 
@@ -298,17 +321,37 @@ void main() {
         gl.viewport(0, 0, w, h);
       });
 
-      function render(time) {
-        requestAnimationFrame(render);
+      function captureContent(content) {
+        try {
+          var elementImage = captureCanvas.captureElementImage(content);
+          captureCanvas.width = elementImage.width;
+          captureCanvas.height = elementImage.height;
+          captureCtx.drawElementImage(elementImage, 0, 0);
+          gl.bindTexture(gl.TEXTURE_2D, contentTex);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, captureCanvas);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          elementImage.close();
+          return true;
+        } catch (e) {
+          console.error('captureContent failed:', e.message);
+          return false;
+        }
+      }
 
+      if (!captureContent(content)) {
+        console.error('CAPTURE FAILED - restoring');
+        restore();
+        return;
+      }
+      console.log('CAPTURE METHOD: captureElementImage + drawElementImage works');
+
+      function render(time) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
-        gl.bindTexture(gl.TEXTURE_2D, contentTex);
-        gl.texElementImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, gl.RGBA, gl.UNSIGNED_BYTE, content);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        if (!captureContent(content)) return;
 
         gl.bindVertexArray(vao);
 
@@ -386,6 +429,8 @@ void main() {
         gl.clearColor(0, 0, 0, 1);
         gl.clear(gl.COLOR_BUFFER_BIT);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+        requestAnimationFrame(render);
       }
 
       requestAnimationFrame(render);
@@ -397,6 +442,7 @@ void main() {
           document.body.appendChild(s);
           s.style.cssText = '';
         }
+        captureCanvas.remove();
       }
     }
 
@@ -406,4 +452,72 @@ void main() {
       init();
     }
   })();
+</script>
+
+<script>
+  (function () {
+    var dividers = document.querySelectorAll('.pixel-divider');
+    if (!dividers.length) return;
+    var accent = getComputedStyle(document.documentElement).getPropertyValue('--color-terminal-orange').trim();
+    var ROWS = 4, PX = 2, GAP = 1;
+    var H = ROWS * (PX + GAP) + GAP;
+    var startTime = performance.now();
+    var SPEED = 6;
+
+    var states = [];
+    dividers.forEach(function (canvas) {
+      var container = canvas.parentElement;
+      canvas.style.width = '100%';
+      canvas.style.height = H + 'px';
+      canvas.height = H;
+      var ctx = canvas.getContext('2d');
+      var cols = 8;
+
+      function resize() {
+        var cw = container.clientWidth;
+        cols = Math.max(3, Math.floor((cw - GAP) / (PX + GAP)));
+        canvas.width = cols * (PX + GAP) + GAP;
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+      states.push({ ctx: ctx, cols: cols, canvas: canvas });
+    });
+
+    function render(now) {
+      var elapsed = (now - startTime) / 1000;
+
+      states.forEach(function (s) {
+        var cols = s.cols;
+        var scan = Math.floor(elapsed * SPEED) % cols;
+        var w = s.canvas.width;
+        var ctx = s.ctx;
+
+        ctx.clearRect(0, 0, w, H);
+        for (var r = 0; r < ROWS; r++) {
+          var ox = r % 2 === 0 ? 0 : (PX + GAP) / 2;
+          for (var c = 0; c < cols; c++) {
+            var x = GAP + c * (PX + GAP) + ox;
+            var y = GAP + r * (PX + GAP);
+            var isBar = c === scan || c === (scan + 1) % cols;
+            var dist = ((scan - 1 - c) + cols) % cols;
+            var alpha = isBar ? 1 : dist < 5 ? 0.5 * (1 - dist / 5) : 0.04;
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = accent;
+            ctx.fillRect(x, y, PX, PX);
+          }
+        }
+      });
+
+      requestAnimationFrame(render);
+    }
+
+    requestAnimationFrame(render);
+  })();
+</script>
+
+<script>
+  setInterval(() => {
+    document.getElementById('grid-pattern')?.classList.toggle('inverted');
+  }, 1000);
 </script>

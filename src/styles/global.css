@@ -1,8 +1,9 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-terminal-orange: #FD7126;
+  --color-terminal-orange: #5200ff;
   --font-geist-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-cormorant: 'Cormorant Garamond', serif;
 }
 
 @font-face {

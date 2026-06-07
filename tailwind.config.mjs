@@ -41,7 +41,7 @@ export default {
 				'pure-white': 'hsl(54, 100%, 94%)',
 				al: 'hsl(158, 12%, 62%)',
 				'dark-grey': 'rgba(153,155,158,255)',
-				'terminal-orange': '#FD7126',
+				'terminal-orange': '#5200ff',
 			},
 			fontFamily: {
 				oi: ['oi', ...defaultTheme.fontFamily.sans], 

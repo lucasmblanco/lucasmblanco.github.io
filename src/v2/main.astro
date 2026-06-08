@@ -3,14 +3,25 @@ import { Icon } from "astro-icon/components";
 ---
 
 <style is:global>
-  #grid-pattern > *:nth-child(odd) {
+  ::selection {
+    background-color: #7b9e12;
+    color: #000;
+  }
+  #grid-pattern > *:nth-child(odd),
+  #loader-grid > *:nth-child(odd) {
     background-color: var(--color-terminal-orange);
   }
-  #grid-pattern.inverted > *:nth-child(odd) {
+  #grid-pattern.inverted > *:nth-child(odd),
+  #loader-grid.inverted > *:nth-child(odd) {
     background-color: transparent;
   }
-  #grid-pattern.inverted > *:nth-child(even) {
+  #grid-pattern.inverted > *:nth-child(even),
+  #loader-grid.inverted > *:nth-child(even) {
     background-color: var(--color-terminal-orange);
+  }
+  #loader.loader-hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 </style>
 
@@ -20,7 +31,7 @@ import { Icon } from "astro-icon/components";
 >
   <div
     id="terminal-content"
-    class="flex w-[250px] flex-col gap-y-1 text-left font-geist-mono text-[9px] uppercase leading-[1.15] tracking-normal text-terminal-orange antialiased sm:text-[10px] md:text-[11px]"
+    class="flex w-[270px] sm:w-[335px] flex-col gap-y-0 sm:gap-y-0.5 text-left font-geist-mono text-[12px] uppercase leading-normal tracking-normal text-terminal-orange antialiased sm:text-[14px] md:text-[15px]"
   >
     <div class="mb-1 flex items-center gap-x-2 justify-between">
       <span
@@ -68,7 +79,7 @@ import { Icon } from "astro-icon/components";
       <span>2024 // 2025</span>
     </div>
 
-    <div class="flex w-full justify-between gap-x-4">
+    <div class="flex w-full justify-between gap-x-4 items-center">
       <span class="flex gap-x-2">
         <a
           href="https://github.com/lucasmblanco"
@@ -76,29 +87,91 @@ import { Icon } from "astro-icon/components";
           rel="noopener noreferrer"
           class="transition-colors duration-150 hover:text-[#7b9e12]"
         >
-          <Icon name="simple-icons:github" class="size-3" />
+          <Icon name="simple-icons:github" class="size-4" />
         </a>
         <a
-          href="#"
+          href="https://www.linkedin.com/in/lucas-matias-blanco/"
           target="_blank"
           rel="noopener noreferrer"
           class="transition-colors duration-150 hover:text-[#7b9e12]"
         >
-          <Icon name="simple-icons:linkedin" class="size-3" />
+          <Icon name="simple-icons:linkedin" class="size-4" />
         </a>
         <a
-          href="#"
+          href="https://docs.google.com/document/d/19bXAvpYcYM8dzHZPdBtAiU6QkCzAiFp7jatZen_mZjg/edit?tab=t.0"
           target="_blank"
           rel="noopener noreferrer"
           class="transition-colors duration-150 hover:text-[#7b9e12]"
         >
-          <Icon name="pixelarticons:file" class="size-3" />
+          <Icon name="pixelarticons:file" class="size-4" />
         </a>
       </span>
-      <span>&#169; 2026</span>
+      <span class="flex items-center gap-x-1">&#9678; 2026</span>
     </div>
   </div>
 </section>
+
+<div id="fallback-glow"></div>
+<canvas id="fallback-noise"></canvas>
+
+<style>
+  #fallback-glow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse clamp(200px, 80vw, 420px) clamp(55px, 24vh, 110px) at 49% 52%, var(--color-terminal-orange) 0%, var(--color-terminal-orange) 25%, transparent 100%),
+      radial-gradient(ellipse clamp(180px, 72vw, 380px) clamp(40px, 16vh, 80px) at 51% 48%, var(--color-terminal-orange) 0%, var(--color-terminal-orange) 20%, transparent 95%);
+    opacity: 0.16;
+    filter: blur(12px);
+    transform: rotate(-4.5deg);
+    mix-blend-mode: screen;
+  }
+  #fallback-noise {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+    opacity: 0.2;
+  }
+  .fallback-hidden { display: none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    #fallback-noise { display: none !important; }
+  }
+</style>
+
+<script>
+  (function () {
+    var nCanvas = document.getElementById('fallback-noise');
+    if (!nCanvas) return;
+    var nCtx = nCanvas.getContext('2d');
+
+    function noise() {
+      var dpr = window.devicePixelRatio || 1;
+      var nw = Math.max(512, Math.floor(nCanvas.clientWidth * dpr / 2));
+      var nh = Math.max(300, Math.floor(nCanvas.clientHeight * dpr / 2));
+      if (nCanvas.width !== nw || nCanvas.height !== nh) {
+        nCanvas.width = nw;
+        nCanvas.height = nh;
+      }
+      var d = nCtx.createImageData(nw, nh).data;
+      for (var i = 0; i < d.length; i += 4) {
+        var ra = Math.random(), rb = Math.random(), rc = Math.random();
+        d[i]     = ra > 0.65 ? 255 : (ra > 0.2 ? Math.random() * 120 : 0);
+        d[i + 1] = rb > 0.65 ? 255 : (rb > 0.2 ? Math.random() * 120 : 0);
+        d[i + 2] = rc > 0.65 ? 255 : (rc > 0.2 ? Math.random() * 120 : 0);
+        d[i + 3] = 255;
+      }
+      nCtx.putImageData(new ImageData(d, nw, nh), 0, 0);
+      requestAnimationFrame(noise);
+    }
+    noise();
+  })();
+</script>
 
 <script>
   (function () {
@@ -221,6 +294,10 @@ void main() {
 
       var testGl = document.createElement('canvas').getContext('webgl2');
       if (!testGl) return;
+
+      document.getElementById('fallback-glow').classList.add('fallback-hidden');
+      document.getElementById('fallback-noise').classList.add('fallback-hidden');
+      document.getElementById('loader').classList.add('loader-hidden');
 
       var section = document.getElementById('terminal-section');
       if (!section) return;
@@ -347,6 +424,9 @@ void main() {
         return;
       }
       console.log('CAPTURE METHOD: captureElementImage + drawElementImage works');
+      document.getElementById('fallback-glow').classList.add('fallback-hidden');
+      document.getElementById('fallback-noise').classList.add('fallback-hidden');
+      document.getElementById('loader').classList.add('loader-hidden');
 
       function render(time) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -373,14 +453,14 @@ void main() {
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, fboA.tex);
         gl.uniform2f(uBlurDirection, 1.0, 0.0);
-        gl.uniform1f(uBlurSpread, 3.0);
+        gl.uniform1f(uBlurSpread, 4.5);
         gl.bindFramebuffer(gl.FRAMEBUFFER, fboB.fbo);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
         // Blur vertical (narrow spread)
         gl.bindTexture(gl.TEXTURE_2D, fboB.tex);
         gl.uniform2f(uBlurDirection, 0.0, 1.0);
-        gl.uniform1f(uBlurSpread, 1.0);
+        gl.uniform1f(uBlurSpread, 1.4);
         gl.bindFramebuffer(gl.FRAMEBUFFER, fboA.fbo);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
@@ -388,14 +468,14 @@ void main() {
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, fboA.tex);
         gl.uniform2f(uBlurDirection, 1.0, 0.0);
-        gl.uniform1f(uBlurSpread, 4.0);
+        gl.uniform1f(uBlurSpread, 6.0);
         gl.bindFramebuffer(gl.FRAMEBUFFER, fboB.fbo);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
         // Second vertical pass
         gl.bindTexture(gl.TEXTURE_2D, fboB.tex);
         gl.uniform2f(uBlurDirection, 0.0, 1.0);
-        gl.uniform1f(uBlurSpread, 1.2);
+        gl.uniform1f(uBlurSpread, 1.8);
         gl.bindFramebuffer(gl.FRAMEBUFFER, fboA.fbo);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
@@ -403,14 +483,14 @@ void main() {
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, fboA.tex);
         gl.uniform2f(uBlurDirection, 1.0, 0.0);
-        gl.uniform1f(uBlurSpread, 5.0);
+        gl.uniform1f(uBlurSpread, 7.5);
         gl.bindFramebuffer(gl.FRAMEBUFFER, fboB.fbo);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
         // Third vertical pass
         gl.bindTexture(gl.TEXTURE_2D, fboB.tex);
         gl.uniform2f(uBlurDirection, 0.0, 1.0);
-        gl.uniform1f(uBlurSpread, 1.5);
+        gl.uniform1f(uBlurSpread, 2.0);
         gl.bindFramebuffer(gl.FRAMEBUFFER, fboA.fbo);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
@@ -443,6 +523,8 @@ void main() {
           s.style.cssText = '';
         }
         captureCanvas.remove();
+        document.getElementById('fallback-glow').classList.remove('fallback-hidden');
+        document.getElementById('fallback-noise').classList.remove('fallback-hidden');
       }
     }
 
@@ -519,5 +601,6 @@ void main() {
 <script>
   setInterval(() => {
     document.getElementById('grid-pattern')?.classList.toggle('inverted');
+    document.getElementById('loader-grid')?.classList.toggle('inverted');
   }, 1000);
 </script>

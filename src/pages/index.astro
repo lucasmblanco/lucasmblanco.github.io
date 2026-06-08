@@ -10,7 +10,7 @@ import V2Main from "../v2/main.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lucas Blanco</title>
     <meta name="description" content="Personal Website" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" id="favicon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,6 +19,50 @@ import V2Main from "../v2/main.astro";
     />
   </head>
   <body>
+    <div id="loader" style="position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity 0.5s;">
+      <div id="loader-grid" class="grid grid-cols-5 grid-rows-5" style="width:32px;height:32px;">
+        {Array.from({ length: 25 }).map(() => <div />)}
+      </div>
+    </div>
     <V2Main />
+    <script>
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          var loader = document.getElementById('loader');
+          if (loader) loader.classList.add('loader-hidden');
+        }, 300);
+      });
+    </script>
+    <script>
+      (function () {
+        var favicon = document.getElementById('favicon');
+        if (!favicon) return;
+        var canvas = document.createElement('canvas');
+        var size = 32, cells = 5, cellSize = size / cells;
+        canvas.width = size; canvas.height = size;
+        var ctx = canvas.getContext('2d');
+        var accent = getComputedStyle(document.documentElement).getPropertyValue('--color-terminal-orange').trim();
+        var inverted = false;
+
+        function draw() {
+          ctx.clearRect(0, 0, size, size);
+          ctx.fillStyle = accent;
+          for (var r = 0; r < cells; r++) {
+            for (var c = 0; c < cells; c++) {
+              var idx = r * cells + c;
+              var isOdd = idx % 2 === 0;
+              if (inverted ? !isOdd : isOdd) {
+                ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+              }
+            }
+          }
+          favicon.href = canvas.toDataURL();
+          inverted = !inverted;
+        }
+
+        setInterval(draw, 1000);
+        draw();
+      })();
+    </script>
   </body>
 </html>
